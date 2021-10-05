@@ -1,7 +1,10 @@
+/** @format */
+@import url("https://fonts.googleapis.com/css2?family=Caudex&family=Fleur+De+Leah&family=Major+Mono+Display&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
+  background-color: rgb(245, 245, 245);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -13,4 +16,46 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+#top-bar {
+  height: 100%;
+  background-color: #ff5959c9;
+  width: 100vw;
+  position: sticky;
+  text-align: center;
+  padding: 2.5vh;
+}
+
+#top-bar-text {
+  color: rgb(245, 245, 245, 1);
+  font-size: 20px;
+  font-family: "Fleur De Leah", cursive;
+}
+
+#top-bar-sub-text {
+  color: rgb(245, 245, 245, 1);
+  font-size: 14px;
+  font-family: "Major Mono Display", monospace;
+}
+
+.title {
+  color: #213560;
+  font-family: "Caudex", serif;
+}
+.dot {
+  color: rgba(255, 127, 80, 0.5);
+}
+#aya-text {
+  font-size: 60px;
+  color: coral;
+}
+.span-img {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+img {
+  vertical-align: middle;
 }
