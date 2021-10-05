@@ -4,29 +4,40 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { TopBar } from "../components/TopBar";
-import { TopMsg } from "../components/TopMsg";
+import Navigation from "react-sticky-nav";
+import { useEffect } from "react";
 
 export default function Home() {
   let msgs = [
-    <TopMsg
-      key={0}
-      text="Pedidos en Whatsapp"
-      subText="manda mensaje Aqui 331·7·00·33·9"
-      icon={"/whatsappLines.png"}
-      url="/"
-    />,
-    <TopMsg
-      key={1}
-      text="Rifas y sorteos"
-      subText="Al comprar $200"
-      icon={"/raffleBlack.png"}
-      url="/"
-    />,
+    {
+      text: "Pedidos en Whatsapp",
+      subText: "manda mensaje Aqui 331·7·00·33·9",
+      icon: "/whatsappWhite.png",
+      url: "https://api.whatsapp.com/send/?phone=5212225503494&text=Hola+me+gustar%C3%ADa+pedir+informes+de ",
+    },
+    {
+      text: "Rifas y sorteos",
+      subText: "Al comprar $200",
+      icon: "/win.png",
+      url: "/rifasysorteos",
+    },
   ];
+
+  const listenToScroll = () => {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+
+    console.log(winScroll);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", listenToScroll);
+    return () => window.removeEventListener("scroll", listenToScroll);
+  }, []);
 
   return (
     <div>
-      <TopBar>{msgs}</TopBar>
+      <TopBar msgs={msgs} />
       <Head>
         <title>Joyeria y accesorios</title>
         <meta name="description" content="Leolandia" />
@@ -34,14 +45,18 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className="title">
-          Joyeri
-          <span id="aya-text">
-            A<span className="dot">·</span>y<span className="dot">·</span>A
-          </span>
-          ccesorios
-        </h1>
-
+        <Navigation>
+          <h1 className="title">
+            Joyeri
+            <span id="aya-text">
+              A<span className="dot">·</span>y<span className="dot">·</span>A
+            </span>
+            ccesorios
+          </h1>
+          <h3 className="by-title">
+            <div>by Leolandia</div>
+          </h3>
+        </Navigation>
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
@@ -71,6 +86,65 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <div className={styles.grid}>
+          <a href="https://nextjs.org/docs" className={styles.card}>
+            <h2>Documentation &rarr;</h2>
+            <p>Find in-depth information about Next.js features and API.</p>
+          </a>
+
+          <a href="https://nextjs.org/learn" className={styles.card}>
+            <h2>Learn &rarr;</h2>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </a>
+
+          <a
+            href="https://github.com/vercel/next.js/tree/master/examples"
+            className={styles.card}
+          >
+            <h2>Examples &rarr;</h2>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </a>
+
+          <a
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+          >
+            <h2>Deploy &rarr;</h2>
+            <p>
+              Instantly deploy your Next.js site to a public URL with Vercel.
+            </p>
+          </a>
+        </div>
+        <div className={styles.grid}>
+          <a href="https://nextjs.org/docs" className={styles.card}>
+            <h2>Documentation &rarr;</h2>
+            <p>Find in-depth information about Next.js features and API.</p>
+          </a>
+
+          <a href="https://nextjs.org/learn" className={styles.card}>
+            <h2>Learn &rarr;</h2>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </a>
+
+          <a
+            href="https://github.com/vercel/next.js/tree/master/examples"
+            className={styles.card}
+          >
+            <h2>Examples &rarr;</h2>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </a>
+
+          <a
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            className={styles.card}
+          >
+            <h2>Deploy &rarr;</h2>
+            <p>
+              Instantly deploy your Next.js site to a public URL with Vercel.
+            </p>
+          </a>
+        </div>
+        <h2 className="sub-title">Nuevos Productos</h2>
       </main>
 
       <footer className={styles.footer}>

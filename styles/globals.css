@@ -1,10 +1,10 @@
 /** @format */
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caudex&family=Major+Mono+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caudex&family=Major+Mono+Display&family=Mrs+Saint+Delafield&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: #ffe6e7;
+  background-color: rgba(245, 245, 245);
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -20,7 +20,7 @@ a {
 
 #top-bar {
   height: 100%;
-  background-color: #fec0bb;
+  background-color: #d98ba0;
   width: 100vw;
   position: sticky;
   text-align: center;
@@ -32,28 +32,28 @@ a {
 
 #top-bar-text {
   font-weight: bolder;
-  color: rgb(53, 19, 19);
+  color: rgb(245, 245, 245);
   font-size: 20px;
   font-family: "Amatic SC", cursive;
 }
 
 #top-bar-sub-text {
   font-weight: bolder;
-  color: rgb(53, 19, 19);
+  color: rgb(245, 245, 245);
   font-size: 14px;
   font-family: "Major Mono Display", monospace;
 }
 
 .title {
-  color: #213560;
+  color: #bf9393;
   font-family: "Caudex", serif;
 }
 .dot {
-  color: rgba(255, 127, 80, 0.5);
+  color: #bf8969b6;
 }
 #aya-text {
   font-size: 60px;
-  color: coral;
+  color: #bf8969;
 }
 .span-img {
   display: inline-block;
@@ -71,7 +71,7 @@ img {
   position: relative;
   border-radius: 50%;
   padding: 0 2vh 1.5vh;
-  background: #febfbb;
+  background: #d98ba0;
   display: inline-block;
 }
 #close-top-bar:hover {
@@ -83,4 +83,14 @@ img {
 }
 .border-top-bar {
   border-bottom: 1px dotted black;
+}
+
+.by-title {
+  left: 21vh;
+  bottom: 6vh;
+  color: rgb(0 0 0 / 66%);
+  font-family: "Mrs Saint Delafield", cursive;
+  font-weight: 100;
+  font-size: 35px;
+  position: relative;
 }

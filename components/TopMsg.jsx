@@ -3,7 +3,7 @@
 import React from "react";
 
 export const TopMsg = (props) => {
-  const { text, icon, subText } = props;
+  const { text, icon, subText } = props.msg;
   return (
     <div>
       <span id={"top-bar-text"}>{text}</span>
