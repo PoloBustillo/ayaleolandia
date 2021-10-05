@@ -5,21 +5,22 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { TopBar } from "../components/TopBar";
 import { TopMsg } from "../components/TopMsg";
-import whatsICon from "public/whatsappOrange.svg";
 
 export default function Home() {
   let msgs = [
     <TopMsg
       key={0}
-      text="Haz tu pedido en Whatsapp"
+      text="Pedidos en Whatsapp"
       subText="manda mensaje Aqui 331·7·00·33·9"
-      icon={whatsICon}
+      icon={"/whatsappLines.png"}
+      url="/"
     />,
     <TopMsg
       key={1}
       text="Rifas y sorteos"
       subText="Al comprar $200"
       icon={"/raffleBlack.png"}
+      url="/"
     />,
   ];
 

@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 export const TopBar = (props) => {
   const [index, setIndex] = useState(0);
+  const [close, setClose] = useState(false);
 
   useEffect(() => {
     console.log(index);
@@ -14,13 +15,29 @@ export const TopBar = (props) => {
       } else {
         setIndex(0);
       }
-    }, 5000);
+    }, 500000);
     return () => clearTimeout(timer);
   }, [index]);
 
-  return (
-    <div id="top-bar" key={index}>
-      {props.children[index]}
+  return !close ? (
+    <div>
+      <div id="top-bar" className="border-top-bar" key={index}>
+        {props.children[index]}
+      </div>
+      <div
+        className="border-top-bar"
+        id="close-top-bar"
+        onClick={() => {
+          setClose(true);
+        }}
+      >
+        <img
+          id="x-img"
+          src={"/x.png"}
+          height="15px"
+          alt="Close Top Bar Leolandia"
+        />
+      </div>
     </div>
-  );
+  ) : null;
 };

@@ -1,10 +1,10 @@
 /** @format */
-@import url("https://fonts.googleapis.com/css2?family=Caudex&family=Fleur+De+Leah&family=Major+Mono+Display&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caudex&family=Major+Mono+Display&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: rgb(245, 245, 245);
+  background-color: #ffe6e7;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -20,21 +20,26 @@ a {
 
 #top-bar {
   height: 100%;
-  background-color: #ff5959c9;
+  background-color: #fec0bb;
   width: 100vw;
   position: sticky;
   text-align: center;
   padding: 2.5vh;
 }
+#top-bar:hover {
+  cursor: pointer;
+}
 
 #top-bar-text {
-  color: rgb(245, 245, 245, 1);
+  font-weight: bolder;
+  color: rgb(53, 19, 19);
   font-size: 20px;
-  font-family: "Fleur De Leah", cursive;
+  font-family: "Amatic SC", cursive;
 }
 
 #top-bar-sub-text {
-  color: rgb(245, 245, 245, 1);
+  font-weight: bolder;
+  color: rgb(53, 19, 19);
   font-size: 14px;
   font-family: "Major Mono Display", monospace;
 }
@@ -58,4 +63,24 @@ a {
 
 img {
   vertical-align: middle;
+}
+
+#close-top-bar {
+  top: -2vh;
+  left: 46vw;
+  position: relative;
+  border-radius: 50%;
+  padding: 0 2vh 1.5vh;
+  background: #febfbb;
+  display: inline-block;
+}
+#close-top-bar:hover {
+  cursor: pointer;
+}
+#x-img {
+  position: relative;
+  top: 4px;
+}
+.border-top-bar {
+  border-bottom: 1px dotted black;
 }
