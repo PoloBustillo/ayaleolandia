@@ -3,13 +3,19 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { SearchBar } from "./SearchBar";
 
 export const NavBarLeolandia = () => {
-  return (
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  return !searchOpen ? (
     <div className="navbar-container">
       <Row>
         <Col className="search-container">
           <img
+            onClick={() => {
+              setSearchOpen(true);
+            }}
             className="nav-icon"
             id="search-icon"
             src={"/search.png"}
@@ -116,5 +122,11 @@ export const NavBarLeolandia = () => {
         </Col>
       </Row>
     </div>
+  ) : (
+    <SearchBar
+      closeFunc={() => {
+        setSearchOpen(false);
+      }}
+    />
   );
 };

@@ -39,6 +39,7 @@ export default function Home() {
         <Headroom>
           <NavBarLeolandia selected={0}></NavBarLeolandia>
         </Headroom>
+
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>

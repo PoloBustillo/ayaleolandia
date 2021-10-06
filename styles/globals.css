@@ -155,9 +155,20 @@ img {
 }
 
 .tools-container {
+  padding: 5vw 0;
   text-align: center;
 }
 
 #search-icon {
   vertical-align: middle;
+}
+
+.search-container {
+  text-align: center;
+  padding: 5vw 0;
+  width: 100vw;
+  background-color: rgba(245, 245, 245);
+}
+.search-container img {
+  padding: 0 0 0 15vw;
 }
