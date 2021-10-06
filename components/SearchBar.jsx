@@ -4,7 +4,7 @@ import { Row } from "react-bootstrap";
 
 export const SearchBar = (props) => {
   return (
-    <Row className="search-container">
+    <Row className="search-bar-container">
       <span>
         <input type="text" placeholder="Busca un producto" />
         <img
