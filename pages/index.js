@@ -4,8 +4,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { TopBar } from "../components/TopBar";
-import Navigation from "react-sticky-nav";
-import { useEffect } from "react";
+import { NavBarLeolandia } from "../components/NavBarLeolandia";
+import Headroom from "react-headroom";
 
 export default function Home() {
   let msgs = [
@@ -23,40 +23,22 @@ export default function Home() {
     },
   ];
 
-  const listenToScroll = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-
-    console.log(winScroll);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", listenToScroll);
-    return () => window.removeEventListener("scroll", listenToScroll);
-  }, []);
-
   return (
     <div>
       <TopBar msgs={msgs} />
       <Head>
-        <title>Joyeria y accesorios</title>
-        <meta name="description" content="Leolandia" />
+        <title>Joyería y accesorios</title>
+        <meta
+          name="description"
+          content="Leolandia accesorios y joyeria al mejor precio"
+        />
         <link rel="icon" href="/logo.png" />
       </Head>
 
       <main className={styles.main}>
-        <Navigation>
-          <h1 className="title">
-            Joyeri
-            <span id="aya-text">
-              A<span className="dot">·</span>y<span className="dot">·</span>A
-            </span>
-            ccesorios
-          </h1>
-          <h3 className="by-title">
-            <div>by Leolandia</div>
-          </h3>
-        </Navigation>
+        <Headroom>
+          <NavBarLeolandia selected={0}></NavBarLeolandia>
+        </Headroom>
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>

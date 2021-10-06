@@ -1,6 +1,7 @@
 /** @format */
 
 .container {
+  background-color: rgb(245, 245, 245);
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
@@ -11,6 +12,7 @@
 }
 
 .main {
+  background-color: rgb(245, 245, 245);
   padding: 0.5rem 0;
   flex: 1;
   display: flex;

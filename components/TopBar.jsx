@@ -21,7 +21,7 @@ export const TopBar = (props) => {
   }, [index]);
 
   return !close ? (
-    <div>
+    <div className="top-bar-container">
       <a href={msgs[index].url} rel="nofollow">
         <div id="top-bar" className="border-top-bar">
           <TopMsg msg={msgs[index]}></TopMsg>
@@ -34,6 +34,7 @@ export const TopBar = (props) => {
           setClose(true);
         }}
       >
+        <span className="visually-hidden">Cerrar Barra</span>
         <img
           id="x-img"
           src={"/close.png"}

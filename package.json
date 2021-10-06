@@ -9,13 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bootstrap": "^5.1.2",
     "dotenv-load": "^2.0.0",
     "next": "11.1.2",
     "next-env": "^1.1.1",
     "next-images": "^1.8.1",
     "react": "17.0.2",
+    "react-bootstrap": "^1.6.4",
     "react-dom": "17.0.2",
-    "react-sticky-nav": "^4.0.6"
+    "react-headroom": "^3.1.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",

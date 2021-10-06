@@ -1,5 +1,5 @@
 /** @format */
-@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caudex&family=Major+Mono+Display&family=Mrs+Saint+Delafield&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amatic+SC&family=Caudex&family=Major+Mono+Display&family=Mrs+Saint+Delafield&family=Unica+One&display=swap");
 html,
 body {
   padding: 0;
@@ -8,10 +8,12 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
+.row {
+  --bs-gutter-x: 0rem !important;
+}
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 * {
@@ -45,6 +47,7 @@ a {
 }
 
 .title {
+  text-align: center;
   color: #bf9393;
   font-family: "Caudex", serif;
 }
@@ -52,8 +55,9 @@ a {
   color: #bf8969b6;
 }
 #aya-text {
-  font-size: 60px;
+  font-size: 7vw;
   color: #bf8969;
+  font-family: "Abril Fatface", cursive;
 }
 .span-img {
   display: inline-block;
@@ -86,11 +90,74 @@ img {
 }
 
 .by-title {
-  left: 21vh;
-  bottom: 6vh;
+  left: 12vw;
+  top: -1.8vh;
+  max-width: 40vw;
   color: rgb(0 0 0 / 66%);
   font-family: "Mrs Saint Delafield", cursive;
   font-weight: 100;
-  font-size: 35px;
+  font-size: 5vw;
   position: relative;
+}
+
+.navbar-container {
+  padding: 3vh 0;
+  width: 100vw;
+  position: sticky;
+  top: 0px;
+  background-color: rgb(245, 245, 245);
+}
+.nav-icon {
+  cursor: pointer;
+}
+
+.nav-item {
+  cursor: pointer;
+  text-align: center;
+  font-family: "Unica One", cursive;
+  font-size: small;
+}
+.menu-nav {
+  margin-bottom: 2vh;
+}
+.nav-item-selected {
+  cursor: pointer;
+  text-decoration-line: underline;
+  color: crimson;
+}
+
+.top-bar-container {
+  background-color: rgb(245, 245, 245);
+}
+
+@media (min-width: 768px) {
+  .hidden-md {
+    display: none !important;
+  }
+  .by-title {
+    left: 13vw !important;
+    top: 0vh !important;
+    max-width: 40vw;
+    color: rgb(0 0 0 / 66%);
+    font-family: "Mrs Saint Delafield", cursive;
+    font-weight: 100;
+    font-size: 5vw;
+    position: relative;
+  }
+  #aya-text {
+    font-family: "Caudex", serif;
+  }
+}
+
+.search-container {
+  text-align: center;
+  display: inline-block;
+}
+
+.tools-container {
+  text-align: center;
+}
+
+#search-icon {
+  vertical-align: middle;
 }
