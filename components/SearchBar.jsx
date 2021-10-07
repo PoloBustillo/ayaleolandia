@@ -96,7 +96,7 @@ export const SearchBar = (props) => {
       </Row>
       {filteredEmails.map((email) => {
         return (
-          <span className="filter-search">
+          <span key={email.id} className="filter-search">
             {email.user.name}
             {" / "}
           </span>
