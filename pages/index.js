@@ -6,8 +6,12 @@ import styles from "../styles/Home.module.css";
 import { TopBar } from "../components/TopBar";
 import { NavBarLeolandia } from "../components/NavBarLeolandia";
 import Headroom from "react-headroom";
+import { SideMenu } from "../components/SideMenu";
+import { useState } from "react";
 
 export default function Home() {
+  const [sideMenuStatus, setSideMenuStatus] = useState(false);
+
   let msgs = [
     {
       text: "Pedidos en Whatsapp",
@@ -25,6 +29,10 @@ export default function Home() {
 
   return (
     <div>
+      <SideMenu
+        sideMenuStatus={sideMenuStatus}
+        sideMenuFunc={setSideMenuStatus}
+      ></SideMenu>
       <TopBar msgs={msgs} />
       <Head>
         <title>Joyería y accesorios</title>
@@ -37,7 +45,11 @@ export default function Home() {
 
       <main className={styles.main}>
         <Headroom>
-          <NavBarLeolandia selected={0}></NavBarLeolandia>
+          <NavBarLeolandia
+            selected={0}
+            sideMenuStatus={sideMenuStatus}
+            sideMenuFunc={setSideMenuStatus}
+          ></NavBarLeolandia>
         </Headroom>
 
         <div className={styles.grid}>

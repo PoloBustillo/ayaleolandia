@@ -1,15 +1,20 @@
 /** @format */
 
 import React from "react";
-import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { useState } from "react";
+import { Row, Col } from "react-bootstrap";
+import HamburguerBtn from "./HamburguerBtn";
 import { SearchBar } from "./SearchBar";
 
-export const NavBarLeolandia = () => {
+export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return !searchOpen ? (
     <div className="navbar-container">
+      <HamburguerBtn
+        sideMenuStatus={props.sideMenuStatus}
+        sideMenuFunc={props.sideMenuFunc}
+      ></HamburguerBtn>
       <Row>
         <Col className="search-container">
           <img
