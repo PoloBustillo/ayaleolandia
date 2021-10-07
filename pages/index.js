@@ -57,6 +57,22 @@ export default function Home() {
             <h2>Documentation &rarr;</h2>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
+          <video
+            playsInline
+            autoPlay
+            loop
+            poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
+            id="bgvid"
+          >
+            <source
+              src="http://thenewcode.com/assets/videos/polina.webm"
+              type="video/webm"
+            />
+            <source
+              src="http://thenewcode.com/assets/videos/polina.mp4"
+              type="video/mp4"
+            />
+          </video>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
             <h2>Learn &rarr;</h2>
