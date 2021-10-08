@@ -75,7 +75,7 @@ export const SearchBar = (props) => {
   return (
     <div>
       <Row className="search-bar-container">
-        <span>
+        <span className="search-bar">
           <SearchInput
             className="search-input"
             placeholder="Buscar producto"

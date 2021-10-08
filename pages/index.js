@@ -51,28 +51,42 @@ export default function Home() {
             sideMenuFunc={setSideMenuStatus}
           ></NavBarLeolandia>
         </Headroom>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-          <video
+        <div id="new-products">
+          {/* <video
             playsInline
+            muted
             autoPlay
             loop
             poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
             id="bgvid"
           >
             <source
-              src="http://thenewcode.com/assets/videos/polina.webm"
+              src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4"
               type="video/webm"
             />
             <source
-              src="http://thenewcode.com/assets/videos/polina.mp4"
+              src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4"
               type="video/mp4"
             />
+          </video> */}
+          <video
+            playsInline
+            muted
+            autoPlay
+            loop
+            poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
+            id="bgvid"
+            className="planet"
+          >
+            <source src="/dance.mp4" type="video/webm" />
+            <source src="/dance.mp4" type="video/mp4" />
           </video>
+        </div>
+        <div className={styles.grid}>
+          <a href="https://nextjs.org/docs" className={styles.card}>
+            <h2>Documentation &rarr;</h2>
+            <p>Find in-depth information about Next.js features and API.</p>
+          </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
             <h2>Learn &rarr;</h2>

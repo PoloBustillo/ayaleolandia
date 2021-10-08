@@ -144,6 +144,9 @@ img {
 }
 
 @media (min-width: 768px) {
+  .search-bar {
+    padding-left: 30vw !important;
+  }
   .menu-btn {
     display: none;
   }
@@ -204,9 +207,7 @@ img {
 input:focus {
   color: #d98ba0;
 }
-.headroom-wrapper {
-  height: 0 !important;
-}
+
 .search-input {
   padding: 10px 10px;
   height: 52px;
@@ -304,7 +305,106 @@ input:focus {
   width: 100%;
   background-color: rgb(245, 245, 245);
 }
+.side-item {
+  text-align: start;
+  cursor: pointer;
+  font-family: "Unica One", cursive;
+  font-size: small;
+  margin: 2vw;
+  margin-left: 5vw;
+}
 .bm-menu-wrap {
   z-index: 1000 !important;
   width: 50vw !important;
+}
+#bgvid {
+  width: 30vw;
+}
+
+.planet {
+  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAPCAMAAAAxmgQeAAAACVBMVEX///8AAAD///9+749PAAAAAXRSTlMAQObYZgAAAD5JREFUGNN1j9EKADAIAnP//9GjFq6w7iU4DNRsB06cb44TJ+UzYUcniqnqoA6ag/62JhjKIU0rxx1lKveuXJ5UAQs/G/2vAAAAAElFTkSuQmCC),
+    auto;
+}
+
+.container-avatar {
+  margin: auto;
+  width: 50%;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-self: center;
+  padding: 1em 0;
+  margin-bottom: 2vh;
+  border-bottom: solid 1px #ffa9f7;
+}
+
+.avatar {
+  width: 5em;
+  height: 5em;
+  border: solid 3px white;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}
+.status h2 {
+  font-weight: bold;
+  font-size: 0.75em;
+}
+.bm-menu:focus,
+input:focus {
+  outline: none;
+}
+
+.container-orders-side {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.orders-side {
+  position: relative;
+  width: 100%;
+  padding: 0.75em;
+  background: white;
+  border-radius: 2px;
+}
+
+.order-avatar {
+  display: flex;
+}
+.order-avatar img {
+  max-width: 65px;
+  max-height: 40px;
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.order-info {
+  padding-left: 1em;
+  justify-content: space-between;
+}
+
+.order-date {
+  font-size: 10px;
+  font-weight: 300;
+  color: #999;
+}
+.order-p {
+  font-weight: 400;
+  font-size: 0.6em;
+  color: #555;
+}
+
+#new-produucts img {
+  width: 100vw;
 }
