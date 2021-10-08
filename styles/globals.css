@@ -313,12 +313,15 @@ input:focus {
   margin: 2vw;
   margin-left: 5vw;
 }
+.side-item:focus {
+  outline: none;
+}
 .bm-menu-wrap {
   z-index: 1000 !important;
   width: 50vw !important;
 }
 #bgvid {
-  width: 30vw;
+  width: 100vw;
 }
 
 .planet {
@@ -327,21 +330,23 @@ input:focus {
 }
 
 .container-avatar {
+  background-color: rgb(245, 245, 245);
   margin: auto;
-  width: 50%;
-  position: relative;
-  display: flex;
-  flex-flow: row wrap;
+  text-align: -webkit-center !important;
+  width: 90%;
   align-self: center;
   padding: 1em 0;
   margin-bottom: 2vh;
   border-bottom: solid 1px #ffa9f7;
 }
+.container-avatar:focus {
+  outline: none;
+}
 
 .avatar {
   width: 5em;
   height: 5em;
-  border: solid 3px white;
+  border: 5px solid #040404;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -352,8 +357,9 @@ input:focus {
 }
 
 .status {
-  display: flex;
+  font-family: "Major Mono Display", monospace;
   align-items: center;
+  margin-top: 3vh;
 }
 .status h2 {
   font-weight: bold;
@@ -370,16 +376,12 @@ input:focus {
   width: 100%;
 }
 
-.orders-side {
-  position: relative;
-  width: 100%;
-  padding: 0.75em;
-  background: white;
-  border-radius: 2px;
-}
-
 .order-avatar {
   display: flex;
+}
+.product-name {
+  font-family: "Abril Fatface", cursive;
+  color: coral;
 }
 .order-avatar img {
   max-width: 65px;
@@ -395,6 +397,12 @@ input:focus {
 }
 
 .order-date {
+  font-size: 7px;
+  font-weight: bolder;
+  color: #000;
+}
+.order-sku {
+  font-family: "Major Mono Display", monospace;
   font-size: 10px;
   font-weight: 300;
   color: #999;
@@ -407,4 +415,23 @@ input:focus {
 
 #new-produucts img {
   width: 100vw;
+}
+
+#camera-icon {
+  width: 20px;
+  height: 20px;
+  top: 13vh;
+  position: relative;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background-color: rgb(245, 245, 245);
+}
+.bm-item:focus {
+  outline: none;
+}
+.title-orders {
+  position: relative;
+  top: -20px;
+  font-family: "Major Mono Display", monospace;
+  font-size: 17px;
 }
