@@ -6,9 +6,11 @@ import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
+import { loginWith } from "../configs/firebase";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [user, setUser] = useState();
 
   return !searchOpen ? (
     <div className="navbar-container">
@@ -60,9 +62,13 @@ export const NavBarLeolandia = (props) => {
         </Col>
         <Col className="tools-container">
           <img
+            onClick={async () => {
+              let user = await loginWith("google");
+              setUser(user);
+            }}
             className="nav-icon"
             id="user-icon"
-            src={"/usergirl.png"}
+            src={user?.avatar ? user.avatar : "/usergirl.png"}
             height="30px"
             alt="Login"
           />{" "}

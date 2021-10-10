@@ -8,7 +8,6 @@ import { NavBarLeolandia } from "../components/NavBarLeolandia";
 import Headroom from "react-headroom";
 import { SideMenu } from "../components/SideMenu";
 import { useState } from "react";
-import firebaseConfig from "../configs/firebase";
 
 export default function Home() {
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
@@ -92,7 +91,6 @@ export default function Home() {
   );
 }
 export async function getStaticProps() {
-  firebaseConfig();
   return {
     props: {}, // will be passed to the page component as props
   };

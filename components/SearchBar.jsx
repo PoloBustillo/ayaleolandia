@@ -1,8 +1,37 @@
 /** @format */
 import React from "react";
+
 import { Row } from "react-bootstrap";
 import SearchInput, { createFilter } from "react-search-input";
 import { useState } from "react";
+// import algoliasearch from "algoliasearch/lite";
+// import {
+//   InstantSearch,
+//   Hits,
+//   SearchBox,
+//   Pagination,
+//   Highlight,
+//   ClearRefinements,
+//   RefinementList,
+//   Configure,
+// } from "react-instantsearch-dom";
+// <InstantSearch indexName="demo_ecommerce" searchClient={searchClient}>
+//   <div className="left-panel">
+//     <ClearRefinements />
+//     <h2>Brands</h2>
+//     <RefinementList attribute="brand" />
+//     <Configure hitsPerPage={8} />
+//   </div>
+//   <div className="right-panel">
+//     <SearchBox />
+//     {Hits()}
+//     <Pagination />
+//   </div>
+// </InstantSearch>;
+// const searchClient = algoliasearch(
+//   "B1G2GM9NG0",
+//   "aadef574be1f9252bb48d4ea09b5cfe5"
+// );
 
 const KEYS_TO_FILTERS = ["user.name", "subject", "dest.name", "id"];
 let emails = [
