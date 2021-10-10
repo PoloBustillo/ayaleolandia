@@ -4,6 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
+import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
 
 export const NavBarLeolandia = (props) => {
@@ -75,56 +76,7 @@ export const NavBarLeolandia = (props) => {
         </Col>
       </Row>
       <Row className="menu-nav d-none d-md-flex">
-        <Col className="nav-item">
-          <img
-            className="nav-icon"
-            id="home-icon"
-            src={"/home.png"}
-            height="20px"
-            alt="Ir a home en Leolandia"
-          />{" "}
-          INICIO
-        </Col>
-        <Col className="nav-item">
-          <img
-            className="nav-icon"
-            id="fashion-icon"
-            src={"/fashion.png"}
-            height="20px"
-            alt="Ir a colecciones de Leolandia"
-          />{" "}
-          COLECCIONES
-        </Col>
-        <Col className="nav-item">
-          <img
-            className="nav-icon"
-            id="new-product-icon"
-            src={"/newProduct.png"}
-            height="20px"
-            alt="Nuevos Productos de Leolandia"
-          />{" "}
-          NUEVOS PRODUCTOS
-        </Col>
-        <Col className="nav-item">
-          <img
-            className="nav-icon"
-            id="ship-icon"
-            src={"/ship.png"}
-            height="20px"
-            alt="Entregas y envios Leolandia"
-          />{" "}
-          ENTREGAS y ENVíOS
-        </Col>
-        <Col className="nav-item">
-          <img
-            className="nav-icon"
-            id="location-icon"
-            src={"/location.png"}
-            height="20px"
-            alt="Localicar a  Leolandia"
-          />{" "}
-          CONTACTO
-        </Col>
+        <MenuItems itemClass="nav-item"></MenuItems>
       </Row>
     </div>
   ) : (

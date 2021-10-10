@@ -359,9 +359,10 @@ input:focus {
 }
 
 .status {
-  font-family: "Major Mono Display", monospace;
+  font-family: "Abril Fatface", cursive;
   align-items: center;
   margin-top: 3vh;
+  color: #d98ba0;
 }
 .status h2 {
   font-weight: bold;
@@ -433,7 +434,8 @@ input:focus {
 }
 .title-orders {
   position: relative;
+  color: #d98ba0;
   top: -20px;
-  font-family: "Major Mono Display", monospace;
+  font-family: "Abril Fatface", cursive;
   font-size: 17px;
 }
