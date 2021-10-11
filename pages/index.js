@@ -74,7 +74,7 @@ export default function Home() {
           </video> */}
           </div>
         </div>
-        <div>
+        <div style={{ height: "1700px" }}>
           <span>OTRA SECCION</span>
         </div>
       </main>
