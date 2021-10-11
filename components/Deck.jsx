@@ -1,8 +1,7 @@
 /** @format */
 
-import { render } from "react-dom";
 import React, { useState } from "react";
-import { useSprings, animated, to as interpolate } from "react-spring";
+import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
 const cards = [
@@ -20,9 +19,14 @@ const to = (i) => ({
   y: i * -4,
   scale: 1,
   rot: -10 + Math.random() * 20,
-  delay: i * 100,
+  delay: i * 300,
 });
-const from = (i) => ({ x: 0, rot: 0, scale: 1.5, y: -1000 });
+const from = (i) => ({
+  x: -2500,
+  rot: -10 + Math.random() * 20,
+  scale: 10.5,
+  y: 1000,
+});
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r, s) =>
   `perspective(1500px) rotateX(30deg) rotateY(${
@@ -31,7 +35,7 @@ const trans = (r, s) =>
 
 export default function Deck() {
   const [gone] = useState(() => new Set()); // The set flags all the cards that are flicked out
-  const [props, set] = useSprings(cards.length, (i) => ({
+  const [springs, set] = useSprings(cards.length, (i) => ({
     ...to(i),
     from: from(i),
   })); // Create a bunch of springs using the helpers above
@@ -60,7 +64,7 @@ export default function Deck() {
     }
   );
   // Now we're just mapping the animated values to our view, that's it. Btw, this component only renders once. :-)
-  return props.map(({ x, y, rot, scale }, i) => (
+  return springs.map(({ x, y, rot, scale }, i) => (
     <animated.div key={i} style={{ x, y }}>
       {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
       <animated.div
@@ -69,7 +73,9 @@ export default function Deck() {
           transform: interpolate([rot, scale], trans),
           backgroundImage: `url(${cards[i]})`,
         }}
-      />
+      >
+        <span>Hola</span>
+      </animated.div>
     </animated.div>
   ));
 }
