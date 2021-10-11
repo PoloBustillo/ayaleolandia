@@ -12,7 +12,6 @@ export const SideMenu = (props) => {
       isOpen={props.sideMenuStatus}
       onClose={() => {
         props.sideMenuFunc(false);
-        console.log("cerrar");
       }}
     >
       <SideAvatar></SideAvatar>

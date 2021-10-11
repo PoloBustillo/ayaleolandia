@@ -416,6 +416,12 @@ input:focus {
   color: #555;
 }
 
+.user-nav-avatar {
+  border: 1px solid #040404;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 #new-produucts img {
   width: 100vw;
 }
@@ -438,4 +444,48 @@ input:focus {
   top: -20px;
   font-family: "Abril Fatface", cursive;
   font-size: 17px;
+}
+
+.status span {
+  font-size: 10px;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+  width: 100%;
+  cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
+      39 39,
+    auto;
+}
+
+#root > div {
+  position: absolute;
+  width: 100vw;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#root > div > div {
+  background-color: white;
+  background-size: auto 85%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 27vw;
+  max-width: 300px;
+  min-width: 200px;
+  height: 50vh;
+  max-height: 570px;
+  will-change: transform;
+  border-radius: 10px;
+  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
+    0 10px 10px -10px rgba(50, 50, 73, 0.3);
 }

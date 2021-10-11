@@ -1,16 +1,17 @@
 /** @format */
 
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
-import { loginWith } from "../configs/firebase";
+import useUser from "../hooks/useUser";
+import { loginWith, onAuthStateChanged } from "../configs/firebase";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [user, setUser] = useState();
+  const user = useUser();
 
   return !searchOpen ? (
     <div className="navbar-container">
@@ -63,10 +64,9 @@ export const NavBarLeolandia = (props) => {
         <Col className="tools-container">
           <img
             onClick={async () => {
-              let user = await loginWith("google");
-              setUser(user);
+              await loginWith("google");
             }}
-            className="nav-icon"
+            className={user?.avatar ? "nav-icon user-nav-avatar" : "nav-icon"}
             id="user-icon"
             src={user?.avatar ? user.avatar : "/usergirl.png"}
             height="30px"

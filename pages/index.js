@@ -8,6 +8,7 @@ import { NavBarLeolandia } from "../components/NavBarLeolandia";
 import Headroom from "react-headroom";
 import { SideMenu } from "../components/SideMenu";
 import { useState } from "react";
+import Deck from "../components/Deck";
 
 export default function Home() {
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
@@ -51,8 +52,10 @@ export default function Home() {
             sideMenuFunc={setSideMenuStatus}
           ></NavBarLeolandia>
         </Headroom>
-        <div id="new-products">
-          {/* <video
+        <div>
+          <div id="root">
+            <Deck></Deck>
+            {/* <video
             playsInline
             muted
             autoPlay
@@ -69,18 +72,10 @@ export default function Home() {
               type="video/mp4"
             />
           </video> */}
-          <video
-            playsInline
-            muted
-            autoPlay
-            loop
-            poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
-            id="bgvid"
-            className="planet"
-          >
-            <source src="/dance.mp4" type="video/webm" />
-            <source src="/dance.mp4" type="video/mp4" />
-          </video>
+          </div>
+        </div>
+        <div>
+          <span>OTRA SECCION</span>
         </div>
       </main>
 

@@ -18,6 +18,7 @@ export const SideAvatar = () => {
       </div>
       <div className="status">
         <h2>Hola Lia Sofia!</h2>
+        <span>Salir</span>
       </div>
     </div>
   );

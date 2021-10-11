@@ -23,15 +23,26 @@ const firebaseConfig = {
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
 
-export const loginWith = async (provider) => {
-  let email, avatar, userName, phoneNumber;
-  if (provider === "google") {
-    let userCredentialImpl = await signInWithPopup(auth, googleProvider);
-    email = userCredentialImpl.user?.email;
-    avatar = userCredentialImpl.user?.photoURL;
-    userName = userCredentialImpl.user?.displayName;
-    phoneNumber = userCredentialImpl.user?.phoneNumber;
-  }
+const mapUserFromFirebaseAuthToUser = (user) => {
+  const { displayName, email, photoURL, uid } = user;
 
-  return { email, avatar, userName, phoneNumber };
+  return {
+    avatar: photoURL,
+    username: displayName,
+    email,
+    uid,
+  };
+};
+
+export const onAuthStateChanged = (onChange) => {
+  return auth.onAuthStateChanged((user) => {
+    const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null;
+
+    onChange(normalizedUser);
+  });
+};
+export const loginWith = async (provider) => {
+  if (provider === "google") {
+    await signInWithPopup(auth, googleProvider);
+  }
 };
