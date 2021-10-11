@@ -14,7 +14,7 @@ export const SideMenu = (props) => {
         props.sideMenuFunc(false);
       }}
     >
-      <SideAvatar></SideAvatar>
+      <SideAvatar sideMenuFunc={props.sideMenuFunc}></SideAvatar>
       <SideItems></SideItems>
       <SideOrders></SideOrders>
     </Menu>

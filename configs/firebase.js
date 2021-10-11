@@ -1,8 +1,13 @@
 /** @format */
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +27,7 @@ const firebaseConfig = {
 !getApps().length && initializeApp(firebaseConfig);
 const auth = getAuth();
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { displayName, email, photoURL, uid } = user;
@@ -45,4 +51,11 @@ export const loginWith = async (provider) => {
   if (provider === "google") {
     await signInWithPopup(auth, googleProvider);
   }
+  if (provider === "facebook") {
+    await signInWithPopup(auth, facebookProvider);
+  }
+};
+
+export const signOutUser = async () => {
+  auth.signOut();
 };

@@ -1,8 +1,9 @@
 /** @format */
 
 import React from "react";
+import { signOutUser } from "../configs/firebase";
 
-export const SideAvatar = () => {
+export const SideAvatar = (props) => {
   return (
     <div className="container-avatar">
       <div>
@@ -18,7 +19,14 @@ export const SideAvatar = () => {
       </div>
       <div className="status">
         <h2>Hola Lia Sofia!</h2>
-        <span>Salir</span>
+        <span
+          onClick={() => {
+            signOutUser();
+            props.sideMenuFunc(false);
+          }}
+        >
+          Salir
+        </span>
       </div>
     </div>
   );

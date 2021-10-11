@@ -7,7 +7,7 @@ import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
 import useUser from "../hooks/useUser";
-import { loginWith, onAuthStateChanged } from "../configs/firebase";
+import { loginWith } from "../configs/firebase";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -64,7 +64,8 @@ export const NavBarLeolandia = (props) => {
         <Col className="tools-container">
           <img
             onClick={async () => {
-              await loginWith("google");
+              if (user == null) await loginWith("google");
+              if (user !== null) props.sideMenuFunc(true);
             }}
             className={user?.avatar ? "nav-icon user-nav-avatar" : "nav-icon"}
             id="user-icon"
