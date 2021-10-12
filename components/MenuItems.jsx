@@ -63,7 +63,7 @@ export const MenuItems = (props) => {
         />{" "}
         ENTREGAS y ENVíOS
       </Col>
-      <Col className={props.itemClass}>
+      {/* <Col className={props.itemClass}>
         <img
           className="side-icon"
           id="location-icon"
@@ -73,7 +73,7 @@ export const MenuItems = (props) => {
           alt="Localicar a  Leolandia"
         />{" "}
         CONTACTO
-      </Col>
+      </Col> */}
       <Col className={props.itemClass}>
         <img
           className="payment-methods-icon"

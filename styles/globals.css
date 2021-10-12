@@ -4,7 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  background-color: rgba(245, 245, 245);
+  background-color: rgba(245, 245, 245) !important;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -16,7 +16,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .main {
-  background-color: whitesmoke;
+  background-color: whitesmoke !important;
 }
 .login-page {
   background-color: whitesmoke;
@@ -157,6 +157,9 @@ img {
 }
 
 @media (min-width: 768px) {
+  .search-container {
+    margin-left: 0vw !important;
+  }
   .search-bar {
     padding-left: 30vw !important;
   }
@@ -183,6 +186,7 @@ img {
 }
 
 .search-container {
+  margin-left: 8vw;
   text-align: center;
   padding: 5vw 0;
   display: inline-block;
@@ -470,21 +474,22 @@ input:focus {
 
 #root {
   background-color: whitesmoke;
+  width: 70vw;
+  margin: auto;
   padding: 6vh 0;
   position: relative;
   height: 65vh;
   overflow: hidden;
-  width: 100%;
 }
 
 #root > div {
+  width: 100%;
   position: absolute;
-  width: 100vw;
   will-change: transform;
   display: flex;
   align-items: center;
   justify-content: center;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 #root > div > div {
@@ -502,9 +507,11 @@ input:focus {
   max-height: 570px;
   will-change: transform;
   border-radius: 10px;
-  touch-action: none;
-  box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
-    0 10px 10px -10px rgba(50, 50, 73, 0.3);
+  border: 0.5px;
+  border-style: solid;
+  border-color: #ff149366;
+  touch-action: pan-y;
+  box-shadow: 7px 5px 14px -10px deeppink, 5px 10px 20px -10px deeppink;
 }
 
 .form-control input {
@@ -556,13 +563,13 @@ input:focus {
   border-color: black !important;
 }
 .forgot-password {
+  display: block;
+  text-align: center;
+  margin: 3vh;
   cursor: pointer;
-  margin-left: 1vw;
-  color: blue;
-  margin-bottom: 1vh;
+  color: #0d6efd;
   font-size: 11px;
-  font-family: ui-rounded;
-  border-bottom-style: inset;
+  font-family: "Abril Fatface" !important;
 }
 .login-btn {
   text-align: center;
@@ -573,4 +580,68 @@ input:focus {
   padding-top: 1vh;
 
   cursor: pointer;
+}
+.pageSwitcher {
+  align-items: center;
+  text-align: center;
+  display: block;
+  background-color: whitesmoke;
+}
+.pageSwitcherItem.selected {
+  background-color: deeppink;
+  color: white;
+}
+.pageSwitcherItem.selected:hover {
+  background-color: deeppink;
+  color: white;
+}
+.pageSwitcherItem:hover {
+  color: deeppink;
+}
+.pageSwitcherItem:first-child {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-right: none;
+}
+.pageSwitcherItem:last-child {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.pageSwitcherItem {
+  background-color: transparent;
+  border: 1px solid deeppink;
+  color: deeppink;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: 0.9em;
+  outline: none;
+  display: inline-block;
+  text-decoration: none;
+}
+.form-floating input:-webkit-autofill,
+.form-floating input:-webkit-autofill:hover,
+.form-floating input:-webkit-autofill:focus,
+.form-floating input:-webkit-autofill:active,
+.form-floating input,
+.form-floating input:hover,
+.form-floating input:focus,
+.form-floating input:active {
+  -webkit-box-shadow: 0 0 0 30px whitesmoke inset !important;
+}
+.form-floating input:-webkit-autofill,
+.form-floating input {
+  -webkit-text-fill-color: deeppink !important;
+}
+.form-floating input {
+  border-radius: unset;
+  border: none;
+  border-bottom: 1px solid pink;
+}
+.advice {
+  text-align: center;
+  font-size: 9px;
+  color: deeppink;
+}
+.icon-tool {
+  margin: 0 1vw;
 }

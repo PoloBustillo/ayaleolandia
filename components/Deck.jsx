@@ -29,9 +29,9 @@ const from = (i) => ({
 });
 // This is being used down there in the view, it interpolates rotation and scale into a css transform
 const trans = (r, s) =>
-  `perspective(1500px) rotateX(30deg) rotateY(${
-    r / 10
-  }deg) rotateZ(${r}deg) scale(${s})`;
+  `perspective(1500px) rotateX(30deg) rotateY(${r / 10}deg) rotateZ(${
+    r / 1.1
+  }deg) scale(${s})`;
 
 export default function Deck() {
   const [playAgain, setPlayAgain] = useState(false);

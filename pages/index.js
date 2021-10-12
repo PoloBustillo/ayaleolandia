@@ -17,10 +17,9 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <Layout>
-        <div>
-          <div id="root">
-            <Deck></Deck>
-            {/* <video
+        <div id="root">
+          <Deck></Deck>
+          {/* <video
             playsInline
             muted
             autoPlay
@@ -37,11 +36,9 @@ export default function Home() {
               type="video/mp4"
             />
           </video> */}
-          </div>
         </div>
         <div style={{ height: "1700px" }}>
           <span>OTRA SECCION</span>
-          <ProductCards></ProductCards>
         </div>
       </Layout>
     </div>

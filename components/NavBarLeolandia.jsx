@@ -50,26 +50,31 @@ export const NavBarLeolandia = (props) => {
           </Link>
         </Col>
         <Col className="hidden-md">
-          <div>
-            <img
-              className="nav-icon"
-              id="logo-icon"
-              src={"/logo.png"}
-              height="50px"
-              alt="joyeria y accesorios"
-            />
-            <span id="aya-text">
-              A<span className="dot">·</span>y<span className="dot">·</span>A
-            </span>
-          </div>
-          <h3 className="by-title">
-            <div>by Leolandia</div>
-          </h3>
+          <Link href={"/"}>
+            <a>
+              <div>
+                <img
+                  className="nav-icon"
+                  id="logo-icon"
+                  src={"/logo.png"}
+                  height="50px"
+                  alt="joyeria y accesorios"
+                />
+                <span id="aya-text">
+                  A<span className="dot">·</span>y<span className="dot">·</span>
+                  A
+                </span>
+              </div>
+              <h3 className="by-title">
+                <div>by Leolandia</div>
+              </h3>
+            </a>
+          </Link>
         </Col>
         <Col className="tools-container">
           {user == null ? (
-            <Link href="/entrar-o-acceder" passHref>
-              <a>
+            <Link className="icon-tool" href="/entrar-o-acceder" passHref>
+              <a className="icon-tool">
                 <img
                   className={"nav-icon"}
                   id="user-icon"
@@ -84,22 +89,28 @@ export const NavBarLeolandia = (props) => {
               onClick={async () => {
                 props.sideMenuFunc(true);
               }}
-              className={user?.avatar ? "nav-icon user-nav-avatar" : "nav-icon"}
+              className={
+                user?.avatar
+                  ? "nav-icon user-nav-avatar icon-tool"
+                  : "nav-icon icon-tool"
+              }
               id="user-icon"
               src={user?.avatar ? user.avatar : "/usergirl.png"}
               height="30px"
               alt="Login"
             />
           )}
-
-          {"  "}
-          <img
-            className="nav-icon"
-            id="user-icon"
-            src={"/cart.png"}
-            height="30px"
-            alt="Carrito de compras"
-          />
+          <Link className="icon-tool" href="/entrar-o-acceder" passHref>
+            <a className="icon-tool">
+              <img
+                className="nav-icon "
+                id="user-icon"
+                src={"/cart.png"}
+                height="30px"
+                alt="Carrito de compras"
+              />
+            </a>
+          </Link>
         </Col>
       </Row>
       <Row className="menu-nav d-none d-md-flex">
