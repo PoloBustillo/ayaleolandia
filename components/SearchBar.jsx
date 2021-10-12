@@ -102,27 +102,25 @@ export const SearchBar = (props) => {
     createFilter(searchTerm, KEYS_TO_FILTERS)
   );
   return (
-    <div>
-      <Row className="search-bar-container">
-        <span className="search-bar">
-          <SearchInput
-            className="search-input"
-            placeholder="Buscar producto"
-            onChange={(term) => {
-              setSearchTerm(term);
-            }}
-          />
-          <img
-            onClick={() => {
-              props.closeFunc();
-            }}
-            id="x-black"
-            src={"/xBlack.png"}
-            height="25px"
-            alt="Close Top Bar Leolandia"
-          />
-        </span>
-      </Row>
+    <Row className="search-bar-container">
+      <span className="search-bar">
+        <SearchInput
+          className="search-input"
+          placeholder="Buscar producto"
+          onChange={(term) => {
+            setSearchTerm(term);
+          }}
+        />
+        <img
+          onClick={() => {
+            props.closeFunc();
+          }}
+          id="x-black"
+          src={"/xBlack.png"}
+          height="25px"
+          alt="Close Top Bar Leolandia"
+        />
+      </span>
       {filteredEmails.map((email) => {
         return (
           <span key={email.id} className="filter-search">
@@ -131,6 +129,6 @@ export const SearchBar = (props) => {
           </span>
         );
       })}
-    </div>
+    </Row>
   );
 };

@@ -51,6 +51,7 @@ export default function Login() {
                   id="floatingInputCustom"
                   type="email"
                   placeholder="name@example.com"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <label htmlFor="floatingInputCustom">Email</label>
               </Form.Floating>
@@ -59,6 +60,7 @@ export default function Login() {
                   id="floatingPasswordCustom"
                   type="password"
                   placeholder="Password"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <label htmlFor="floatingPasswordCustom">Contraseña</label>
               </Form.Floating>
@@ -82,7 +84,7 @@ export default function Login() {
             ></Form.Check>
             <Button
               onClick={async () => {
-                await loginWith("google");
+                await loginWith("email", email, password);
               }}
               block
               size="lg"
@@ -93,7 +95,7 @@ export default function Login() {
               Iniciar Sesión
             </Button>
             <Row>
-              <Col className="login-btn">
+              <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
                 <Button
                   onClick={async () => {
                     await loginWith("facebook");
@@ -109,7 +111,7 @@ export default function Login() {
                   Facebook
                 </Button>
               </Col>
-              <Col className="login-btn">
+              <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
                 <Button
                   onClick={async () => {
                     await loginWith("google");
@@ -125,6 +127,7 @@ export default function Login() {
                   Google
                 </Button>
               </Col>
+              <div className="create-account-container">Crear Nueva Cuenta</div>
             </Row>
           </div>
         </div>

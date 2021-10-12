@@ -66,7 +66,7 @@ export default function Deck() {
       }
     }
   );
-  console.log(springs[0]);
+
   return (
     <>
       {springs.map(({ x, y, rot, scale }, i) => (

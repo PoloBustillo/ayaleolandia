@@ -4,6 +4,8 @@ import { initializeApp, getApps } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   FacebookAuthProvider,
 } from "firebase/auth";
@@ -31,10 +33,6 @@ const facebookProvider = new FacebookAuthProvider();
 
 const mapUserFromFirebaseAuthToUser = (user) => {
   let { displayName, email, photoURL, uid } = user;
-  if (user.providerData[0].providerId === "facebook.com") {
-    photoURL = photoURL + "?access_token=" + user.accessToken;
-  }
-  console.log(photoURL);
   return {
     avatar: photoURL,
     username: displayName,
@@ -45,18 +43,32 @@ const mapUserFromFirebaseAuthToUser = (user) => {
 
 export const onAuthStateChanged = (onChange) => {
   return auth.onAuthStateChanged((user) => {
-    console.log(user);
     const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null;
-
     onChange(normalizedUser);
   });
 };
-export const loginWith = async (provider) => {
+export const loginWith = async (provider, email, password) => {
+  let session;
   if (provider === "google") {
-    await signInWithPopup(auth, googleProvider);
+    session = await signInWithPopup(auth, googleProvider);
   }
   if (provider === "facebook") {
-    await signInWithPopup(auth, facebookProvider);
+    session = await signInWithPopup(auth, facebookProvider);
+  }
+  if (provider === "email") {
+    try {
+      session = await createUserWithEmailAndPassword(auth, email, password);
+    } catch {
+      session = await signInWithEmailAndPassword(auth, email, password);
+    }
+  }
+  //TODO:REMOVE
+  console.log(session.user);
+  if (
+    session.user.metadata.creationTime === session.user.metadata.lastSignInTime
+  ) {
+    //TODO:REMOVE
+    console.log("SAVE USER");
   }
 };
 

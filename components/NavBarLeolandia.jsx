@@ -8,7 +8,6 @@ import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
 import useUser from "../hooks/useUser";
-import { loginWith } from "../configs/firebase";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);

@@ -20,13 +20,12 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .login-page {
   background-color: whitesmoke;
-  padding: 10vh 0;
+  padding: 5vh 0;
 }
 .login-container {
   margin: auto;
   width: 75vw;
-  padding: 50px;
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 .row {
@@ -547,12 +546,17 @@ input:focus {
   margin: 2vh 0;
   font-family: "Abril Fatface" !important;
   color: deeppink;
+  cursor: pointer;
+}
+.form-check-input {
+  cursor: pointer;
 }
 .form-check-input:checked {
   background-color: deeppink !important;
   border-color: black !important;
 }
 .forgot-password {
+  cursor: pointer;
   margin-left: 1vw;
   color: blue;
   margin-bottom: 1vh;
@@ -562,4 +566,11 @@ input:focus {
 }
 .login-btn {
   text-align: center;
+}
+.create-account-container {
+  text-align: center;
+  font-family: "Abril Fatface" !important;
+  padding-top: 1vh;
+
+  cursor: pointer;
 }
