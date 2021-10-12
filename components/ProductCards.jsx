@@ -16,7 +16,11 @@ export const ProductCards = () => {
   return (
     <AnimateSharedLayout type="crossfade">
       {items.map((item) => (
-        <motion.div layoutId={item.id} onClick={() => setSelectedId(item.id)}>
+        <motion.div
+          key={item.id}
+          layoutId={item.id}
+          onClick={() => setSelectedId(item.id)}
+        >
           <motion.h5>{item.subtitle}</motion.h5>
           <motion.h2>{item.title}</motion.h2>
         </motion.div>
