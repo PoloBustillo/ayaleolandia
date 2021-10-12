@@ -2,10 +2,14 @@
 
 import React from "react";
 import { signOutUser } from "../configs/firebase";
+import UserProfile from "./icons/UserProfileIcon";
 
 export const SideAvatar = (props) => {
   return (
     <div className="container-avatar">
+      <div className={"settings"}>
+        <UserProfile height="2em" width={"11em"}></UserProfile>
+      </div>
       <div>
         <div className="change-photo">
           <img id="camera-icon" src="/camera.png" alt="cambia foto" />

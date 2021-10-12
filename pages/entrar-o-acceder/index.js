@@ -47,12 +47,12 @@ export default function Login() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <Layout>
-        <div class="pageSwitcher">
+        <div className="pageSwitcher">
           <span
             onClick={() => {
               setLoginScreen(true);
             }}
-            class={
+            className={
               loginScreen ? "selected pageSwitcherItem" : "pageSwitcherItem"
             }
           >
@@ -63,7 +63,7 @@ export default function Login() {
             onClick={() => {
               setLoginScreen(false);
             }}
-            class={
+            className={
               !loginScreen ? "selected pageSwitcherItem" : "pageSwitcherItem"
             }
           >

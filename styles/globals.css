@@ -645,3 +645,9 @@ input:focus {
 .icon-tool {
   margin: 0 1vw;
 }
+.settings {
+  width: 100%;
+  position: absolute;
+  left: 38%;
+  cursor: pointer;
+}
