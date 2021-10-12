@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
@@ -33,16 +34,21 @@ export const NavBarLeolandia = (props) => {
           />
         </Col>
         <Col className="d-none d-md-block">
-          <h1 className="title">
-            Joyerí
-            <span id="aya-text">
-              A<span className="dot">·</span>y<span className="dot">·</span>A
-            </span>
-            ccesorios
-          </h1>
-          <h3 className="by-title">
-            <div>by Leolandia</div>
-          </h3>
+          <Link href={"/"}>
+            <a>
+              <h1 className="title">
+                Joyerí
+                <span id="aya-text">
+                  A<span className="dot">·</span>y<span className="dot">·</span>
+                  A
+                </span>
+                ccesorios
+              </h1>
+              <h3 className="by-title">
+                <div>by Leolandia</div>
+              </h3>
+            </a>
+          </Link>
         </Col>
         <Col className="hidden-md">
           <div>
@@ -62,17 +68,32 @@ export const NavBarLeolandia = (props) => {
           </h3>
         </Col>
         <Col className="tools-container">
-          <img
-            onClick={async () => {
-              if (user == null) await loginWith("google");
-              if (user !== null) props.sideMenuFunc(true);
-            }}
-            className={user?.avatar ? "nav-icon user-nav-avatar" : "nav-icon"}
-            id="user-icon"
-            src={user?.avatar ? user.avatar : "/usergirl.png"}
-            height="30px"
-            alt="Login"
-          />{" "}
+          {user == null ? (
+            <Link href="/entrar-o-acceder" passHref>
+              <a>
+                <img
+                  className={"nav-icon"}
+                  id="user-icon"
+                  src={"/usergirl.png"}
+                  height="30px"
+                  alt="Login"
+                />
+              </a>
+            </Link>
+          ) : (
+            <img
+              onClick={async () => {
+                props.sideMenuFunc(true);
+              }}
+              className={user?.avatar ? "nav-icon user-nav-avatar" : "nav-icon"}
+              id="user-icon"
+              src={user?.avatar ? user.avatar : "/usergirl.png"}
+              height="30px"
+              alt="Login"
+            />
+          )}
+
+          {"  "}
           <img
             className="nav-icon"
             id="user-icon"

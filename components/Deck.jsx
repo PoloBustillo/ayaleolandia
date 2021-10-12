@@ -34,11 +34,13 @@ const trans = (r, s) =>
   }deg) rotateZ(${r}deg) scale(${s})`;
 
 export default function Deck() {
+  const [playAgain, setPlayAgain] = useState(false);
   const [gone] = useState(() => new Set()); // The set flags all the cards that are flicked out
   const [springs, set] = useSprings(cards.length, (i) => ({
     ...to(i),
     from: from(i),
-  })); // Create a bunch of springs using the helpers above
+  }));
+
   // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
   const bind = useDrag(
     ({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
@@ -59,23 +61,37 @@ export default function Deck() {
           config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
         };
       });
-      if (!down && gone.size === cards.length)
-        setTimeout(() => gone.clear() || set((i) => to(i)), 600);
+      if (!down && gone.size === cards.length) {
+        setPlayAgain(true);
+      }
     }
   );
-  // Now we're just mapping the animated values to our view, that's it. Btw, this component only renders once. :-)
-  return springs.map(({ x, y, rot, scale }, i) => (
-    <animated.div key={i} style={{ x, y }}>
-      {/* This is the card itself, we're binding our gesture to it (and inject its index so we know which is which) */}
-      <animated.div
-        {...bind(i)}
-        style={{
-          transform: interpolate([rot, scale], trans),
-          backgroundImage: `url(${cards[i]})`,
-        }}
-      >
-        <span>Hola</span>
-      </animated.div>
-    </animated.div>
-  ));
+  console.log(springs[0]);
+  return (
+    <>
+      {springs.map(({ x, y, rot, scale }, i) => (
+        <animated.div key={i} style={{ x, y }}>
+          <animated.div
+            {...bind(i)}
+            style={{
+              transform: interpolate([rot, scale], trans),
+              backgroundImage: `url(${cards[i]})`,
+            }}
+          >
+            <span>Hola</span>
+          </animated.div>
+        </animated.div>
+      ))}
+      {playAgain && (
+        <div
+          onClick={() => {
+            setTimeout(() => gone.clear() || set((i) => to(i)), 600);
+            setPlayAgain(false);
+          }}
+        >
+          <img src="/playAgain.png" width="60px" />
+        </div>
+      )}
+    </>
+  );
 }

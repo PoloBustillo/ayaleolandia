@@ -50,7 +50,7 @@ a {
   font-weight: bolder;
   color: rgb(245, 245, 245);
   font-size: 14px;
-  font-family: "Caudex", serif;
+  font-family: "Amatic SC", cursive;
 }
 
 .title {
@@ -114,7 +114,7 @@ img {
 }
 
 .navbar-container {
-  padding: 3vh 0;
+  padding-bottom: 2vh;
   width: 100vw;
   position: sticky;
   top: 0px;
@@ -471,6 +471,7 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: none;
 }
 
 #root > div > div {

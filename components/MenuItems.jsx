@@ -72,6 +72,17 @@ export const MenuItems = (props) => {
         />{" "}
         CONTACTO
       </Col>
+      <Col className={props.itemClass}>
+        <img
+          className="payment-methods-icon"
+          id="payment-methods-icon"
+          src={"/payment-methods.png"}
+          height="20px"
+          width="20px"
+          alt="Metodos de pago Leolandia"
+        />{" "}
+        METODOS DE PAGO
+      </Col>
     </>
   );
 };
