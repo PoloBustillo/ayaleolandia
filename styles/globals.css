@@ -15,6 +15,20 @@ input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
 
+.main {
+  background-color: whitesmoke;
+}
+.login-page {
+  background-color: whitesmoke;
+  padding: 10vh 0;
+}
+.login-container {
+  margin: auto;
+  width: 75vw;
+  padding: 50px;
+  background-color: white;
+}
+
 .row {
   --bs-gutter-x: 0rem !important;
 }
@@ -492,4 +506,60 @@ input:focus {
   touch-action: none;
   box-shadow: 0 12.5px 100px -10px rgba(50, 50, 73, 0.4),
     0 10px 10px -10px rgba(50, 50, 73, 0.3);
+}
+
+.form-control input {
+  border: 1px solid #fa4fb6;
+}
+
+.form-control:focus {
+  color: #d98ba0 !important;
+  border-color: #d98ba0 !important;
+}
+.btn-primary {
+  fill: deeppink;
+  font-family: "Abril Fatface" !important;
+  cursor: pointer;
+  margin: 2vh 0 !important;
+  background: transparent !important;
+  color: deeppink !important;
+  border-color: deeppink !important;
+}
+
+.btn-primary:hover {
+  fill: white;
+  background: deeppink !important;
+  color: white !important;
+  border-color: white !important;
+}
+.login-email {
+  width: 100%;
+}
+.login-facebook {
+  width: 80%;
+  text-align: center !important;
+}
+.login-google {
+  width: 80%;
+  text-align: center !important;
+}
+.form-switch {
+  margin: 2vh 0;
+  font-family: "Abril Fatface" !important;
+  color: deeppink;
+}
+.form-check-input:checked {
+  background-color: deeppink !important;
+  border-color: black !important;
+}
+.forgot-password {
+  margin-left: 1vw;
+  color: blue;
+  margin-bottom: 1vh;
+  font-size: 11px;
+  font-family: ui-rounded;
+  border-bottom-style: inset;
+}
+.login-btn {
+  text-align: center;
 }

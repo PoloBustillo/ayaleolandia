@@ -2,21 +2,23 @@
 
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-
+import Link from "next/link";
 export const MenuItems = (props) => {
   return (
     <>
-      <Col className={props.itemClass}>
-        <img
-          className="side-icon"
-          id="home-icon"
-          src={"/home.png"}
-          height="20px"
-          width="20px"
-          alt="Ir a home en Leolandia"
-        />{" "}
-        INICIO
-      </Col>
+      <Link href="/">
+        <Col className={props.itemClass}>
+          <img
+            className="side-icon"
+            id="home-icon"
+            src={"/home.png"}
+            height="20px"
+            width="20px"
+            alt="Ir a home en Leolandia"
+          />{" "}
+          INICIO
+        </Col>
+      </Link>
       <Col className={props.itemClass}>
         <img
           className="side-icon"
