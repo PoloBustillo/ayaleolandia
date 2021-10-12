@@ -30,8 +30,11 @@ const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
 const mapUserFromFirebaseAuthToUser = (user) => {
-  const { displayName, email, photoURL, uid } = user;
-
+  let { displayName, email, photoURL, uid } = user;
+  if (user.providerData[0].providerId === "facebook.com") {
+    photoURL = photoURL + "?access_token=" + user.accessToken;
+  }
+  console.log(photoURL);
   return {
     avatar: photoURL,
     username: displayName,
@@ -42,6 +45,7 @@ const mapUserFromFirebaseAuthToUser = (user) => {
 
 export const onAuthStateChanged = (onChange) => {
   return auth.onAuthStateChanged((user) => {
+    console.log(user);
     const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null;
 
     onChange(normalizedUser);
