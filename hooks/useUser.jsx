@@ -1,9 +1,9 @@
 /** @format */
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "../configs/firebase";
+import { onAuthStateChanged } from "configs/firebase";
 
-import { USER_STATES } from "../utils/constants";
+import { USER_STATES } from "utils/constants";
 
 export default function useUser() {
   const [user, setUser] = useState(USER_STATES.NOT_KNOWN);

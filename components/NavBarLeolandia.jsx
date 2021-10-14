@@ -7,7 +7,9 @@ import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
-import useUser from "../hooks/useUser";
+import CartIcon from "./icons/CartIcon";
+import useUser from "hooks/useUser";
+import SearchIcon from "./icons/SearchIcon";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -21,16 +23,15 @@ export const NavBarLeolandia = (props) => {
       ></HamburguerBtn>
       <Row>
         <Col className="search-container">
-          <img
+          <SearchIcon
+            id="search-icon"
+            className="nav-icon"
+            width="30px"
+            height="30px"
             onClick={() => {
               setSearchOpen(true);
             }}
-            className="nav-icon"
-            id="search-icon"
-            src={"/search.png"}
-            height="30px"
-            alt="Buscar productos"
-          />
+          ></SearchIcon>
         </Col>
         <Col className="d-none d-md-block">
           <Link href={"/"}>
@@ -87,6 +88,7 @@ export const NavBarLeolandia = (props) => {
           ) : (
             <img
               onClick={async () => {
+                console.log("OPEN USER");
                 props.sideMenuFunc(true);
               }}
               className={
@@ -102,13 +104,7 @@ export const NavBarLeolandia = (props) => {
           )}
           <Link className="icon-tool" href="/entrar-o-acceder" passHref>
             <a className="icon-tool">
-              <img
-                className="nav-icon "
-                id="user-icon"
-                src={"/cart.png"}
-                height="30px"
-                alt="Carrito de compras"
-              />
+              <CartIcon width={"30px"} height={"30px"}></CartIcon>
             </a>
           </Link>
         </Col>

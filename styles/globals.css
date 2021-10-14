@@ -116,6 +116,9 @@ img {
 }
 
 .by-title {
+  width: 20vw;
+  margin: 0;
+  padding: 0;
   left: 12vw;
   top: -1.8vh;
   max-width: 40vw;
@@ -316,6 +319,7 @@ input:focus {
   display: none;
 }
 .bm-menu {
+  overflow-x: hidden !important;
   top: 15vh;
   height: 70vh !important;
   text-align: center;
@@ -474,7 +478,7 @@ input:focus {
 
 #root {
   background-color: whitesmoke;
-  width: 70vw;
+  width: 90vw;
   margin: auto;
   padding: 6vh 0;
   position: relative;
@@ -489,7 +493,6 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-  touch-action: pan-y;
 }
 
 #root > div > div {
@@ -510,7 +513,6 @@ input:focus {
   border: 0.5px;
   border-style: solid;
   border-color: #ff149366;
-  touch-action: pan-y;
   box-shadow: 7px 5px 14px -10px deeppink, 5px 10px 20px -10px deeppink;
 }
 

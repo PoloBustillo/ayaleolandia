@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
@@ -42,8 +43,26 @@ export default function Deck() {
   }));
 
   // Create a gesture, we're interested in down-state, delta (current-pos - click-pos), direction and velocity
-  const bind = useDrag(
-    ({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
+  const bind = useDrag((state) => {
+    const {
+      args: [index],
+      down,
+      movement: [mx],
+      direction: [xDir, yDir],
+      velocity,
+    } = state;
+
+    if (yDir > 0.9 || yDir < -0.9) {
+      set((i) => {
+        if (index !== i) return; // We're only interested in changing spring-data for the current spring
+
+        const scale = down ? 1.1 : 1; // Active cards lift up a bit
+        return {
+          scale,
+          config: { friction: 50, tension: 500 },
+        };
+      });
+    } else {
       const trigger = velocity > 0.2; // If you flick hard enough it should trigger the card to fly out
       const dir = xDir < 0 ? -1 : 1; // Direction should either point left or right
       if (!down && trigger) gone.add(index); // If button/finger's up and trigger velocity is reached, we flag the card ready to fly out
@@ -65,7 +84,7 @@ export default function Deck() {
         setPlayAgain(true);
       }
     }
-  );
+  });
 
   return (
     <>
@@ -78,7 +97,16 @@ export default function Deck() {
               backgroundImage: `url(${cards[i]})`,
             }}
           >
-            <span>Hola</span>
+            <>
+              <div>OTRA</div>{" "}
+              <button
+                onTouchStart={() => {
+                  console.log("CLIK T");
+                }}
+              >
+                Nuuevo Anillo
+              </button>
+            </>
           </animated.div>
         </animated.div>
       ))}

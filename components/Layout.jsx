@@ -3,7 +3,6 @@
 import React from "react";
 import { SideMenu } from "./SideMenu";
 import { Footer } from "./Footer";
-import styles from "../styles/Home.module.css";
 import { TopBar } from "./TopBar";
 import { NavBarLeolandia } from "./NavBarLeolandia";
 import Headroom from "react-headroom";

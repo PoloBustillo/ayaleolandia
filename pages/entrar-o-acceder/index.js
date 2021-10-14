@@ -2,14 +2,14 @@
 
 import Head from "next/head";
 import Link from "next/link";
-import { Layout } from "../../components/Layout";
+import { Layout } from "components/Layout";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import { loginWith } from "../../configs/firebase";
+import { loginWith } from "configs/firebase";
 import { useRouter } from "next/router";
-import useUser from "../../hooks/useUser";
-import FacebookIcon from "../../components/icons/FacebookIcon";
-import GoogleIcon from "../../components/icons/GoogleIcon";
+import useUser from "hooks/useUser";
+import FacebookIcon from "components/icons/FacebookIcon";
+import GoogleIcon from "components/icons/GoogleIcon";
 
 export default function Login() {
   const [email, setEmail] = useState("");

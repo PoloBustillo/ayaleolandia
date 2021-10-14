@@ -1,9 +1,8 @@
 /** @format */
 
 import Head from "next/head";
-import Deck from "../components/Deck";
-import { Layout } from "../components/Layout";
-import { ProductCards } from "../components/ProductCards";
+import Deck from "components/Deck";
+import { Layout } from "components/Layout";
 
 export default function Home() {
   return (

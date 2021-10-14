@@ -1,21 +1,24 @@
 /** @format */
 
 import React from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import Link from "next/link";
+import ShipIcon from "./icons/ShipIcon";
+import PromosIcon from "./icons/PromoseIcon";
+import PayMethods from "./icons/PayMethods";
+import NewProducts from "./icons/NewProducts";
+import HomeIcon from "./icons/HomeIcon";
 export const MenuItems = (props) => {
   return (
     <>
       <Link href="/">
         <Col className={props.itemClass}>
-          <img
-            className="side-icon"
-            id="home-icon"
-            src={"/home.png"}
+          <HomeIcon
+            fill={"deeppink"}
+            className="home-icon"
             height="20px"
             width="20px"
-            alt="Ir a home en Leolandia"
-          />{" "}
+          ></HomeIcon>{" "}
           INICIO
         </Col>
       </Link>
@@ -31,36 +34,28 @@ export const MenuItems = (props) => {
         COLECCIONES
       </Col>
       <Col className={props.itemClass}>
-        <img
-          className="side-icon"
-          id="new-product-icon"
-          src={"/newProduct.png"}
+        <NewProducts
+          className="new-products-icon"
           height="20px"
           width="20px"
-          alt="Nuevos Productos de Leolandia"
-        />{" "}
+        ></NewProducts>{" "}
         NUEVOS PRODUCTOS
       </Col>
       <Col className={props.itemClass}>
-        <img
-          className="promose-icon"
-          id="promos-icon"
-          src={"/promos.png"}
+        <PromosIcon
+          className="promos-icon"
           height="20px"
           width="20px"
-          alt="Promociones de Leolandia"
-        />{" "}
+        ></PromosIcon>{" "}
         PROMOCIONES
       </Col>
       <Col className={props.itemClass}>
-        <img
-          className="side-icon"
+        <ShipIcon
+          className="ship-icon"
           id="ship-icon"
-          src={"/ship.png"}
           height="20px"
           width="20px"
-          alt="Entregas y envios Leolandia"
-        />{" "}
+        ></ShipIcon>{" "}
         ENTREGAS y ENVíOS
       </Col>
       {/* <Col className={props.itemClass}>
@@ -75,14 +70,11 @@ export const MenuItems = (props) => {
         CONTACTO
       </Col> */}
       <Col className={props.itemClass}>
-        <img
+        <PayMethods
           className="payment-methods-icon"
-          id="payment-methods-icon"
-          src={"/payment-methods.png"}
           height="20px"
           width="20px"
-          alt="Metodos de pago Leolandia"
-        />{" "}
+        ></PayMethods>{" "}
         METODOS DE PAGO
       </Col>
     </>
