@@ -2,4 +2,6 @@
 
 import React from "react";
 
-export default Loader = () => <div className="loader" />;
+export default function Loader() {
+  return <div className="loader" />;
+}
