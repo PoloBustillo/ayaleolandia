@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   FacebookAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -47,6 +48,26 @@ export const onAuthStateChanged = (onChange) => {
     onChange(normalizedUser);
   });
 };
+export const createAccountWith = async (provider, email, password) => {
+  let session;
+  if (provider === "google") {
+    session = await signInWithPopup(auth, googleProvider);
+  }
+  if (provider === "facebook") {
+    session = await signInWithPopup(auth, facebookProvider);
+  }
+  if (provider === "email") {
+    session = await createUserWithEmailAndPassword(auth, email, password);
+  }
+  //TODO:REMOVE
+  console.log(session.user);
+  if (
+    session.user.metadata.creationTime === session.user.metadata.lastSignInTime
+  ) {
+    //TODO:REMOVE
+    console.log("SAVE USER");
+  }
+};
 export const loginWith = async (provider, email, password) => {
   let session;
   if (provider === "google") {
@@ -56,11 +77,7 @@ export const loginWith = async (provider, email, password) => {
     session = await signInWithPopup(auth, facebookProvider);
   }
   if (provider === "email") {
-    try {
-      session = await createUserWithEmailAndPassword(auth, email, password);
-    } catch {
-      session = await signInWithEmailAndPassword(auth, email, password);
-    }
+    session = await signInWithEmailAndPassword(auth, email, password);
   }
   //TODO:REMOVE
   console.log(session.user);
@@ -74,4 +91,15 @@ export const loginWith = async (provider, email, password) => {
 
 export const signOutUser = async () => {
   auth.signOut();
+};
+export const resetPasswordByEmail = async (email) => {
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+
+      console.log(error.code);
+    });
 };

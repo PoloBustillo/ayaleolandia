@@ -13,12 +13,7 @@ export const MenuItems = (props) => {
     <>
       <Link href="/">
         <Col className={props.itemClass}>
-          <HomeIcon
-            fill={"deeppink"}
-            className="home-icon"
-            height="20px"
-            width="20px"
-          ></HomeIcon>{" "}
+          <HomeIcon className="home-icon" height="20px" width="20px"></HomeIcon>{" "}
           INICIO
         </Col>
       </Link>

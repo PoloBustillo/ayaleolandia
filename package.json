@@ -13,6 +13,7 @@
     "@use-gesture/react": "^10.0.3",
     "algoliasearch": "^4.10.5",
     "bootstrap": "5.1.1",
+    "check-password-strength": "^2.0.3",
     "dotenv": "^10.0.0",
     "dotenv-load": "^2.0.0",
     "firebase": "^9.1.2",

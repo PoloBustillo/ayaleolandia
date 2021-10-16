@@ -88,7 +88,6 @@ export const NavBarLeolandia = (props) => {
           ) : (
             <img
               onClick={async () => {
-                console.log("OPEN USER");
                 props.sideMenuFunc(true);
               }}
               className={

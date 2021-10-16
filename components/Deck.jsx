@@ -100,11 +100,11 @@ export default function Deck() {
             <>
               <div>OTRA</div>{" "}
               <button
-                onTouchStart={() => {
-                  console.log("CLIK T");
+                onClick={() => {
+                  console.log("CLIK M");
                 }}
               >
-                Nuuevo Anillo
+                Nuevo Anillo
               </button>
             </>
           </animated.div>
