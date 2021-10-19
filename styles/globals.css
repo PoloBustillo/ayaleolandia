@@ -1,5 +1,6 @@
 /** @format */
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amatic+SC&family=Caudex&family=Major+Mono+Display&family=Mrs+Saint+Delafield&family=Unica+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Italianno&display=swap");
 html,
 body {
   padding: 0;
@@ -703,4 +704,54 @@ input:focus {
   border-radius: 50%;
   width: 25px;
   height: 25px;
+}
+
+.dropdown {
+  color: coral;
+  width: fit-content;
+  margin: auto;
+  right: 35vw;
+}
+.dropdown a {
+  font-family: "Abril Fatface", cursive;
+  color: coral;
+}
+
+.dropdown a:hover {
+  font-family: "Abril Fatface", cursive;
+  color: deeppink;
+}
+.dropdown-item.active {
+  color: #fff;
+  text-decoration: none;
+  background-color: deeppink !important;
+}
+.dropdown-item.active:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: deeppink !important;
+}
+.title-section {
+  -webkit-text-stroke: 1px black;
+  margin: auto;
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 10vw;
+  font-family: "Rampart One", cursive;
+  color: hotpink;
+}
+@import url("https://fonts.googleapis.com/css2?family=Rampart+One&display=swap");
+.title-new {
+  -webkit-text-stroke: 1px black;
+  margin: auto;
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 15vw;
+  font-family: "Rampart One", cursive;
+  transform: rotate(-13deg);
+  color: hotpink;
 }

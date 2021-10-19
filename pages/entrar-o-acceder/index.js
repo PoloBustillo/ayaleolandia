@@ -17,6 +17,7 @@ import useUser from "hooks/useUser";
 import FacebookIcon from "components/icons/FacebookIcon";
 import GoogleIcon from "components/icons/GoogleIcon";
 import Loader from "components/Loader";
+import { ButtonLoader } from "components/ButtonLoader";
 
 export default function Login() {
   const styles = useSpring({
@@ -86,6 +87,30 @@ export default function Login() {
 
   const handleFieldChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmitEmail = async () => {
+    if (!hasError(validationMap, "type", "error")) {
+      //Add loading to button
+      if (loginScreen) {
+        try {
+          await loginWith("email", state.email, state.password);
+        } catch (error) {
+          console.log(error.code);
+          setShow(true);
+          setAlertMsg(errorFirebaseMap.get(error.code));
+        }
+      } else {
+        try {
+          await createAccountWith("email", state.email, state.password);
+        } catch (error) {
+          setShow(true);
+          setAlertMsg(errorFirebaseMap.get(error.code));
+        }
+      }
+    } else {
+      setTriggerAnimation(true);
+    }
   };
 
   return (
@@ -242,14 +267,14 @@ export default function Login() {
               </Form.Floating>
             </Form>
             {loginScreen && (
-              <span
+              <div
                 onClick={() => {
                   resetPasswordByEmail(state.email);
                 }}
                 className="forgot-password"
               >
                 Olvide mi contraseña
-              </span>
+              </div>
             )}
             {!loginScreen && (
               <>
@@ -282,39 +307,9 @@ export default function Login() {
                 </animated.div>
               </>
             )}
-
-            <Button
-              onClick={async () => {
-                if (!hasError(validationMap, "type", "error")) {
-                  setShowLoader(true);
-                  //Add loading to button
-                  if (loginScreen) {
-                    try {
-                      await loginWith("email", state.email, state.password);
-                      setShowLoader(false);
-                    } catch (error) {
-                      console.log(error.code);
-                      setShow(true);
-                      setAlertMsg(errorFirebaseMap.get(error.code));
-                    }
-                  } else {
-                    try {
-                      await createAccountWith(
-                        "email",
-                        state.email,
-                        state.password
-                      );
-                      setShowLoader(false);
-                    } catch (error) {
-                      setShow(true);
-                      setAlertMsg(errorFirebaseMap.get(error.code));
-                    }
-                  }
-                } else {
-                  setTriggerAnimation(true);
-                }
-              }}
-              onMouseUp={() => {
+            <ButtonLoader
+              clickFunc={handleSubmitEmail}
+              onMouseUpFunc={() => {
                 setTriggerAnimation(false);
               }}
               block
@@ -322,13 +317,12 @@ export default function Login() {
               type="submit"
               className="login-email"
             >
-              {showLoader ? <Loader /> : "Ingresar"}
-            </Button>
-
+              Ingresar
+            </ButtonLoader>
             <Row>
               <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                <Button
-                  onClick={async () => {
+                <ButtonLoader
+                  clickFunc={async () => {
                     try {
                       await loginWith("facebook");
                     } catch (error) {
@@ -344,11 +338,11 @@ export default function Login() {
                   <FacebookIcon className="facebook-icon"></FacebookIcon>
                   {"  "}
                   Facebook
-                </Button>
+                </ButtonLoader>
               </Col>
               <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                <Button
-                  onClick={async () => {
+                <ButtonLoader
+                  clickFunc={async () => {
                     try {
                       await loginWith("google");
                     } catch (error) {
@@ -364,7 +358,7 @@ export default function Login() {
                   <GoogleIcon className="facebook-icon"></GoogleIcon>
                   {"  "}
                   Google
-                </Button>
+                </ButtonLoader>
               </Col>
               <span className={"advice"}>
                 Al iniciar con redes sociales aceptas terminos y condiciones

@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useState } from "react";
-import Link from "next/link";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
@@ -16,6 +15,13 @@ const cards = [
 
 // These two are just helpers, they curate spring data, values that are later being interpolated into css
 const to = (i) => ({
+  x: 0,
+  y: i * -4,
+  scale: 1,
+  rot: -10 + Math.random() * 20,
+  delay: i * 300 + 2000,
+});
+const toNew = (i) => ({
   x: 0,
   y: i * -4,
   scale: 1,
@@ -113,7 +119,7 @@ export default function Deck() {
       {playAgain && (
         <div
           onClick={() => {
-            setTimeout(() => gone.clear() || set((i) => to(i)), 600);
+            setTimeout(() => gone.clear() || set((i) => toNew(i)), 600);
             setPlayAgain(false);
           }}
         >
