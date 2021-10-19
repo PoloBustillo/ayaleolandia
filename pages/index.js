@@ -5,6 +5,7 @@ import Deck from "components/Deck";
 import { Layout } from "components/Layout";
 import { useState, useEffect } from "react";
 import { DropDownFilter } from "components/DropDownFilter";
+import { Row, Col, Card } from "react-bootstrap";
 import { AnimateSharedLayout, AnimatePresence, motion } from "framer-motion";
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -27,19 +28,30 @@ export default function Home() {
         <link rel="icon" href="/logo.png" />
       </Head>
       <Layout>
-        <div style={{ height: "1700px" }}>
-          <div className="title-section">Productos</div>
-          <DropDownFilter></DropDownFilter>
-          <AnimateSharedLayout>
-            <motion.ul layout>
-              {products.map((item) => (
-                <span>ITEM</span>
-              ))}
-            </motion.ul>
-          </AnimateSharedLayout>
-          {products.map((product) => {
-            return <div>{product.id}</div>;
-          })}
+        <div>
+          <Row className="products-container">
+            <Col>
+              <DropDownFilter></DropDownFilter>
+            </Col>
+            <Col>
+              <span className="title-products">Productos</span>
+            </Col>
+          </Row>
+          <Row className="product-row g-3">
+            {products.map((product) => {
+              return (
+                <Col key={product.id}>
+                  <Card>
+                    <Card.Img variant="top" src="holder.js/100px160" />
+                    <Card.Body>
+                      <Card.Title>{product.name}</Card.Title>
+                      <Card.Text>{product.shortDescription}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
         </div>
         <div id="root">
           <div className="title-new ">Nuevos Productos</div>

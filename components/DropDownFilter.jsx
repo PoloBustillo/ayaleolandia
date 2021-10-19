@@ -15,6 +15,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     {children} &#x25bc;
   </a>
 ));
+CustomToggle.displayName = "CustomToggle";
 
 const CustomMenu = React.forwardRef(
   ({ children, style, className, "aria-labelledby": labeledBy }, ref) => {
@@ -44,6 +45,7 @@ const CustomMenu = React.forwardRef(
     );
   }
 );
+CustomMenu.displayName = "CustomMenu";
 
 export const DropDownFilter = () => {
   return (
