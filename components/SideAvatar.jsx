@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { signOutUser } from "configs/firebase";
+import { signOutUser } from "configs/client/firebase";
 import UserProfile from "./icons/UserProfileIcon";
 
 export const SideAvatar = (props) => {

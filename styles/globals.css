@@ -667,11 +667,11 @@ input:focus {
 }
 .alert-heading {
   font-family: "Abril Fatface" !important;
-  font-size: 17px !important;
+  font-size: 3vw !important;
 }
 .alert p {
   font-family: "Abril Fatface" !important;
-  font-size: 12px;
+  font-size: 2vw;
 }
 .alert {
   margin: auto;

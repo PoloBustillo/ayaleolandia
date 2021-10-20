@@ -113,4 +113,8 @@ export const errorFirebaseMap = new Map([
     "auth/too-many-requests",
     "Cuenta bloqueada, por favor entrar en 'Olvide mi contraseña'",
   ],
+  [
+    "auth/popup-closed-by-user",
+    "Cerro la ventana de autentificación antes de iniciar sesión",
+  ],
 ]);

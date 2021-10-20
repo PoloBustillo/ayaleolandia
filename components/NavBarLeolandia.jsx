@@ -9,6 +9,7 @@ import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
 import CartIcon from "./icons/CartIcon";
 import useUser from "hooks/useUser";
+
 import SearchIcon from "./icons/SearchIcon";
 
 export const NavBarLeolandia = (props) => {

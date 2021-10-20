@@ -1,7 +1,7 @@
 /** @format */
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "configs/firebase";
+import { onAuthStateChanged } from "configs/client/firebase";
 
 import { USER_STATES } from "utils/constants";
 

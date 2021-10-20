@@ -3,20 +3,19 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Layout } from "components/Layout";
-import { Form, Button, Row, Col, Alert } from "react-bootstrap";
+import { Form, Row, Col, Alert } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
 import { useState, useEffect } from "react";
 import {
   loginWith,
   createAccountWith,
   resetPasswordByEmail,
-} from "configs/firebase";
+} from "configs/client/firebase";
 import { useRouter } from "next/router";
 import { validateFormData, hasError, errorFirebaseMap } from "utils/methods";
 import useUser from "hooks/useUser";
 import FacebookIcon from "components/icons/FacebookIcon";
 import GoogleIcon from "components/icons/GoogleIcon";
-import Loader from "components/Loader";
 import { ButtonLoader } from "components/ButtonLoader";
 
 export default function Login() {
