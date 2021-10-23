@@ -1,7 +1,6 @@
 /** @format */
 
 import admin from "firebase-admin";
-import serviceAccount from "./service-account.json";
 
 const privateKey = process.env.NEXT_FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n");
 const clientEmail = process.env.NEXT_FIREBASE_EMAIL;
