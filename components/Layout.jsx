@@ -8,6 +8,7 @@ import { NavBarLeolandia } from "./NavBarLeolandia";
 import Headroom from "react-headroom";
 import { useState } from "react";
 import useSWR from "swr";
+import axios from "axios";
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 
