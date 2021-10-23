@@ -27,9 +27,13 @@ let msgs = [
 ];
 
 export const Layout = (props) => {
-  const { data } = useSWR("/api/top-bar-msgs", fetcher);
+  const { data, error } = useSWR(
+    "https://ayaleolandia.vercel.app/api/top-bar-msgs",
+    fetcher
+  );
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
   console.log(data);
+  console.log(error);
   return (
     <>
       <SideMenu
