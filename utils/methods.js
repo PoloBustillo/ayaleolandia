@@ -121,9 +121,10 @@ export const errorFirebaseMap = new Map([
 ]);
 
 export function getURL(path = "") {
-  return `${
-    process.env.PUBLIC_NEXT_WEB_APP_URL || "http://localhost:3000"
-  }${path}`;
+  console.log("URL: " + process.env.NEXT_PUBLIC_VERCEL_URL);
+  console.log("URL: " + process.env.VERCEL_URL);
+
+  return `${process.env.VERCEL_URL || "http://localhost:3000"}${path}`;
 }
 
 // Helper to make GET requests to Strapi
