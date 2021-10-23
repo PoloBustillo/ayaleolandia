@@ -32,8 +32,8 @@ export const Layout = (props) => {
     fetcher
   );
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
-  console.log(data);
-  console.log(error);
+  console.log("DATA:" + data);
+  console.log("ERROR:" + error);
   return (
     <>
       <SideMenu
