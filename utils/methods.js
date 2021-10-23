@@ -122,7 +122,7 @@ export const errorFirebaseMap = new Map([
 
 export function getURL(path = "") {
   return `${
-    process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+    process.env.PUBLIC_NEXT_WEB_APP_URL || "http://localhost:3000"
   }${path}`;
 }
 
