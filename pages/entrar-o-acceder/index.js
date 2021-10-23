@@ -392,7 +392,7 @@ export default function Login({ fallback }) {
 
 export async function getStaticProps(context) {
   // `getStaticProps` is executed on the server side.
-  const topBarMsgs = [];
+  const topBarMsgs = await fetchGet("/api/top-bar-msgs");
 
   return {
     props: {
