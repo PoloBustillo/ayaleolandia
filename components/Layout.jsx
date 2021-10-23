@@ -36,7 +36,7 @@ export const Layout = (props) => {
         sideMenuStatus={sideMenuStatus}
         sideMenuFunc={setSideMenuStatus}
       ></SideMenu>
-      <TopBar msgs={msgs} />
+      <TopBar msgs={data} />
       <main className="main">
         <Headroom>
           <NavBarLeolandia
