@@ -123,6 +123,8 @@ export const errorFirebaseMap = new Map([
 export function getURL(path = "") {
   console.log("URL: " + process.env.NEXT_PUBLIC_VERCEL_URL);
   console.log("URL: " + process.env.VERCEL_URL);
+  let url = `${process.env.VERCEL_URL || "http://localhost:3000"}${path}`;
+  console.log(url);
 
   return `${process.env.VERCEL_URL || "http://localhost:3000"}${path}`;
 }
