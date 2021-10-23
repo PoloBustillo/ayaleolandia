@@ -7,6 +7,9 @@ import { TopBar } from "./TopBar";
 import { NavBarLeolandia } from "./NavBarLeolandia";
 import Headroom from "react-headroom";
 import { useState } from "react";
+import useSWR from "swr";
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 let msgs = [
   {
@@ -24,8 +27,9 @@ let msgs = [
 ];
 
 export const Layout = (props) => {
+  const { data } = useSWR("/api/top-bar-msgs", fetcher);
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
-
+  console.log(data);
   return (
     <>
       <SideMenu
@@ -33,7 +37,7 @@ export const Layout = (props) => {
         sideMenuFunc={setSideMenuStatus}
       ></SideMenu>
       <TopBar msgs={msgs} />
-      <main>
+      <main className="main">
         <Headroom>
           <NavBarLeolandia
             selected={0}

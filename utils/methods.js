@@ -1,5 +1,6 @@
 /** @format */
 import { passwordStrength } from "check-password-strength";
+import axios from "axios";
 
 export function validateEmail(email) {
   var re = /\S+@\S+\.\S+/;
@@ -118,3 +119,16 @@ export const errorFirebaseMap = new Map([
     "Cerro la ventana de autentificación antes de iniciar sesión",
   ],
 ]);
+
+export function getURL(path = "") {
+  return `${
+    process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000"
+  }${path}`;
+}
+
+// Helper to make GET requests to Strapi
+export async function fetchGet(path) {
+  const requestUrl = getURL(path);
+  const response = await axios.get(requestUrl);
+  return response.data;
+}

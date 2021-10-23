@@ -32,7 +32,7 @@ export const ButtonLoader = (props) => {
       }}
       className={props.className}
       size={props.size}
-      block={props.block}
+      block={props.block.toString()}
       type={props.type}
     >
       {showLoader ? <Loader /> : props.children}

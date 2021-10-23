@@ -2,11 +2,14 @@
 
 import "styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import SSRProvider from "react-bootstrap/SSRProvider";
 
-const userContext = React.createContext();
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <SSRProvider>
+      <Component {...pageProps} />
+    </SSRProvider>
+  );
 }
 
 export default MyApp;

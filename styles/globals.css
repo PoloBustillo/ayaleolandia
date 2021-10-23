@@ -17,6 +17,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .main {
+  overflow: hidden;
   background-color: whitesmoke !important;
 }
 .login-page {
