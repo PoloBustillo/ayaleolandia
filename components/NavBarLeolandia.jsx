@@ -8,13 +8,13 @@ import HamburguerBtn from "./HamburguerBtn";
 import { MenuItems } from "./MenuItems";
 import { SearchBar } from "./SearchBar";
 import CartIcon from "./icons/CartIcon";
-import useUser from "hooks/useUser";
+import { useAuth } from "hooks/AuthUserProvider";
 
 import SearchIcon from "./icons/SearchIcon";
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
-  const user = useUser();
+  const { authUser, loading } = useAuth();
 
   return !searchOpen ? (
     <div className="navbar-container">
@@ -74,7 +74,7 @@ export const NavBarLeolandia = (props) => {
           </Link>
         </Col>
         <Col className="tools-container">
-          {user == null ? (
+          {authUser == null ? (
             <Link className="icon-tool" href="/entrar-o-acceder" passHref>
               <a className="icon-tool">
                 <img
@@ -92,12 +92,12 @@ export const NavBarLeolandia = (props) => {
                 props.sideMenuFunc(true);
               }}
               className={
-                user?.avatar
+                authUser?.avatar
                   ? "nav-icon user-nav-avatar icon-tool"
                   : "nav-icon icon-tool"
               }
               id="user-icon"
-              src={user?.avatar ? user.avatar : "/usergirl.png"}
+              src={authUser?.avatar ? authUser.avatar : "/usergirl.png"}
               height="30px"
               alt="Login"
             />

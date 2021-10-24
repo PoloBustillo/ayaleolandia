@@ -3,6 +3,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Layout } from "components/Layout";
+import { Logtail } from "@logtail/browser";
 import { Form, Row, Col, Alert } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
 import { useState, useEffect } from "react";
@@ -18,11 +19,13 @@ import {
   errorFirebaseMap,
   fetchGet,
 } from "utils/methods";
-import useUser from "hooks/useUser";
 import FacebookIcon from "components/icons/FacebookIcon";
 import GoogleIcon from "components/icons/GoogleIcon";
 import { ButtonLoader } from "components/ButtonLoader";
 import { SWRConfig } from "swr";
+import { PageSwitcher } from "components/PageSwitcher";
+import { useAuth } from "hooks/AuthUserProvider";
+const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
 
 export default function Login({ fallback }) {
   const styles = useSpring({
@@ -42,7 +45,9 @@ export default function Login({ fallback }) {
   const [alertMsg, setAlertMsg] = useState("");
   const [loginScreen, setLoginScreen] = useState(true);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const user = useUser();
+
+  const { authUser } = useAuth();
+  console.log(authUser);
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -69,7 +74,7 @@ export default function Login({ fallback }) {
       setTriggerAnimation(false);
     }
     const { name, phone, email, password } = state;
-    if (user) {
+    if (authUser) {
       router.push("/");
     }
     let validation = validateFormData(loginScreen, {
@@ -84,7 +89,7 @@ export default function Login({ fallback }) {
       return map;
     }, {});
     setValidationMap(validationMap);
-  }, [state, user, loginScreen, checkboxChecked]);
+  }, [state, authUser, loginScreen, checkboxChecked]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -108,6 +113,7 @@ export default function Login({ fallback }) {
       } else {
         try {
           await createAccountWith("email", state.email, state.password);
+          logtail.info(`Cuenta creada con email ${state.email}`);
         } catch (error) {
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
@@ -131,32 +137,10 @@ export default function Login({ fallback }) {
       <SWRConfig value={{ fallback }}>
         <div>
           <Layout>
-            <div className="pageSwitcher">
-              <span
-                onClick={() => {
-                  setLoginScreen(true);
-                }}
-                className={
-                  loginScreen ? "selected pageSwitcherItem" : "pageSwitcherItem"
-                }
-              >
-                Entrar Cuenta
-              </span>
-              <span
-                aria-current="page"
-                onClick={() => {
-                  setLoginScreen(false);
-                }}
-                className={
-                  !loginScreen
-                    ? "selected pageSwitcherItem"
-                    : "pageSwitcherItem"
-                }
-              >
-                Crear Cuenta
-              </span>
-            </div>
-
+            <PageSwitcher
+              firstSelected={loginScreen}
+              updateScreen={setLoginScreen}
+            ></PageSwitcher>
             <div className="login-page">
               <div className="login-container">
                 {show && (

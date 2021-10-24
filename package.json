@@ -9,9 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-spring/addons": "^9.0.0-beta.33",
+    "@logtail/browser": "^0.1.10",
     "@use-gesture/react": "^10.0.3",
-    "algoliasearch": "^4.10.5",
     "axios": "^0.23.0",
     "bootstrap": "5.1.1",
     "chalk": "^4.1.2",
