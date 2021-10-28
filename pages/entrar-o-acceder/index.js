@@ -47,7 +47,7 @@ export default function Login({ fallback }) {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
 
   const { authUser } = useAuth();
-  console.log(authUser);
+
   const router = useRouter();
   const [state, setState] = useState({
     name: "",
@@ -260,9 +260,19 @@ export default function Login({ fallback }) {
                           Se ve bien!
                         </Form.Control.Feedback>
                       )}
-                      <Form.Control.Feedback type="invalid">
-                        {validationMap.password?.msg}
-                      </Form.Control.Feedback>
+                      {!validationMap.password?.msg.includes(
+                        "Contraseña debil"
+                      ) ? (
+                        <animated.div style={triggerAnimation ? styles : {}}>
+                          <Form.Control.Feedback type="invalid">
+                            {validationMap.password?.msg}
+                          </Form.Control.Feedback>
+                        </animated.div>
+                      ) : (
+                        <Form.Control.Feedback type="invalid">
+                          {validationMap.password?.msg}
+                        </Form.Control.Feedback>
+                      )}
                     </>
                     <label htmlFor="floatingPasswordCustom">Contraseña</label>
                   </Form.Floating>

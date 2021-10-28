@@ -30,8 +30,7 @@ let msgs = [
 export const Layout = (props) => {
   const { data, error } = useSWR("/api/top-bar-msgs", fetcher);
   const [sideMenuStatus, setSideMenuStatus] = useState(false);
-  console.log("DATA:" + data);
-  console.log("ERROR:" + error);
+
   return (
     <>
       <SideMenu

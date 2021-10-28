@@ -3,16 +3,27 @@
 import React from "react";
 import { signOutUser } from "configs/client/firebase";
 import UserProfile from "./icons/UserProfileIcon";
+import Link from "next/link";
+import { useAuth } from "hooks/AuthUserProvider";
 
 export const SideAvatar = (props) => {
+  const { authUser } = useAuth();
   return (
     <div className="container-avatar">
       <div className={"settings"}>
-        <UserProfile height="2em" width={"5em"}></UserProfile>
+        <Link href="/user-profile">
+          <a
+            onClick={() => {
+              props.sideMenuFunc(false);
+            }}
+          >
+            <UserProfile height="2em" width={"5em"}></UserProfile>
+          </a>
+        </Link>
       </div>
       <div className="avatar">
         <img
-          src="https://images.unsplash.com/photo-1486116736668-6384736c9330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2850&amp;q=80"
+          src={authUser?.avatar ? authUser.avatar : "usergirl.png"}
           alt="user avatar"
         />
       </div>

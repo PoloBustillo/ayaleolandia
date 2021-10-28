@@ -1,6 +1,6 @@
 /** @format */
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -11,7 +11,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -32,6 +32,7 @@ const firebaseConfig = {
 !getApps().length && initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore();
+const usersRef = collection(db, "users");
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
@@ -62,13 +63,30 @@ export const createAccountWith = async (provider, email, password) => {
   if (provider === "email") {
     session = await createUserWithEmailAndPassword(auth, email, password);
   }
-  //TODO:REMOVE
-  console.log(session.user);
+
   if (
     session.user.metadata.creationTime === session.user.metadata.lastSignInTime
   ) {
-    //TODO:REMOVE
-    console.log("SAVE USER");
+    const data = {
+      name: session.user.displayName,
+      id: session.user.uid,
+      phoneNumber: session.user.phoneNumber,
+      email: session.user.email,
+      emailVerified: session.user.emailVerified,
+      photoUrl: session.user.photoURL,
+      orders: [],
+      address: {},
+      paymentMethods: {},
+      billingAddress: {},
+      shipAddresses: {},
+    };
+    console.log("NEW USER");
+
+    try {
+      await setDoc(doc(usersRef, session.user.uid), data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 export const loginWith = async (provider, email, password) => {
