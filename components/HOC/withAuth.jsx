@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "hooks/AuthUserProvider";
 import Head from "next/head";
 
-const withAuth = (WrappedComponent) => {
+export default function withAuth(WrappedComponent) {
   return (props) => {
     const { authUser, loading } = useAuth();
     console.log(loading);
@@ -42,6 +42,4 @@ const withAuth = (WrappedComponent) => {
     // If we are on server, return null
     return null;
   };
-};
-
-export default withAuth;
+}
