@@ -17,17 +17,19 @@ export const MenuItems = (props) => {
           INICIO
         </Col>
       </Link>
-      <Col className={props.itemClass}>
-        <img
-          className="side-icon"
-          id="fashion-icon"
-          src={"/fashion.png"}
-          height="20px"
-          width="20px"
-          alt="Ir a colecciones de Leolandia"
-        />{" "}
-        COLECCIONES
-      </Col>
+      <Link href="/colecciones">
+        <Col className={props.itemClass}>
+          <img
+            className="side-icon"
+            id="fashion-icon"
+            src={"/fashion.png"}
+            height="20px"
+            width="20px"
+            alt="Ir a colecciones de Leolandia"
+          />{" "}
+          COLECCIONES
+        </Col>
+      </Link>
       <Col className={props.itemClass}>
         <NewProducts
           className="new-products-icon"

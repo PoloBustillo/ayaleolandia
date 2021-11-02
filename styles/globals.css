@@ -24,6 +24,28 @@ input[type="search"]::-webkit-search-results-decoration {
   background-color: whitesmoke;
   padding: 5vh 0;
 }
+.loading-container {
+  background: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.notfoud-container {
+  width: 100vw;
+  background-color: whitesmoke;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+.notfoud-container h1 {
+  color: #bf8969;
+  font-family: "Abril Fatface", cursive;
+}
+.notfoud-container h3 {
+  color: hotpink;
+  font-family: "Abril Fatface", cursive;
+}
+
 .login-container {
   margin: auto;
   width: 75vw;

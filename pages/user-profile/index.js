@@ -10,9 +10,11 @@ import { useAuth } from "hooks/AuthUserProvider";
 
 import { ButtonLoader } from "components/ButtonLoader";
 import { Row, Col, Form, Accordion, Alert } from "react-bootstrap";
-import { RestrictedPage } from "components/RestrictedPage";
 
-export default function UserProfile({ fallback }) {
+import { Layout } from "components/Layout";
+import withAuth from "components/HOC/withAuth";
+
+function UserProfile({ fallback }) {
   const { authUser, loading } = useAuth();
   const [showAlert, setShowAlert] = useState(false);
   const [formState, setFormState] = useState({});
@@ -32,7 +34,7 @@ export default function UserProfile({ fallback }) {
         <link rel="icon" href="/logo.png" />
       </Head>
       <SWRConfig value={{ fallback }}>
-        <RestrictedPage>
+        <Layout>
           <div className="settings-page">
             <div className="settings-container">
               {showAlert && (
@@ -246,11 +248,13 @@ export default function UserProfile({ fallback }) {
               </Row>
             </div>
           </div>
-        </RestrictedPage>
+        </Layout>
       </SWRConfig>
     </div>
   );
 }
+
+export default withAuth(UserProfile);
 
 export async function getStaticProps(context) {
   // `getStaticProps` is executed on the server side.
