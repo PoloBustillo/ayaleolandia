@@ -8,11 +8,9 @@ import Head from "next/head";
 function withAuth(WrappedComponent) {
   return function Element(props) {
     const { authUser, loading } = useAuth();
-
+    const Router = useRouter();
     // checks whether we are on client / browser or server.
     if (typeof window !== "undefined") {
-      const Router = useRouter();
-
       if (loading) {
         return (
           <>
