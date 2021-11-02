@@ -92,10 +92,6 @@ export default function UserProfile({ fallback }) {
                               Se ve bien!
                             </Form.Control.Feedback>
 
-                            <Form.Control.Feedback type="invalid">
-                              "Errorr"
-                            </Form.Control.Feedback>
-
                             <label htmlFor="floatingPhoneCustom">
                               Teléfono
                             </label>
