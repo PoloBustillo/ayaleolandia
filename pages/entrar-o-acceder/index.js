@@ -42,6 +42,7 @@ export default function Login({ fallback }) {
   const [showLoader, setShowLoader] = useState(false);
   const [triggerAnimation, setTriggerAnimation] = useState(false);
   const [show, setShow] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
   const [loginScreen, setLoginScreen] = useState(true);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -106,7 +107,6 @@ export default function Login({ fallback }) {
         try {
           await loginWith("email", state.email, state.password);
         } catch (error) {
-          console.log(error.code);
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
         }
@@ -153,6 +153,18 @@ export default function Login({ fallback }) {
                       Lo sentimos, hubo un error en tu petición!
                     </Alert.Heading>
                     <p>{alertMsg}</p>
+                  </Alert>
+                )}
+                {showEmail && (
+                  <Alert
+                    variant="info"
+                    onClose={() => setShowEmail(false)}
+                    dismissible
+                  >
+                    <Alert.Heading>
+                      {`Email fue mandado a ${state.email}`}
+                    </Alert.Heading>
+                    <p>para cambiar su contraseña</p>
                   </Alert>
                 )}
                 <Form onSubmit={handleSubmit}>
@@ -280,7 +292,16 @@ export default function Login({ fallback }) {
                 {loginScreen && (
                   <div
                     onClick={() => {
-                      resetPasswordByEmail(state.email);
+                      resetPasswordByEmail(
+                        state.email,
+                        () => {
+                          setShowEmail(true);
+                        },
+                        (msg) => {
+                          setShow(true);
+                          setAlertMsg(msg);
+                        }
+                      );
                     }}
                     className="forgot-password"
                   >

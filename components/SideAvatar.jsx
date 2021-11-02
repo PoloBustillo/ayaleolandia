@@ -21,22 +21,50 @@ export const SideAvatar = (props) => {
           </a>
         </Link>
       </div>
+
       <div className="avatar">
-        <img
-          src={authUser?.avatar ? authUser.avatar : "usergirl.png"}
-          alt="user avatar"
-        />
+        <Link href="/user-profile">
+          <a
+            onClick={() => {
+              props.sideMenuFunc(false);
+            }}
+          >
+            <img
+              src={authUser?.avatar ? authUser.avatar : "usergirl.png"}
+              alt="user avatar"
+            />
+          </a>
+        </Link>
       </div>
+
       <div className="status">
-        <h2>Hola Lia Sofia!</h2>
-        <span
-          onClick={() => {
-            signOutUser();
-            props.sideMenuFunc(false);
-          }}
-        >
-          Salir
-        </span>
+        {authUser ? (
+          <>
+            {authUser.name ? (
+              <h2>{`Hola ${authUser.name}!`}</h2>
+            ) : (
+              <h2>{`Hola Usuario!`}</h2>
+            )}
+            <span
+              onClick={() => {
+                signOutUser();
+                props.sideMenuFunc(false);
+              }}
+            >
+              Salir
+            </span>
+          </>
+        ) : (
+          <Link href="/entrar-o-acceder">
+            <a
+              onClick={() => {
+                props.sideMenuFunc(false);
+              }}
+            >
+              <h2>{`Iniciar Sesion!`}</h2>
+            </a>
+          </Link>
+        )}
       </div>
     </div>
   );

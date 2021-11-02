@@ -27,6 +27,7 @@ export default function UseFirebaseAuth() {
     }
 
     setLoading(true);
+    console.log(authState);
     var formattedUser = formatAuthUser(authState);
     setAuthUser(formattedUser);
     setLoading(false);

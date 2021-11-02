@@ -29,6 +29,30 @@ input[type="search"]::-webkit-search-results-decoration {
   width: 75vw;
   background-color: whitesmoke;
 }
+.settings-container {
+  margin: auto;
+  width: 75vw;
+  background-color: whitesmoke;
+}
+.settings-title {
+  font-size: 7vw;
+  color: hotpink;
+  font-family: "Abril Fatface", cursive;
+  text-align: center;
+  padding-bottom: 2vh;
+}
+.accordion-container {
+  background-color: whitesmoke;
+  color: deeppink;
+}
+.accordion-item {
+  background-color: whitesmoke !important;
+  color: deeppink;
+}
+.accordion-button {
+  background-color: transparent !important;
+  color: deeppink !important;
+}
 
 a {
   color: inherit;

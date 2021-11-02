@@ -107,12 +107,15 @@ export const errorFirebaseMap = new Map([
   ["auth/invalid-password", "Contraseña no valida (almenos 6 caracteres)."],
   ["auth/invalid-email", "Email no es valido."],
   ["auth/email-already-exists", "Email ya existe."],
-  ["auth/email-already-in-use", "Email ya existe."],
+  [
+    "auth/email-already-in-use",
+    "Email ya fue usado por otro medio (FB, Google, Email).",
+  ],
   ["auth/wrong-password", "Contraseña no es correcta."],
   ["auth/weak-password", "Contraseña no valida (almenos 6 caracteres)."],
   [
     "auth/too-many-requests",
-    "Cuenta bloqueada, por favor entrar en 'Olvide mi contraseña'",
+    "Cuenta bloqueada, por favor hacer click en 'Olvide mi contraseña'",
   ],
   [
     "auth/popup-closed-by-user",

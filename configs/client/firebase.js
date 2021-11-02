@@ -113,14 +113,13 @@ export const loginWith = async (provider, email, password) => {
 export const signOutUser = async () => {
   auth.signOut();
 };
-export const resetPasswordByEmail = async (email) => {
+export const resetPasswordByEmail = async (email, successFunc, errorFunc) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
-      console.log("Email sent");
+      successFunc();
     })
     .catch((error) => {
       const errorCode = error.code;
-
-      console.log(error.code);
+      errorFunc(errorCode);
     });
 };
