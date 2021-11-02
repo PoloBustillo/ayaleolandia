@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "hooks/AuthUserProvider";
 import Head from "next/head";
 
-export default function withAuth(WrappedComponent) {
+function withAuth(WrappedComponent) {
   return (props) => {
     const { authUser, loading } = useAuth();
     console.log(loading);
@@ -43,3 +43,5 @@ export default function withAuth(WrappedComponent) {
     return null;
   };
 }
+withAuth.displayName = "withAuth";
+export default withAuth;
