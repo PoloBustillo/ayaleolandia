@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Layout } from "components/Layout";
 import { Logtail } from "@logtail/browser";
-import { Form, Row, Col, Alert } from "react-bootstrap";
+import { Form, Row, Col, Alert, Toast, ToastContainer } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
 import { useState, useEffect } from "react";
 import {
@@ -144,28 +144,40 @@ export default function Login({ fallback }) {
             <div className="login-page">
               <div className="login-container">
                 {show && (
-                  <Alert
-                    variant="danger"
-                    onClose={() => setShow(false)}
-                    dismissible
-                  >
-                    <Alert.Heading>
-                      Lo sentimos, hubo un error en tu petición!
-                    </Alert.Heading>
-                    <p>{alertMsg}</p>
-                  </Alert>
+                  <ToastContainer className="p-3" position="bottom-center">
+                    <Toast
+                      onClose={() => setShow(false)}
+                      show={show}
+                      delay={5000}
+                      bg="danger"
+                      autohide
+                    >
+                      <Toast.Header>
+                        <strong className="me-auto">
+                          Lo sentimos, hubo un error en tu petición!
+                        </strong>
+                      </Toast.Header>
+                      <Toast.Body>{alertMsg}</Toast.Body>
+                    </Toast>
+                  </ToastContainer>
                 )}
                 {showEmail && (
-                  <Alert
-                    variant="info"
-                    onClose={() => setShowEmail(false)}
-                    dismissible
-                  >
-                    <Alert.Heading>
-                      {`Email fue mandado a ${state.email}`}
-                    </Alert.Heading>
-                    <p>para cambiar su contraseña</p>
-                  </Alert>
+                  <ToastContainer className="p-3" position="bottom-center">
+                    <Toast
+                      onClose={() => setShowEmail(false)}
+                      show={showEmail}
+                      delay={5000}
+                      bg="info"
+                      autohide
+                    >
+                      <Toast.Header>
+                        <strong className="me-auto">
+                          {`Email fue mandado a ${state.email}`}
+                        </strong>
+                      </Toast.Header>
+                      <Toast.Body>para cambiar su contraseña</Toast.Body>
+                    </Toast>
+                  </ToastContainer>
                 )}
                 <Form onSubmit={handleSubmit}>
                   {!loginScreen && (
@@ -299,7 +311,7 @@ export default function Login({ fallback }) {
                         },
                         (msg) => {
                           setShow(true);
-                          setAlertMsg(msg);
+                          setAlertMsg(errorFirebaseMap.get(msg));
                         }
                       );
                     }}
@@ -349,7 +361,7 @@ export default function Login({ fallback }) {
                   type="submit"
                   className="login-email"
                 >
-                  Ingresar
+                  {loginScreen ? "Ingresar" : "Crear"}
                 </ButtonLoader>
                 <Row>
                   <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>

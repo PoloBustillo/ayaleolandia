@@ -113,10 +113,7 @@ export const errorFirebaseMap = new Map([
   ],
   ["auth/wrong-password", "Contraseña no es correcta."],
   ["auth/weak-password", "Contraseña no valida (almenos 6 caracteres)."],
-  [
-    "auth/too-many-requests",
-    "Cuenta bloqueada, por favor hacer click en 'Olvide mi contraseña'",
-  ],
+  ["auth/too-many-requests", "Cuenta bloqueada"],
   [
     "auth/popup-closed-by-user",
     "Cerro la ventana de autentificación antes de iniciar sesión",
@@ -125,7 +122,6 @@ export const errorFirebaseMap = new Map([
 
 export function getURL(path = "") {
   let url = `${process.env.URL || "http://localhost:3000"}${path}`;
-  console.log(url);
   return url;
 }
 

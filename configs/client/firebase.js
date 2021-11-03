@@ -10,7 +10,8 @@ import {
   FacebookAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
-
+import { Logtail } from "@logtail/browser";
+const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
 import { getFirestore, collection, doc, setDoc } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -80,12 +81,13 @@ export const createAccountWith = async (provider, email, password) => {
       billingAddress: {},
       shipAddresses: {},
     };
-    console.log("NEW USER");
+    logtail.info("New user created");
 
     try {
+      //TODO: SAVE USER
       await setDoc(doc(usersRef, session.user.uid), data);
     } catch (error) {
-      console.log(error);
+      logtail.error(`User creation error: ${error}`);
     }
   }
 };
@@ -100,13 +102,15 @@ export const loginWith = async (provider, email, password) => {
   if (provider === "email") {
     session = await signInWithEmailAndPassword(auth, email, password);
   }
-  //TODO:REMOVE
-  console.log(session.user);
   if (
     session.user.metadata.creationTime === session.user.metadata.lastSignInTime
   ) {
-    //TODO:REMOVE
-    console.log("SAVE USER");
+    try {
+      //TODO: SAVE USER
+      await setDoc(doc(usersRef, session.user.uid), data);
+    } catch (error) {
+      logtail.error(`User creation error: ${error}`);
+    }
   }
 };
 
@@ -119,6 +123,7 @@ export const resetPasswordByEmail = async (email, successFunc, errorFunc) => {
       successFunc();
     })
     .catch((error) => {
+      logtail.error(`Sent email error: ${error}`);
       const errorCode = error.code;
       errorFunc(errorCode);
     });

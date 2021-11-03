@@ -416,12 +416,63 @@ input:focus {
 .container-avatar:focus {
   outline: none;
 }
-
+.avatar-form {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  width: 3em;
+  height: 3em;
+  border: 3px solid hotpink;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+}
+.container-upload {
+  cursor: pointer;
+  vertical-align: middle;
+  display: grid;
+  border: 1px dotted hotpink;
+  padding: 4px 0;
+}
+.avatar-upload {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  width: 2em;
+  height: 2em;
+  border: 3px solid hotpink;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+}
+.avatar-form img {
+  width: 100%;
+  cursor: pointer;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.avatar-label {
+  font-size: 1.5vw;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+.avatar-file-input {
+  visibility: hidden !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5;
+  color: hotpink !important;
+  background-color: whitesmoke !important;
+  background-clip: padding-box;
+  border: 1px solid hotpink !important;
+}
 .avatar {
   position: relative;
   width: 5em;
   height: 5em;
-  border: 5px solid #040404;
+  border: 5px solid hotpink;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -646,6 +697,7 @@ input:focus {
   align-items: center;
   text-align: center;
   display: block;
+  padding-top: 2vh;
   background-color: whitesmoke;
 }
 .pageSwitcherItem.selected {

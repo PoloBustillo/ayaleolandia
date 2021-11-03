@@ -1,7 +1,7 @@
 /** @format */
 
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { SWRConfig } from "swr";
 
@@ -16,11 +16,21 @@ import withAuth from "components/HOC/withAuth";
 
 function UserProfile({ fallback }) {
   const { authUser, loading } = useAuth();
+  const inputFile = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
+  const [file, setFile] = useState({});
+  const [avatar, setAvatar] = useState(null);
   const [formState, setFormState] = useState({});
 
   const handleFieldChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
+  };
+
+  const handleFileSelected = (e) => {
+    const files = Array.from(e.target.files);
+    let reader = new FileReader();
+    setAvatar(URL.createObjectURL(files[0]));
+    setFile(files[0]);
   };
 
   return (
@@ -63,6 +73,50 @@ function UserProfile({ fallback }) {
                         }}
                       >
                         <>
+                          <Row
+                            onClick={() => {
+                              inputFile.current.click();
+                            }}
+                          >
+                            <Col className="container-upload">
+                              <div className="avatar-form">
+                                <img
+                                  src={
+                                    avatar
+                                      ? avatar
+                                      : authUser.avatar
+                                      ? authUser.avatar
+                                      : "usergirl.png"
+                                  }
+                                  alt="user avatar"
+                                />
+                              </div>
+                            </Col>
+                            <Col className="container-upload">
+                              <Form.Group
+                                controlId="formFile"
+                                className="avatar-upload"
+                              >
+                                <Form.Label>
+                                  <img
+                                    width="30px"
+                                    src={"upload_file.png"}
+                                    alt="file upload"
+                                  />
+                                </Form.Label>
+                                <Form.Control
+                                  onChange={handleFileSelected}
+                                  ref={inputFile}
+                                  className="avatar-file-input"
+                                  type="file"
+                                  accept="image/*"
+                                />
+                              </Form.Group>
+                              <span className="avatar-label">
+                                {file?.name ? file.name : "Seleccciona Imagen"}
+                              </span>
+                            </Col>
+                          </Row>
                           <Form.Floating required className="mb-3">
                             <Form.Control
                               id="floatingNameInput"
