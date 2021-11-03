@@ -58,14 +58,7 @@ export default function Home({ fallback }) {
           </div>
           <div>
             <div className="title-new ">Nuevos Productos</div>
-            <video
-              playsInline
-              muted
-              autoPlay
-              loop
-              poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg"
-              id="bgvid"
-            >
+            {/* <video playsInline muted autoPlay loop poster="" id="bgvid">
               <source
                 src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4"
                 type="video/webm"
@@ -74,7 +67,7 @@ export default function Home({ fallback }) {
                 src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4"
                 type="video/mp4"
               />
-            </video>
+            </video> */}
           </div>
           <div id="root">
             <Deck></Deck>

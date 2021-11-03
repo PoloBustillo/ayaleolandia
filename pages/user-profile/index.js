@@ -28,9 +28,10 @@ function UserProfile({ fallback }) {
 
   const handleFileSelected = (e) => {
     const files = Array.from(e.target.files);
-    let reader = new FileReader();
-    setAvatar(URL.createObjectURL(files[0]));
-    setFile(files[0]);
+    try {
+      setAvatar(URL.createObjectURL(files[0]));
+      setFile(files[0]);
+    } catch (error) {}
   };
 
   return (
@@ -72,87 +73,95 @@ function UserProfile({ fallback }) {
                           console.log("Hola");
                         }}
                       >
-                        <>
-                          <Row
-                            onClick={() => {
-                              inputFile.current.click();
+                        <Row
+                          onClick={() => {
+                            inputFile.current.click();
+                          }}
+                        >
+                          <Col className="container-upload">
+                            <div className="avatar-form">
+                              <img
+                                src={
+                                  avatar
+                                    ? avatar
+                                    : authUser.avatar
+                                    ? authUser.avatar
+                                    : "usergirl.png"
+                                }
+                                alt="user avatar"
+                              />
+                            </div>
+                          </Col>
+                          <Col className="container-upload">
+                            <Form.Group
+                              controlId="formFile"
+                              className="avatar-upload"
+                            >
+                              <img
+                                width="30px"
+                                src={"upload_file.png"}
+                                alt="file upload"
+                              />
+                              <Form.Control
+                                onChange={handleFileSelected}
+                                ref={inputFile}
+                                className="avatar-file-input"
+                                type="file"
+                                accept="image/*"
+                              />
+                            </Form.Group>
+                            <span className="avatar-label">
+                              {file?.name ? file.name : "Seleccciona Imagen"}
+                            </span>
+                          </Col>
+                        </Row>
+                        <Form.Floating required className="mb-3">
+                          <Form.Control
+                            id="floatingNameInput"
+                            className={"is-valid"}
+                            type="text"
+                            name="name"
+                            onChange={(e) => {
+                              handleFieldChange(e);
                             }}
-                          >
-                            <Col className="container-upload">
-                              <div className="avatar-form">
-                                <img
-                                  src={
-                                    avatar
-                                      ? avatar
-                                      : authUser.avatar
-                                      ? authUser.avatar
-                                      : "usergirl.png"
-                                  }
-                                  alt="user avatar"
-                                />
-                              </div>
-                            </Col>
-                            <Col className="container-upload">
-                              <Form.Group
-                                controlId="formFile"
-                                className="avatar-upload"
-                              >
-                                <Form.Label>
-                                  <img
-                                    width="30px"
-                                    src={"upload_file.png"}
-                                    alt="file upload"
-                                  />
-                                </Form.Label>
-                                <Form.Control
-                                  onChange={handleFileSelected}
-                                  ref={inputFile}
-                                  className="avatar-file-input"
-                                  type="file"
-                                  accept="image/*"
-                                />
-                              </Form.Group>
-                              <span className="avatar-label">
-                                {file?.name ? file.name : "Seleccciona Imagen"}
-                              </span>
-                            </Col>
-                          </Row>
-                          <Form.Floating required className="mb-3">
-                            <Form.Control
-                              id="floatingNameInput"
-                              className={"is-valid"}
-                              type="text"
-                              name="name"
-                              onChange={(e) => {
-                                handleFieldChange(e);
-                              }}
-                            />
-                            <Form.Control.Feedback>
-                              Se ve bien!
-                            </Form.Control.Feedback>
+                          />
+                          <label htmlFor="floatingInputCustom">Nombre</label>
+                        </Form.Floating>
+                        <Row>
+                          <Col>
+                            <Form.Floating required className="mb-3">
+                              <Form.Control
+                                id="floatingNameInput"
+                                className={"is-valid"}
+                                type="text"
+                                name="username"
+                                onChange={(e) => {
+                                  handleFieldChange(e);
+                                }}
+                              />
+                              <label htmlFor="floatingInputCustom">
+                                Nickname
+                              </label>
+                            </Form.Floating>
+                          </Col>
+                          <Col>
+                            <Form.Floating className="mb-3">
+                              <Form.Control
+                                className={"is-valid"}
+                                id="floatingPhoneCustom"
+                                type="phone"
+                                name="phone"
+                                onChange={(e) => {
+                                  handleFieldChange(e);
+                                }}
+                              />
 
-                            <label htmlFor="floatingInputCustom">Nombre</label>
-                          </Form.Floating>
-
-                          <Form.Floating className="mb-3">
-                            <Form.Control
-                              className={"is-valid"}
-                              id="floatingPhoneCustom"
-                              type="phone"
-                              name="phone"
-                              onChange={(e) => {
-                                handleFieldChange(e);
-                              }}
-                            />
-                            <Form.Control.Feedback>
-                              Se ve bien!
-                            </Form.Control.Feedback>
-
-                            <label htmlFor="floatingPhoneCustom">
-                              Teléfono
-                            </label>
-                          </Form.Floating>
-                        </>
+                              <label htmlFor="floatingPhoneCustom">
+                                Teléfono
+                              </label>
+                            </Form.Floating>
+                          </Col>
+                        </Row>
 
                         <Form.Floating className="mb-3">
                           <Form.Control
@@ -167,138 +176,67 @@ function UserProfile({ fallback }) {
 
                           <label htmlFor="floatingInputCustom">Email</label>
                         </Form.Floating>
-                        <Form.Floating>
-                          <Form.Control
-                            className={"is-valid"}
-                            id="floatingPasswordCustom"
-                            type="password"
-                            name="password"
-                            onChange={(e) => {
-                              handleFieldChange(e);
-                            }}
-                          />
-                          <>
-                            <Form.Control.Feedback>
-                              Se ve bien!
-                            </Form.Control.Feedback>
-                            <Form.Control.Feedback type="invalid">
-                              Errror
-                            </Form.Control.Feedback>
-                          </>
-                          <label htmlFor="floatingPasswordCustom">
-                            Contraseña
-                          </label>
-                        </Form.Floating>
                         <>
                           <Form.Check
+                            readOnly
                             checked={true}
-                            onChange={() => {
-                              console.log("CHECKL");
-                            }}
+                            type="switch"
+                            className="form-settings"
+                            id="terminos-switch"
+                            label={<span>Email verificado</span>}
+                          ></Form.Check>
+                          <Form.Check
+                            readOnly
+                            checked={true}
+                            className="form-settings"
                             type="switch"
                             id="terminos-switch"
-                            label={
-                              <span>
-                                Acepto{" "}
-                                <Link href={"/terminos-y-condiciones"}>
-                                  <a>Terminos y Condiciones</a>
-                                </Link>
-                              </span>
-                            }
-                            className={"is-valid"}
+                            label={<span>Recibir notificaciones</span>}
                           ></Form.Check>
-                          <Form.Control.Feedback>
-                            Se ve bien!
-                          </Form.Control.Feedback>
-                          <Form.Control.Feedback type="invalid">
-                            Error
-                          </Form.Control.Feedback>
+                          <Form.Check
+                            readOnly
+                            checked={true}
+                            className="form-settings"
+                            type="switch"
+                            id="terminos-switch"
+                            label={<span>Subscripción</span>}
+                          ></Form.Check>
                         </>
                       </Form>
-
-                      <ButtonLoader
-                        clickFunc={async () => {
-                          console.log("HOLA");
-                        }}
-                        onMouseUpFunc={() => {
-                          console.log("lol");
-                        }}
-                        block
-                        size="lg"
-                        type="submit"
-                        className="login-email"
-                      >
-                        Ingresar
-                      </ButtonLoader>
-
-                      <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                        <ButtonLoader
-                          clickFunc={async () => {
-                            console.log("HOLA");
-                          }}
-                          block
-                          size="lg"
-                          type="submit"
-                          className="login-facebook"
-                        >
-                          Button
-                        </ButtonLoader>
-                      </Col>
-                      <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                        <ButtonLoader
-                          clickFunc={async () => {
-                            console.log("BUITTON");
-                          }}
-                          block
-                          size="lg"
-                          type="submit"
-                          className="login-google"
-                        >
-                          Otro
-                        </ButtonLoader>
-                      </Col>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="1">
-                    <Accordion.Header>Dirrecciones</Accordion.Header>
+                    <Accordion.Header>Dirrecciones de envios </Accordion.Header>
                     <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      <div>Dirrecciones de envios +</div>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="2">
                     <Accordion.Header>Información de pagos</Accordion.Header>
                     <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      <div>Dirreccion de Facturación</div>
+                      <div>Tarjetas Guardadas</div>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="3">
                     <Accordion.Header>Ordenes</Accordion.Header>
-                    <Accordion.Body>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
-                    </Accordion.Body>
+                    <Accordion.Body></Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
+                <ButtonLoader
+                  clickFunc={async () => {
+                    console.log("HOLA");
+                  }}
+                  onMouseUpFunc={() => {
+                    console.log("lol");
+                  }}
+                  block
+                  size="lg"
+                  type="submit"
+                  className="login-email"
+                >
+                  Guardar
+                </ButtonLoader>
               </Row>
             </div>
           </div>

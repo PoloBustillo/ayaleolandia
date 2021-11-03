@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 export default function Custom404() {
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(3);
   const Router = useRouter();
   useEffect(() => {
     if (counter == 0) {

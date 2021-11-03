@@ -440,7 +440,6 @@ input:focus {
   position: relative;
   width: 2em;
   height: 2em;
-  border: 3px solid hotpink;
   border-radius: 50%;
   overflow: hidden;
   margin: auto;
@@ -667,6 +666,14 @@ input:focus {
   color: deeppink;
   cursor: pointer;
 }
+.form-settings {
+  margin: 2vh 0;
+  padding-bottom: 0vh !important;
+  padding-top: 0vh !important;
+  font-family: "Abril Fatface" !important;
+  color: deeppink;
+  cursor: pointer;
+}
 .form-check-input {
   cursor: pointer;
 }
@@ -719,6 +726,10 @@ input:focus {
 .pageSwitcherItem:last-child {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
+}
+.form-floating input {
+  font-size: 3vw;
+  padding-right: 0px;
 }
 .pageSwitcherItem {
   background-color: transparent;
