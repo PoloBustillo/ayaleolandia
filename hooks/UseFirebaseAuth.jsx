@@ -1,13 +1,21 @@
 /** @format */
 
 import { useState, useEffect } from "react";
-import { auth } from "configs/client/firebase.js";
+import { auth, getUser } from "configs/client/firebase.js";
 
 const formatAuthUser = (user) => {
   //TODO:retrieve user from DB
   return {
+    orders: user.orders,
+    address: user.address,
+    pushNotification: user.pushNotification,
+    subsciption: user.subsciption,
+    paymentMethods: user.paymentMethods,
+    billingAddress: user.billingAddress,
+    shipAddresses: user.shipAddresses,
+    username: user.username,
     emailVerified: user.emailVerified,
-    uid: user.uid,
+    uid: user.id,
     phoneNumber: user.phoneNumber,
     email: user.email,
     name: user.displayName,
@@ -25,11 +33,15 @@ export default function UseFirebaseAuth() {
       setLoading(false);
       return;
     }
-
-    setLoading(true);
-    var formattedUser = formatAuthUser(authState);
-    setAuthUser(formattedUser);
-    setLoading(false);
+    try {
+      setLoading(true);
+      let user = await getUser(authState.uid);
+      setAuthUser(user);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      //TODO: log off sent error msg
+    }
   };
 
   // listen for Firebase state change

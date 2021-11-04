@@ -1,6 +1,6 @@
 /** @format */
 // Import the functions you need from the SDKs you need
-import { initializeApp, getApps, getApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -12,13 +12,15 @@ import {
 } from "firebase/auth";
 import { Logtail } from "@logtail/browser";
 const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+  getDoc,
+} from "firebase/firestore/lite";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCPZnbAyv_TYe4S5j6ZQNQTGHTJw2yn-sk",
   authDomain: "ayaleolandia-87c19.firebaseapp.com",
@@ -37,22 +39,6 @@ const usersRef = collection(db, "users");
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-const mapUserFromFirebaseAuthToUser = (user) => {
-  let { displayName, email, photoURL, uid } = user;
-  return {
-    avatar: photoURL,
-    username: displayName,
-    email,
-    uid,
-  };
-};
-
-export const onAuthStateChanged = (onChange) => {
-  return auth.onAuthStateChanged((user) => {
-    const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null;
-    onChange(normalizedUser);
-  });
-};
 export const createAccountWith = async (provider, email, password) => {
   let session;
   if (provider === "google") {
@@ -70,6 +56,7 @@ export const createAccountWith = async (provider, email, password) => {
   ) {
     const data = {
       name: session.user.displayName,
+      username: `user_${session.user.uid.slice(-5)}`,
       id: session.user.uid,
       phoneNumber: session.user.phoneNumber,
       email: session.user.email,
@@ -82,15 +69,10 @@ export const createAccountWith = async (provider, email, password) => {
       shipAddresses: {},
     };
     logtail.info("New user created");
-
-    try {
-      //TODO: SAVE USER
-      await setDoc(doc(usersRef, session.user.uid), data);
-    } catch (error) {
-      logtail.error(`User creation error: ${error}`);
-    }
+    createUser(session.user.uid);
   }
 };
+
 export const loginWith = async (provider, email, password) => {
   let session;
   if (provider === "google") {
@@ -105,18 +87,65 @@ export const loginWith = async (provider, email, password) => {
   if (
     session.user.metadata.creationTime === session.user.metadata.lastSignInTime
   ) {
-    try {
-      //TODO: SAVE USER
-      await setDoc(doc(usersRef, session.user.uid), data);
-    } catch (error) {
-      logtail.error(`User creation error: ${error}`);
-    }
+    const data = {
+      name: session.user.displayName,
+      username: `user_${session.user.uid.slice(-5)}`,
+      id: session.user.uid,
+      phoneNumber: session.user.phoneNumber,
+      email: session.user.email,
+      emailVerified: session.user.emailVerified,
+      photoUrl: session.user.photoURL,
+      pushNotification: true,
+      subsciption: false,
+      orders: [],
+      address: {},
+      paymentMethods: {},
+      billingAddress: {},
+      shipAddresses: {},
+    };
+    createUser(session.user.uid, data);
+    logtail.info("New user created");
   }
+};
+
+export const createUser = async (uid, data) => {
+  try {
+    await setDoc(doc(usersRef, uid, data));
+  } catch (error) {
+    //TODO: log off sent error msg
+    console.log(error);
+    logtail.error(`User creation error: ${error}`);
+  }
+};
+export const updateUser = async (uid, data) => {
+  try {
+    await updateDoc(doc(db, "users", uid), data);
+  } catch (error) {
+    //TODO: log off sent error msg
+    console.log(error);
+    logtail.error(`User creation error: ${error}`);
+  }
+};
+
+export const refreshUser = () => {
+  auth.currentUser.reload();
+};
+export const getUser = async (uid) => {
+  let user = null;
+  try {
+    user = await getDoc(doc(usersRef, uid));
+    return user.data();
+  } catch (error) {
+    //TODO: log off sent error msg
+    logtail.error(`User creation error: ${error}`);
+  }
+  return user;
 };
 
 export const signOutUser = async () => {
   auth.signOut();
 };
+
 export const resetPasswordByEmail = async (email, successFunc, errorFunc) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {

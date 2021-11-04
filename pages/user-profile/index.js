@@ -13,6 +13,7 @@ import { Row, Col, Form, Accordion, Alert } from "react-bootstrap";
 
 import { Layout } from "components/Layout";
 import withAuth from "components/HOC/withAuth";
+import { refreshUser, updateUser } from "configs/client/firebase";
 
 function UserProfile({ fallback }) {
   const { authUser, loading } = useAuth();
@@ -20,8 +21,8 @@ function UserProfile({ fallback }) {
   const [showAlert, setShowAlert] = useState(false);
   const [file, setFile] = useState({});
   const [avatar, setAvatar] = useState(null);
-  const [formState, setFormState] = useState({});
-
+  const [formState, setFormState] = useState(authUser);
+  console.log(authUser);
   const handleFieldChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
@@ -68,11 +69,7 @@ function UserProfile({ fallback }) {
                       Información de la cuenta
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Form
-                        onSubmit={() => {
-                          console.log("Hola");
-                        }}
-                      >
+                      <Form>
                         <Row
                           onClick={() => {
                             inputFile.current.click();
@@ -121,6 +118,7 @@ function UserProfile({ fallback }) {
                             className={"is-valid"}
                             type="text"
                             name="name"
+                            value={authUser.name}
                             onChange={(e) => {
                               handleFieldChange(e);
                             }}
@@ -135,6 +133,7 @@ function UserProfile({ fallback }) {
                                 className={"is-valid"}
                                 type="text"
                                 name="username"
+                                value={authUser.username}
                                 onChange={(e) => {
                                   handleFieldChange(e);
                                 }}
@@ -151,6 +150,7 @@ function UserProfile({ fallback }) {
                                 id="floatingPhoneCustom"
                                 type="phone"
                                 name="phone"
+                                value={authUser.phoneNumber}
                                 onChange={(e) => {
                                   handleFieldChange(e);
                                 }}
@@ -169,6 +169,7 @@ function UserProfile({ fallback }) {
                             id="floatingInputCustom"
                             type="email"
                             name="email"
+                            value={authUser.email}
                             onChange={(e) => {
                               handleFieldChange(e);
                             }}
@@ -179,7 +180,7 @@ function UserProfile({ fallback }) {
                         <>
                           <Form.Check
                             readOnly
-                            checked={true}
+                            checked={authUser.emailVerified}
                             type="switch"
                             className="form-settings"
                             id="terminos-switch"
@@ -225,10 +226,12 @@ function UserProfile({ fallback }) {
                 </Accordion>
                 <ButtonLoader
                   clickFunc={async () => {
-                    console.log("HOLA");
+                    console.log(authUser);
+                    updateUser(authUser.id, { username: "newUser" });
+                    refreshUser();
                   }}
                   onMouseUpFunc={() => {
-                    console.log("lol");
+                    console.log("onMouseUpFunc");
                   }}
                   block
                   size="lg"
