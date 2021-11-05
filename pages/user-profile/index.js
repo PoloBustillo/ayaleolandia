@@ -115,10 +115,10 @@ function UserProfile({ fallback }) {
                         <Form.Floating required className="mb-3">
                           <Form.Control
                             id="floatingNameInput"
-                            className={"is-valid"}
+                            className={"is-valid input-settings"}
                             type="text"
                             name="name"
-                            value={authUser.name}
+                            value={formState.name ? formState.name : ""}
                             onChange={(e) => {
                               handleFieldChange(e);
                             }}
@@ -130,10 +130,12 @@ function UserProfile({ fallback }) {
                             <Form.Floating required className="mb-3">
                               <Form.Control
                                 id="floatingNameInput"
-                                className={"is-valid"}
+                                className={"is-valid input-settings"}
                                 type="text"
                                 name="username"
-                                value={authUser.username}
+                                value={
+                                  formState.username ? formState.username : ""
+                                }
                                 onChange={(e) => {
                                   handleFieldChange(e);
                                 }}
@@ -146,11 +148,15 @@ function UserProfile({ fallback }) {
                           <Col>
                             <Form.Floating className="mb-3">
                               <Form.Control
-                                className={"is-valid"}
+                                className={"is-valid input-settings"}
                                 id="floatingPhoneCustom"
                                 type="phone"
-                                name="phone"
-                                value={authUser.phoneNumber}
+                                name="phoneNumber"
+                                value={
+                                  formState.phoneNumber
+                                    ? formState.phoneNumber
+                                    : ""
+                                }
                                 onChange={(e) => {
                                   handleFieldChange(e);
                                 }}
@@ -165,11 +171,11 @@ function UserProfile({ fallback }) {
 
                         <Form.Floating className="mb-3">
                           <Form.Control
-                            className={"is-valid"}
+                            className={"is-valid input-settings"}
                             id="floatingInputCustom"
                             type="email"
                             name="email"
-                            value={authUser.email}
+                            value={formState.email ? formState.email : ""}
                             onChange={(e) => {
                               handleFieldChange(e);
                             }}
@@ -180,23 +186,47 @@ function UserProfile({ fallback }) {
                         <>
                           <Form.Check
                             readOnly
-                            checked={authUser.emailVerified}
+                            checked={
+                              formState.emailVerified
+                                ? formState.emailVerified
+                                : false
+                            }
                             type="switch"
                             className="form-settings"
                             id="terminos-switch"
-                            label={<span>Email verificado</span>}
+                            label={
+                              <span>
+                                Email verificado{" "}
+                                {!formState.emailVerified && (
+                                  <Link href={"/terminos-y-condiciones"}>
+                                    <a>Verificar Email</a>
+                                  </Link>
+                                )}
+                              </span>
+                            }
                           ></Form.Check>
+
                           <Form.Check
-                            readOnly
-                            checked={true}
+                            checked={formState.pushNotification}
+                            onChange={() => {
+                              setFormState({
+                                ...formState,
+                                pushNotification: !formState.pushNotification,
+                              });
+                            }}
                             className="form-settings"
                             type="switch"
                             id="terminos-switch"
                             label={<span>Recibir notificaciones</span>}
                           ></Form.Check>
                           <Form.Check
-                            readOnly
-                            checked={true}
+                            checked={formState.subscription}
+                            onChange={() => {
+                              setFormState({
+                                ...formState,
+                                subscription: !formState.subscription,
+                              });
+                            }}
                             className="form-settings"
                             type="switch"
                             id="terminos-switch"

@@ -7,13 +7,15 @@ export default function HamburguerBtn(props) {
 
   return (
     <div
-      className={props.sideMenuStatus ? "menu-btn open" : "menu-btn"}
+      className="menu-btn-container"
       onClick={() => {
         setOpen(true);
         props.sideMenuFunc(true);
       }}
     >
-      <div className="menu-btn__burger"></div>
+      <div className={props.sideMenuStatus ? "menu-btn open" : "menu-btn"}>
+        <div className="menu-btn__burger"></div>
+      </div>
     </div>
   );
 }

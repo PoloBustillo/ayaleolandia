@@ -160,7 +160,10 @@ img {
 .border-top-bar {
   border-bottom: 1px dotted black;
 }
-
+.input-settings {
+  font-size: 2vw !important;
+  padding-right: 0 !important;
+}
 .by-title {
   width: 20vw;
   margin: 0;
@@ -208,7 +211,13 @@ img {
 .top-bar-container {
   background-color: rgb(245, 245, 245);
 }
-
+.menu-btn-container {
+  position: absolute;
+  width: 15%;
+  height: 50%;
+  z-index: 1000;
+  cursor: pointer;
+}
 @media (min-width: 768px) {
   .search-container {
     margin-left: 0vw !important;
@@ -216,6 +225,7 @@ img {
   .search-bar {
     padding-left: 30vw !important;
   }
+
   .menu-btn {
     display: none;
   }
@@ -434,6 +444,7 @@ input:focus {
   border: 1px dotted hotpink;
   padding: 4px 0;
 }
+
 .avatar-upload {
   width: 100%;
   cursor: pointer;

@@ -3,19 +3,21 @@
 import { useState, useEffect } from "react";
 import { auth, getUser } from "configs/client/firebase.js";
 
-const formatAuthUser = (user) => {
-  //TODO:retrieve user from DB
+const formatAuthUser = (user, userDB) => {
+  if (userDB) {
+    return userDB;
+  }
   return {
-    orders: user.orders,
-    address: user.address,
-    pushNotification: user.pushNotification,
-    subsciption: user.subsciption,
-    paymentMethods: user.paymentMethods,
-    billingAddress: user.billingAddress,
-    shipAddresses: user.shipAddresses,
-    username: user.username,
+    orders: {},
+    address: {},
+    pushNotification: true,
+    subscription: false,
+    paymentMethods: {},
+    billingAddress: {},
+    shipAddresses: {},
+    username: `user_${user.uid.slice(-5)}`,
     emailVerified: user.emailVerified,
-    uid: user.id,
+    id: user.uid,
     phoneNumber: user.phoneNumber,
     email: user.email,
     name: user.displayName,
@@ -33,10 +35,13 @@ export default function UseFirebaseAuth() {
       setLoading(false);
       return;
     }
+    setLoading(true);
+    console.log(authState);
+    let user = await getUser(authState.uid);
+    let formattedUser = formatAuthUser(authState, user);
+    console.log(formattedUser);
     try {
-      setLoading(true);
-      let user = await getUser(authState.uid);
-      setAuthUser(user);
+      setAuthUser(formattedUser);
       setLoading(false);
     } catch (error) {
       console.log(error);

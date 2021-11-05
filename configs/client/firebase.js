@@ -50,27 +50,6 @@ export const createAccountWith = async (provider, email, password) => {
   if (provider === "email") {
     session = await createUserWithEmailAndPassword(auth, email, password);
   }
-
-  if (
-    session.user.metadata.creationTime === session.user.metadata.lastSignInTime
-  ) {
-    const data = {
-      name: session.user.displayName,
-      username: `user_${session.user.uid.slice(-5)}`,
-      id: session.user.uid,
-      phoneNumber: session.user.phoneNumber,
-      email: session.user.email,
-      emailVerified: session.user.emailVerified,
-      photoUrl: session.user.photoURL,
-      orders: [],
-      address: {},
-      paymentMethods: {},
-      billingAddress: {},
-      shipAddresses: {},
-    };
-    logtail.info("New user created");
-    createUser(session.user.uid);
-  }
 };
 
 export const loginWith = async (provider, email, password) => {
@@ -84,33 +63,12 @@ export const loginWith = async (provider, email, password) => {
   if (provider === "email") {
     session = await signInWithEmailAndPassword(auth, email, password);
   }
-  if (
-    session.user.metadata.creationTime === session.user.metadata.lastSignInTime
-  ) {
-    const data = {
-      name: session.user.displayName,
-      username: `user_${session.user.uid.slice(-5)}`,
-      id: session.user.uid,
-      phoneNumber: session.user.phoneNumber,
-      email: session.user.email,
-      emailVerified: session.user.emailVerified,
-      photoUrl: session.user.photoURL,
-      pushNotification: true,
-      subsciption: false,
-      orders: [],
-      address: {},
-      paymentMethods: {},
-      billingAddress: {},
-      shipAddresses: {},
-    };
-    createUser(session.user.uid, data);
-    logtail.info("New user created");
-  }
 };
 
 export const createUser = async (uid, data) => {
+  console.log("CREATE");
   try {
-    await setDoc(doc(usersRef, uid, data));
+    await setDoc(doc(usersRef, uid), data);
   } catch (error) {
     //TODO: log off sent error msg
     console.log(error);
@@ -118,6 +76,7 @@ export const createUser = async (uid, data) => {
   }
 };
 export const updateUser = async (uid, data) => {
+  console.log("UPDATE");
   try {
     await updateDoc(doc(db, "users", uid), data);
   } catch (error) {
@@ -131,12 +90,15 @@ export const refreshUser = () => {
   auth.currentUser.reload();
 };
 export const getUser = async (uid) => {
+  console.log("GET_USER");
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
-    return user.data();
+    console.log(user.data());
+    return user?.data();
   } catch (error) {
     //TODO: log off sent error msg
+    console.log(error);
     logtail.error(`User creation error: ${error}`);
   }
   return user;
