@@ -106,6 +106,7 @@ export default function Login({ fallback }) {
         try {
           await loginWith("email", state.email, state.password);
         } catch (error) {
+          console.log(error);
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
         }
@@ -114,6 +115,7 @@ export default function Login({ fallback }) {
           await createAccountWith(state);
           logtail.info(`Cuenta creada con email ${state.email}`);
         } catch (error) {
+          console.log(error);
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
         }

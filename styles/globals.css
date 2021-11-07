@@ -742,7 +742,7 @@ input:focus {
   border-bottom-right-radius: 25px;
 }
 .form-floating input {
-  font-size: 3vw;
+  font-size: 2vh;
   padding-right: 0px;
 }
 .pageSwitcherItem {

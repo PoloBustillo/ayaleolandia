@@ -3,15 +3,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { TopMsg } from "./TopMsg";
-import axios from "axios";
-import useSWR from "swr";
-
-const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const TopBar = (props) => {
   const [index, setIndex] = useState(0);
   const [close, setClose] = useState(false);
-  const { data, error } = useSWR("/api/top-bar-msgs", fetcher);
+  const data = props.msgs;
 
   useEffect(() => {
     if (data) {

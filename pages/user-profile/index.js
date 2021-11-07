@@ -10,10 +10,10 @@ import { Row, Col, Form, Accordion, Alert } from "react-bootstrap";
 
 import { Layout } from "components/Layout";
 import withAuth from "components/HOC/withAuth";
-import { refreshUser, updateUser } from "configs/client/firebase";
+import { updateUser } from "configs/client/firebase";
 
 function UserProfile({ fallback }) {
-  const { authUser, loading } = useAuth();
+  const { authUser, loading, setAuthUser } = useAuth();
   const inputFile = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
   const [file, setFile] = useState({});
@@ -252,7 +252,6 @@ function UserProfile({ fallback }) {
                 clickFunc={async () => {
                   console.log("UPDATE_USER:" + authUser);
                   updateUser(authUser.id, { username: "newUser" });
-                  refreshUser();
                 }}
                 onMouseUpFunc={() => {
                   console.log("onMouseUpFunc");

@@ -59,13 +59,13 @@ const facebookProvider = new FacebookAuthProvider();
 
 export const createAccountWith = async (formState) => {
   let session;
+  //const { authUser, loading, setAuthUser } = useAuth();
 
   session = await createUserWithEmailAndPassword(
     auth,
     formState.email,
     formState.password
   );
-  console.log(session);
   let data = {
     orders: {},
     address: {},
@@ -85,11 +85,11 @@ export const createAccountWith = async (formState) => {
     avatar: session.user.photoURL,
   };
 
-  console.log(data);
+  //console.log(data);
+  //console.log(authUser);
+  //console.log(setAuthUser);
+  //setAuthUser(data);
   await createUser(session.user.uid, data);
-  refreshUser();
-  console.log(":GETTY");
-  await getUser(session.user.uid);
 };
 
 export const loginWith = async (provider, email, password) => {
@@ -106,7 +106,6 @@ export const loginWith = async (provider, email, password) => {
 };
 
 export const createUser = async (uid, data) => {
-  console.log("CREATE");
   try {
     await setDoc(doc(usersRef, uid), data);
   } catch (error) {
@@ -116,7 +115,6 @@ export const createUser = async (uid, data) => {
   }
 };
 export const updateUser = async (uid, data) => {
-  console.log("UPDATE");
   try {
     await updateDoc(doc(db, "users", uid), data);
   } catch (error) {
@@ -126,19 +124,10 @@ export const updateUser = async (uid, data) => {
   }
 };
 
-export const refreshUser = () => {
-  console.log(JSON.stringify(auth.currentUser));
-  auth.currentUser.reload().then((u) => {
-    console.log(u);
-  });
-};
-
 export const getUser = async (uid) => {
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
-    console.log("GET_USER: ");
-    console.log(user.data());
     return user?.data();
   } catch (error) {
     //TODO: log off sent error msg

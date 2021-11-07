@@ -38,17 +38,10 @@ export default function UseFirebaseAuth() {
       return;
     }
     setLoading(true);
-    console.log("AUTH:");
-    console.log(authState);
+
     let user = await getUser(authState.uid);
     let formattedUser = formatAuthUser(authState, user);
-    console.log("USER:");
-    console.log(user);
-    // if (!user) {
-    //   createUser(authState.uid, formattedUser);
-    // }
-    console.log("LAST_USER:");
-    console.log(formattedUser);
+
     try {
       setAuthUser(formattedUser);
       setLoading(false);
@@ -67,5 +60,6 @@ export default function UseFirebaseAuth() {
   return {
     authUser,
     loading,
+    setAuthUser,
   };
 }
