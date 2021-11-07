@@ -379,9 +379,12 @@ input:focus {
 .bm-burger-button {
   display: none;
 }
+.bm-overlay {
+  top: 0vh !important;
+}
 .bm-menu {
   overflow-x: hidden !important;
-  top: 15vh;
+  top: 6vh;
   height: 70vh !important;
   text-align: center;
   width: 100%;
@@ -400,7 +403,7 @@ input:focus {
 }
 .bm-menu-wrap {
   z-index: 1000 !important;
-  width: 50vw !important;
+  width: 65vw !important;
 }
 #bgvid {
   width: 100vw;

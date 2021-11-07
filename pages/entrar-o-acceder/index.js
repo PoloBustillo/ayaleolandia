@@ -22,7 +22,6 @@ import {
 import FacebookIcon from "components/icons/FacebookIcon";
 import GoogleIcon from "components/icons/GoogleIcon";
 import { ButtonLoader } from "components/ButtonLoader";
-import { SWRConfig } from "swr";
 import { PageSwitcher } from "components/PageSwitcher";
 import { useAuth } from "hooks/AuthUserProvider";
 const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
@@ -112,7 +111,7 @@ export default function Login({ fallback }) {
         }
       } else {
         try {
-          await createAccountWith("email", state.email, state.password);
+          await createAccountWith(state);
           logtail.info(`Cuenta creada con email ${state.email}`);
         } catch (error) {
           setShow(true);
@@ -134,298 +133,275 @@ export default function Login({ fallback }) {
         />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <SWRConfig value={{ fallback }}>
-        <div>
-          <Layout>
-            <PageSwitcher
-              firstSelected={loginScreen}
-              updateScreen={setLoginScreen}
-            ></PageSwitcher>
-            <div className="login-page">
-              <div className="login-container">
-                {show && (
-                  <ToastContainer className="p-3" position="bottom-center">
-                    <Toast
-                      onClose={() => setShow(false)}
-                      show={show}
-                      delay={5000}
-                      bg="danger"
-                      autohide
-                    >
-                      <Toast.Header>
-                        <strong className="me-auto">
-                          Lo sentimos, hubo un error en tu petición!
-                        </strong>
-                      </Toast.Header>
-                      <Toast.Body>{alertMsg}</Toast.Body>
-                    </Toast>
-                  </ToastContainer>
-                )}
-                {showEmail && (
-                  <ToastContainer className="p-3" position="bottom-center">
-                    <Toast
-                      onClose={() => setShowEmail(false)}
-                      show={showEmail}
-                      delay={5000}
-                      bg="info"
-                      autohide
-                    >
-                      <Toast.Header>
-                        <strong className="me-auto">
-                          {`Email fue mandado a ${state.email}`}
-                        </strong>
-                      </Toast.Header>
-                      <Toast.Body>para cambiar su contraseña</Toast.Body>
-                    </Toast>
-                  </ToastContainer>
-                )}
-                <Form onSubmit={handleSubmit}>
-                  {!loginScreen && (
-                    <>
-                      <Form.Floating required className="mb-3">
-                        <Form.Control
-                          id="floatingNameInput"
-                          className={
-                            validationMap.name?.type == "error"
-                              ? "is-invalid"
-                              : "is-valid"
-                          }
-                          type="text"
-                          name="name"
-                          value={state.name}
-                          onChange={(e) => {
-                            handleFieldChange(e);
-                          }}
-                        />
-                        <Form.Control.Feedback>
-                          Se ve bien!
-                        </Form.Control.Feedback>
-                        <animated.div style={triggerAnimation ? styles : {}}>
-                          <Form.Control.Feedback type="invalid">
-                            {validationMap.name?.msg}
-                          </Form.Control.Feedback>
-                        </animated.div>
-                        <label htmlFor="floatingInputCustom">Nombre</label>
-                      </Form.Floating>
-
-                      <Form.Floating className="mb-3">
-                        <Form.Control
-                          className={
-                            validationMap.phone?.type == "error"
-                              ? "is-invalid"
-                              : "is-valid"
-                          }
-                          id="floatingPhoneCustom"
-                          type="phone"
-                          name="phone"
-                          onChange={(e) => {
-                            handleFieldChange(e);
-                          }}
-                        />
-                        <Form.Control.Feedback>
-                          Se ve bien!
-                        </Form.Control.Feedback>
-                        <animated.div style={triggerAnimation ? styles : {}}>
-                          <Form.Control.Feedback type="invalid">
-                            {validationMap.phone?.msg}
-                          </Form.Control.Feedback>
-                        </animated.div>
-                        <label htmlFor="floatingPhoneCustom">Teléfono</label>
-                      </Form.Floating>
-                    </>
-                  )}
-                  <Form.Floating className="mb-3">
-                    <Form.Control
-                      className={
-                        validationMap.email?.type == "error"
-                          ? "is-invalid"
-                          : "is-valid"
-                      }
-                      id="floatingInputCustom"
-                      type="email"
-                      name="email"
-                      onChange={(e) => {
-                        handleFieldChange(e);
-                      }}
-                    />
-                    <>
-                      {!loginScreen && (
-                        <Form.Control.Feedback>
-                          Se ve bien!
-                        </Form.Control.Feedback>
-                      )}
-                      <animated.div style={triggerAnimation ? styles : {}}>
-                        <Form.Control.Feedback type="invalid">
-                          {validationMap.email?.msg}
-                        </Form.Control.Feedback>
-                      </animated.div>
-                    </>
-                    <label htmlFor="floatingInputCustom">Email</label>
-                  </Form.Floating>
-                  <Form.Floating>
-                    <Form.Control
-                      className={
-                        validationMap.password?.type == "warning"
-                          ? "is-invalid"
-                          : validationMap.password?.type == "error"
-                          ? "is-invalid"
-                          : "is-valid"
-                      }
-                      id="floatingPasswordCustom"
-                      type="password"
-                      name="password"
-                      onChange={(e) => {
-                        handleFieldChange(e);
-                      }}
-                    />
-                    <>
-                      {!loginScreen && (
-                        <Form.Control.Feedback>
-                          Se ve bien!
-                        </Form.Control.Feedback>
-                      )}
-                      {!validationMap.password?.msg.includes(
-                        "Contraseña debil"
-                      ) ? (
-                        <animated.div style={triggerAnimation ? styles : {}}>
-                          <Form.Control.Feedback type="invalid">
-                            {validationMap.password?.msg}
-                          </Form.Control.Feedback>
-                        </animated.div>
-                      ) : (
-                        <Form.Control.Feedback type="invalid">
-                          {validationMap.password?.msg}
-                        </Form.Control.Feedback>
-                      )}
-                    </>
-                    <label htmlFor="floatingPasswordCustom">Contraseña</label>
-                  </Form.Floating>
-                </Form>
-                {loginScreen && (
-                  <div
-                    onClick={() => {
-                      resetPasswordByEmail(
-                        state.email,
-                        () => {
-                          setShowEmail(true);
-                        },
-                        (msg) => {
-                          setShow(true);
-                          setAlertMsg(errorFirebaseMap.get(msg));
-                        }
-                      );
-                    }}
-                    className="forgot-password"
+      <div>
+        <Layout>
+          <PageSwitcher
+            firstSelected={loginScreen}
+            updateScreen={setLoginScreen}
+          ></PageSwitcher>
+          <div className="login-page">
+            <div className="login-container">
+              {show && (
+                <ToastContainer className="p-3" position="bottom-center">
+                  <Toast
+                    onClose={() => setShow(false)}
+                    show={show}
+                    delay={5000}
+                    bg="danger"
+                    autohide
                   >
-                    Olvide mi contraseña
-                  </div>
-                )}
+                    <Toast.Header>
+                      <strong className="me-auto">
+                        Lo sentimos, hubo un error en tu petición!
+                      </strong>
+                    </Toast.Header>
+                    <Toast.Body>{alertMsg}</Toast.Body>
+                  </Toast>
+                </ToastContainer>
+              )}
+              {showEmail && (
+                <ToastContainer className="p-3" position="bottom-center">
+                  <Toast
+                    onClose={() => setShowEmail(false)}
+                    show={showEmail}
+                    delay={5000}
+                    bg="info"
+                    autohide
+                  >
+                    <Toast.Header>
+                      <strong className="me-auto">
+                        {`Email fue mandado a ${state.email}`}
+                      </strong>
+                    </Toast.Header>
+                    <Toast.Body>para cambiar su contraseña</Toast.Body>
+                  </Toast>
+                </ToastContainer>
+              )}
+              <Form onSubmit={handleSubmit}>
                 {!loginScreen && (
                   <>
-                    <Form.Check
-                      checked={checkboxChecked}
-                      onChange={() => {
-                        setCheckboxChecked(!checkboxChecked);
-                      }}
-                      type="switch"
-                      id="terminos-switch"
-                      label={
-                        <span>
-                          Acepto{" "}
-                          <Link href={"/terminos-y-condiciones"}>
-                            <a>Terminos y Condiciones</a>
-                          </Link>
-                        </span>
-                      }
-                      className={
-                        validationMap.check?.type == "error"
-                          ? "is-invalid"
-                          : "is-valid"
-                      }
-                    ></Form.Check>
-                    <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                    <Form.Floating required className="mb-3">
+                      <Form.Control
+                        id="floatingNameInput"
+                        className={
+                          validationMap.name?.type == "error"
+                            ? "is-invalid"
+                            : "is-valid"
+                        }
+                        type="text"
+                        name="name"
+                        value={state.name}
+                        onChange={(e) => {
+                          handleFieldChange(e);
+                        }}
+                      />
+                      <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                      <animated.div style={triggerAnimation ? styles : {}}>
+                        <Form.Control.Feedback type="invalid">
+                          {validationMap.name?.msg}
+                        </Form.Control.Feedback>
+                      </animated.div>
+                      <label htmlFor="floatingInputCustom">Nombre</label>
+                    </Form.Floating>
+
+                    <Form.Floating className="mb-3">
+                      <Form.Control
+                        className={
+                          validationMap.phone?.type == "error"
+                            ? "is-invalid"
+                            : "is-valid"
+                        }
+                        id="floatingPhoneCustom"
+                        type="phone"
+                        name="phone"
+                        onChange={(e) => {
+                          handleFieldChange(e);
+                        }}
+                      />
+                      <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                      <animated.div style={triggerAnimation ? styles : {}}>
+                        <Form.Control.Feedback type="invalid">
+                          {validationMap.phone?.msg}
+                        </Form.Control.Feedback>
+                      </animated.div>
+                      <label htmlFor="floatingPhoneCustom">Teléfono</label>
+                    </Form.Floating>
+                  </>
+                )}
+                <Form.Floating className="mb-3">
+                  <Form.Control
+                    className={
+                      validationMap.email?.type == "error"
+                        ? "is-invalid"
+                        : "is-valid"
+                    }
+                    id="floatingInputCustom"
+                    type="email"
+                    name="email"
+                    onChange={(e) => {
+                      handleFieldChange(e);
+                    }}
+                  />
+                  <>
+                    {!loginScreen && (
+                      <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                    )}
                     <animated.div style={triggerAnimation ? styles : {}}>
                       <Form.Control.Feedback type="invalid">
-                        {validationMap.check?.msg}
+                        {validationMap.email?.msg}
                       </Form.Control.Feedback>
                     </animated.div>
                   </>
-                )}
-                <ButtonLoader
-                  clickFunc={handleSubmitEmail}
-                  onMouseUpFunc={() => {
-                    setTriggerAnimation(false);
+                  <label htmlFor="floatingInputCustom">Email</label>
+                </Form.Floating>
+                <Form.Floating>
+                  <Form.Control
+                    className={
+                      validationMap.password?.type == "warning"
+                        ? "is-invalid"
+                        : validationMap.password?.type == "error"
+                        ? "is-invalid"
+                        : "is-valid"
+                    }
+                    id="floatingPasswordCustom"
+                    type="password"
+                    name="password"
+                    onChange={(e) => {
+                      handleFieldChange(e);
+                    }}
+                  />
+                  <>
+                    {!loginScreen && (
+                      <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                    )}
+                    {!validationMap.password?.msg.includes(
+                      "Contraseña debil"
+                    ) ? (
+                      <animated.div style={triggerAnimation ? styles : {}}>
+                        <Form.Control.Feedback type="invalid">
+                          {validationMap.password?.msg}
+                        </Form.Control.Feedback>
+                      </animated.div>
+                    ) : (
+                      <Form.Control.Feedback type="invalid">
+                        {validationMap.password?.msg}
+                      </Form.Control.Feedback>
+                    )}
+                  </>
+                  <label htmlFor="floatingPasswordCustom">Contraseña</label>
+                </Form.Floating>
+              </Form>
+              {loginScreen && (
+                <div
+                  onClick={() => {
+                    resetPasswordByEmail(
+                      state.email,
+                      () => {
+                        setShowEmail(true);
+                      },
+                      (msg) => {
+                        setShow(true);
+                        setAlertMsg(errorFirebaseMap.get(msg));
+                      }
+                    );
                   }}
-                  block
-                  size="lg"
-                  type="submit"
-                  className="login-email"
+                  className="forgot-password"
                 >
-                  {loginScreen ? "Ingresar" : "Crear"}
-                </ButtonLoader>
-                <Row>
-                  <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                    <ButtonLoader
-                      clickFunc={async () => {
-                        try {
-                          await loginWith("facebook");
-                        } catch (error) {
-                          setShow(true);
-                          setAlertMsg(errorFirebaseMap.get(error.code));
-                        }
-                      }}
-                      block
-                      size="lg"
-                      type="submit"
-                      className="login-facebook"
-                    >
-                      <FacebookIcon className="facebook-icon"></FacebookIcon>
-                      {"  "}
-                      Facebook
-                    </ButtonLoader>
-                  </Col>
-                  <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
-                    <ButtonLoader
-                      clickFunc={async () => {
-                        try {
-                          await loginWith("google");
-                        } catch (error) {
-                          setShow(true);
-                          setAlertMsg(errorFirebaseMap.get(error.code));
-                        }
-                      }}
-                      block
-                      size="lg"
-                      type="submit"
-                      className="login-google"
-                    >
-                      <GoogleIcon className="facebook-icon"></GoogleIcon>
-                      {"  "}
-                      Google
-                    </ButtonLoader>
-                  </Col>
-                  <span className={"advice"}>
-                    Al iniciar con redes sociales aceptas terminos y condiciones
-                  </span>
-                </Row>
-              </div>
+                  Olvide mi contraseña
+                </div>
+              )}
+              {!loginScreen && (
+                <>
+                  <Form.Check
+                    checked={checkboxChecked}
+                    onChange={() => {
+                      setCheckboxChecked(!checkboxChecked);
+                    }}
+                    type="switch"
+                    id="terminos-switch"
+                    label={
+                      <span>
+                        Acepto{" "}
+                        <Link href={"/terminos-y-condiciones"}>
+                          <a>Terminos y Condiciones</a>
+                        </Link>
+                      </span>
+                    }
+                    className={
+                      validationMap.check?.type == "error"
+                        ? "is-invalid"
+                        : "is-valid"
+                    }
+                  ></Form.Check>
+                  <Form.Control.Feedback>Se ve bien!</Form.Control.Feedback>
+                  <animated.div style={triggerAnimation ? styles : {}}>
+                    <Form.Control.Feedback type="invalid">
+                      {validationMap.check?.msg}
+                    </Form.Control.Feedback>
+                  </animated.div>
+                </>
+              )}
+              <ButtonLoader
+                clickFunc={handleSubmitEmail}
+                onMouseUpFunc={() => {
+                  setTriggerAnimation(false);
+                }}
+                block
+                size="lg"
+                type="submit"
+                className="login-email"
+              >
+                {loginScreen ? "Ingresar" : "Crear"}
+              </ButtonLoader>
+              <Row>
+                <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
+                  <ButtonLoader
+                    clickFunc={async () => {
+                      try {
+                        await loginWith("facebook");
+                      } catch (error) {
+                        setShow(true);
+                        setAlertMsg(errorFirebaseMap.get(error.code));
+                      }
+                    }}
+                    block
+                    size="lg"
+                    type="submit"
+                    className="login-facebook"
+                  >
+                    <FacebookIcon className="facebook-icon"></FacebookIcon>
+                    {"  "}
+                    Facebook
+                  </ButtonLoader>
+                </Col>
+                <Col className="login-btn" xs={12} sm={6} md={12} lg={6}>
+                  <ButtonLoader
+                    clickFunc={async () => {
+                      try {
+                        await loginWith("google");
+                      } catch (error) {
+                        setShow(true);
+                        setAlertMsg(errorFirebaseMap.get(error.code));
+                      }
+                    }}
+                    block
+                    size="lg"
+                    type="submit"
+                    className="login-google"
+                  >
+                    <GoogleIcon className="facebook-icon"></GoogleIcon>
+                    {"  "}
+                    Google
+                  </ButtonLoader>
+                </Col>
+                <span className={"advice"}>
+                  Al iniciar con redes sociales aceptas terminos y condiciones
+                </span>
+              </Row>
             </div>
-          </Layout>
-        </div>
-      </SWRConfig>
+          </div>
+        </Layout>
+      </div>
     </div>
   );
-}
-
-export async function getStaticProps(context) {
-  // `getStaticProps` is executed on the server side.
-  const topBarMsgs = await fetchGet("/api/top-bar-msgs");
-
-  return {
-    props: {
-      fallback: {
-        "/api/top-bar-msgs": topBarMsgs,
-      },
-    },
-  };
 }

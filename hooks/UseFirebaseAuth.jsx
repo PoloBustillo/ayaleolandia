@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState, useEffect } from "react";
-import { auth, getUser } from "configs/client/firebase.js";
+import { auth, createUser, getUser } from "configs/client/firebase.js";
 
 const formatAuthUser = (user, userDB) => {
   if (userDB) {
@@ -15,12 +15,14 @@ const formatAuthUser = (user, userDB) => {
     paymentMethods: {},
     billingAddress: {},
     shipAddresses: {},
-    username: `user_${user.uid.slice(-5)}`,
+    username: user.displayName
+      ? user.displayName
+      : `user_${user.uid.slice(-5)}`,
     emailVerified: user.emailVerified,
     id: user.uid,
     phoneNumber: user.phoneNumber,
     email: user.email,
-    name: user.displayName,
+    name: "",
     avatar: user.photoURL,
   };
 };
@@ -36,9 +38,16 @@ export default function UseFirebaseAuth() {
       return;
     }
     setLoading(true);
+    console.log("AUTH:");
     console.log(authState);
     let user = await getUser(authState.uid);
     let formattedUser = formatAuthUser(authState, user);
+    console.log("USER:");
+    console.log(user);
+    // if (!user) {
+    //   createUser(authState.uid, formattedUser);
+    // }
+    console.log("LAST_USER:");
     console.log(formattedUser);
     try {
       setAuthUser(formattedUser);

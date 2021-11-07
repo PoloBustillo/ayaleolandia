@@ -8,10 +8,12 @@ import { Row, Col, Card } from "react-bootstrap";
 import { fetchGet } from "utils/methods";
 import { SWRConfig } from "swr";
 import { Layout } from "components/Layout";
+import { TopBar } from "components/TopBar";
 
 export default function Home({ fallback }) {
   const [products, setProducts] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
+  console.log(fallback);
 
   useEffect(() => {
     fetch("/api/products")
@@ -29,7 +31,9 @@ export default function Home({ fallback }) {
         />
         <link rel="icon" href="/logo.png" />
       </Head>
+
       <SWRConfig value={{ fallback }}>
+        <TopBar />
         <Layout>
           <div>
             <Row className="products-container">

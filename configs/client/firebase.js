@@ -10,16 +10,20 @@ import {
   FacebookAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
+
 import { Logtail } from "@logtail/browser";
 const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
+
 import {
+  enableIndexedDbPersistence,
   getFirestore,
   collection,
   doc,
   setDoc,
   updateDoc,
   getDoc,
-} from "firebase/firestore/lite";
+  initializeFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCPZnbAyv_TYe4S5j6ZQNQTGHTJw2yn-sk",
@@ -32,24 +36,60 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-!getApps().length && initializeApp(firebaseConfig);
-export const auth = getAuth();
+let firebaseapp = getApps()[0];
+
+if (!firebaseapp) {
+  firebaseapp = initializeApp(firebaseConfig);
+  let initDB = initializeFirestore(firebaseapp, {});
+  enableIndexedDbPersistence(initDB).catch((err) => {
+    if (err.code == "failed-precondition") {
+      logtail.error("Multiple tabs open, persistence can only be enabled");
+    } else if (err.code == "unimplemented") {
+      logtail.error("The current browser does not support");
+    }
+  });
+}
+
 export const db = getFirestore();
+export const auth = getAuth();
+
 const usersRef = collection(db, "users");
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-export const createAccountWith = async (provider, email, password) => {
+export const createAccountWith = async (formState) => {
   let session;
-  if (provider === "google") {
-    session = await signInWithPopup(auth, googleProvider);
-  }
-  if (provider === "facebook") {
-    session = await signInWithPopup(auth, facebookProvider);
-  }
-  if (provider === "email") {
-    session = await createUserWithEmailAndPassword(auth, email, password);
-  }
+
+  session = await createUserWithEmailAndPassword(
+    auth,
+    formState.email,
+    formState.password
+  );
+  console.log(session);
+  let data = {
+    orders: {},
+    address: {},
+    pushNotification: true,
+    subscription: false,
+    paymentMethods: {},
+    billingAddress: {},
+    shipAddresses: {},
+    username: session.user.displayName
+      ? session.user.displayName
+      : `user_${session.user.uid.slice(-5)}`,
+    emailVerified: session.user.emailVerified,
+    id: session.user.uid,
+    phoneNumber: formState.phone,
+    email: session.user.email,
+    name: formState.name,
+    avatar: session.user.photoURL,
+  };
+
+  console.log(data);
+  await createUser(session.user.uid, data);
+  refreshUser();
+  console.log(":GETTY");
+  await getUser(session.user.uid);
 };
 
 export const loginWith = async (provider, email, password) => {
@@ -87,13 +127,17 @@ export const updateUser = async (uid, data) => {
 };
 
 export const refreshUser = () => {
-  auth.currentUser.reload();
+  console.log(JSON.stringify(auth.currentUser));
+  auth.currentUser.reload().then((u) => {
+    console.log(u);
+  });
 };
+
 export const getUser = async (uid) => {
-  console.log("GET_USER");
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
+    console.log("GET_USER: ");
     console.log(user.data());
     return user?.data();
   } catch (error) {

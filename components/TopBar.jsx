@@ -3,28 +3,34 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { TopMsg } from "./TopMsg";
+import axios from "axios";
+import useSWR from "swr";
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export const TopBar = (props) => {
-  const { msgs } = props;
   const [index, setIndex] = useState(0);
   const [close, setClose] = useState(false);
+  const { data, error } = useSWR("/api/top-bar-msgs", fetcher);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (index < msgs.length - 1) {
-        setIndex(index + 1);
-      } else {
-        setIndex(0);
-      }
-    }, 5000);
-    return () => clearTimeout(timer);
+    if (data) {
+      const timer = setTimeout(() => {
+        if (index < data.length - 1) {
+          setIndex(index + 1);
+        } else {
+          setIndex(0);
+        }
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
   }, [index]);
 
-  return !close ? (
+  return !close && data ? (
     <div className="top-bar-container">
-      <a href={msgs[index].url} rel="nofollow">
+      <a href={data[index].url} rel="nofollow">
         <div id="top-bar" className="border-top-bar">
-          <TopMsg msg={msgs[index]}></TopMsg>
+          <TopMsg msg={data[index]}></TopMsg>
         </div>
       </a>
       <div
