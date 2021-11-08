@@ -1,16 +1,14 @@
 /** @format */
 
 import admin from "firebase-admin";
-import { Logtail } from "@logtail/node";
 
 const privateKey = process.env.NEXT_FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n");
 const clientEmail = process.env.NEXT_FIREBASE_EMAIL;
 const projectId = "ayaleolandia-87c19";
 console.log(process.env.NEXT_PUBLIC_LOGTAIL_KEY);
-const logtail = new Logtail(process.env.NEXT_PUBLIC_LOGTAIL_KEY);
 
 if (!privateKey || !clientEmail || !projectId) {
-  logtail.error(
+  console.log(
     `Failed to load Firebase credentials. Follow the instructions in the README to set your Firebase credentials inside environment variables.`
   );
 }
@@ -26,7 +24,7 @@ if (!admin.apps.length) {
       databaseURL: `https://${projectId}.firebaseio.com`,
     });
   } catch (error) {
-    logtail.error("Firebase admin initialization error", error.stack);
+    console.log("Firebase admin initialization error", error.stack);
   }
 }
 export default admin;

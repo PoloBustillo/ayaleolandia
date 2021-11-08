@@ -8,7 +8,7 @@ const logtail = new Browser(process.env.NEXT_PUBLIC_LOGTAIL_KEY);
 const resources = {
   source: source,
   start_date: new Date().toDateString(),
-  userAgent: window.navigator.userAgent,
+  userAgent: typeof window !== "undefined" ? window.navigator.userAgent : "",
   correlationId: Date.now().toString(36) + Math.random().toString(36).substr(2),
 };
 Object.freeze(resources);
