@@ -3,7 +3,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import { Layout } from "components/Layout";
-import { Logtail } from "@logtail/browser";
 import { Form, Row, Col, Alert, Toast, ToastContainer } from "react-bootstrap";
 import { useSpring, animated } from "@react-spring/web";
 import { useState, useEffect } from "react";
@@ -24,7 +23,7 @@ import GoogleIcon from "components/icons/GoogleIcon";
 import { ButtonLoader } from "components/ButtonLoader";
 import { PageSwitcher } from "components/PageSwitcher";
 import { useAuth } from "hooks/AuthUserProvider";
-const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
+import { logError, logInfo } from "utils/logger";
 
 export default function Login({ fallback }) {
   const styles = useSpring({
@@ -106,16 +105,24 @@ export default function Login({ fallback }) {
         try {
           await loginWith("email", state.email, state.password);
         } catch (error) {
-          console.log(error);
+          logError(`Error en el login`, "handleSubmitEmail", {
+            error,
+          });
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
         }
       } else {
         try {
           await createAccountWith(state);
-          logtail.info(`Cuenta creada con email ${state.email}`);
+          logInfo(
+            `Cuenta creada con email ${state.email}`,
+            "handleSubmitEmail",
+            {}
+          );
         } catch (error) {
-          console.log(error);
+          logError(`Cuenta no creada`, "handleSubmitEmail", {
+            error,
+          });
           setShow(true);
           setAlertMsg(errorFirebaseMap.get(error.code));
         }
@@ -362,6 +369,9 @@ export default function Login({ fallback }) {
                       try {
                         await loginWith("facebook");
                       } catch (error) {
+                        logError(`Error en el login`, "handleSubmitEmail", {
+                          error,
+                        });
                         setShow(true);
                         setAlertMsg(errorFirebaseMap.get(error.code));
                       }
@@ -382,6 +392,9 @@ export default function Login({ fallback }) {
                       try {
                         await loginWith("google");
                       } catch (error) {
+                        logError(`Error en el login`, "handleSubmitEmail", {
+                          error,
+                        });
                         setShow(true);
                         setAlertMsg(errorFirebaseMap.get(error.code));
                       }

@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { auth, createUser, getUser } from "configs/client/firebase.js";
-import { Logtail } from "@logtail/browser";
-const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
+
+import { logError } from "utils/logger";
 
 const formatAuthUser = (user, userDB) => {
   if (userDB) {
@@ -50,9 +50,9 @@ export default function UseFirebaseAuth() {
       setAuthUser(formattedUser);
       setLoading(false);
     } catch (error) {
-      logtail.error(
-        `Method: authStateChanged / Data: ${formattedUser} / Error: ${error}`
-      );
+      logError(`Usuario no actualizado ${authState.uid}`, "authStateChanged", {
+        error,
+      });
     }
   };
 

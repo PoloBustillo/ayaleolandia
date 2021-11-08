@@ -24,9 +24,13 @@ export const logInfo = (msg = "NONE", method = "LOGGER", extra = {}) => {
     extra = { data: extra };
   }
   let new_resources = { ...resources, ...extra };
-  logtail.info(`🚀 INFO 🚀 -- Method: ${method} - Msg: ${msg}`, {
-    tracing: new_resources,
-  });
+  try {
+    logtail.info(`🚀 INFO 🚀 -- Method: ${method} - Msg: ${msg}`, {
+      tracing: new_resources,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -40,9 +44,13 @@ export const logError = (msg = "NONE", method = "LOGGER", extra = {}) => {
     extra = { data: extra };
   }
   let new_resources = { ...resources, ...extra };
-  logtail.error(`🎃 ERROR 🎃 -- Method: ${method} - Msg: ${msg}`, {
-    tracing: new_resources,
-  });
+  try {
+    logtail.error(`🎃 ERROR 🎃 -- Method: ${method} - Msg: ${msg}`, {
+      tracing: new_resources,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -56,7 +64,11 @@ export const logWarning = (msg = "NONE", method = "LOGGER", extra = {}) => {
     extra = { data: extra };
   }
   let new_resources = { ...resources, ...extra };
-  logtail.error(`✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}`, {
-    tracing: new_resources,
-  });
+  try {
+    logtail.error(`✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}`, {
+      tracing: new_resources,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
