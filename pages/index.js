@@ -79,7 +79,11 @@ export default function Home(props) {
 export async function getStaticProps(context) {
   // `getStaticProps` is executed on the server side.
   const topBarMsgs = await fetchGet("/api/top-bar-msgs");
-
+  if (!topBarMsgs) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: {
       topMsgs: topBarMsgs,

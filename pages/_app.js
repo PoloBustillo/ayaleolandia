@@ -8,7 +8,9 @@ import { AuthUserProvider } from "hooks/AuthUserProvider";
 function MyApp({ Component, pageProps }) {
   return (
     <AuthUserProvider>
-      <Component {...pageProps} />
+      <SSRProvider>
+        <Component {...pageProps} />
+      </SSRProvider>
     </AuthUserProvider>
   );
 }
