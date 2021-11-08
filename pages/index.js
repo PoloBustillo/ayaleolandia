@@ -8,6 +8,7 @@ import { Row, Col, Card } from "react-bootstrap";
 import { fetchGet } from "utils/methods";
 import { Layout } from "components/Layout";
 import { TopBar } from "components/TopBar";
+import { logError } from "utils/logger";
 
 export default function Home(props) {
   const [products, setProducts] = useState([]);
@@ -77,8 +78,15 @@ export default function Home(props) {
 }
 
 export async function getStaticProps(context) {
-  // `getStaticProps` is executed on the server side.
-  const topBarMsgs = await fetchGet("/api/top-bar-msgs");
+  let topBarMsgs = null;
+
+  try {
+    topBarMsgs = await fetchGet("/api/top-bar-msgs");
+  } catch (error) {
+    logError("TopBar failing", getStaticProps.name, {});
+  }
+
+  console.log(topBarMsgs);
   if (!topBarMsgs) {
     return {
       notFound: true,
