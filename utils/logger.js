@@ -1,4 +1,5 @@
 /** @format */
+
 import { Logtail as Browser } from "@logtail/browser";
 
 const source = "CLIENT";
@@ -12,62 +13,50 @@ const resources = {
 };
 Object.freeze(resources);
 
-export const logInfo = (
-  method = "LOGGER",
-  data = source,
-  msg = "NONE",
-  extra
-) => {
+/**
+ *
+ * @param {*} msg Mensaje a logear
+ * @param {*} method Metodo trigger
+ * @param {*} extra Data extra
+ */
+export const logInfo = (msg = "NONE", method = "LOGGER", extra = {}) => {
+  if (typeof extra !== "object") {
+    extra = { data: extra };
+  }
   let new_resources = { ...resources, ...extra };
-
-  logtail.info(
-    `🚀 INFO 🚀 -- Method: ${method} - Data: ${JSON.stringify(
-      data,
-      null,
-      "\t"
-    )} - Msg: ${msg}`,
-    {
-      tracing: new_resources,
-    }
-  );
+  logtail.info(`🚀 INFO 🚀 -- Method: ${method} - Msg: ${msg}`, {
+    tracing: new_resources,
+  });
 };
 
-export const logError = (
-  method = "LOGGER",
-  data = source,
-  msg = "NONE",
-  extra
-) => {
+/**
+ *
+ * @param {*} msg Mensaje a logear
+ * @param {*} method Metodo trigger
+ * @param {*} extra Data extra
+ */
+export const logError = (msg = "NONE", method = "LOGGER", extra = {}) => {
+  if (typeof extra !== "object") {
+    extra = { data: extra };
+  }
   let new_resources = { ...resources, ...extra };
-
-  logtail.error(
-    `🎃 ERROR 🎃 -- Method: ${method} - Data: ${JSON.stringify(
-      data,
-      null,
-      "\t"
-    )} - Msg: ${msg}`,
-    {
-      tracing: new_resources,
-    }
-  );
+  logtail.error(`🎃 ERROR 🎃 -- Method: ${method} - Msg: ${msg}`, {
+    tracing: new_resources,
+  });
 };
 
-export const logWarning = (
-  method = "LOGGER",
-  data = source,
-  msg = "NONE",
-  extra
-) => {
+/**
+ *
+ * @param {*} msg Mensaje a logear
+ * @param {*} method Metodo trigger
+ * @param {*} extra Data extra
+ */
+export const logWarning = (msg = "NONE", method = "LOGGER", extra = {}) => {
+  if (typeof extra !== "object") {
+    extra = { data: extra };
+  }
   let new_resources = { ...resources, ...extra };
-
-  logtail.warn(
-    `✨ WARNING ✨ -- Method: ${method} - Data: ${JSON.stringify(
-      data,
-      null,
-      "\t"
-    )} - Msg: ${msg}`,
-    {
-      tracing: new_resources,
-    }
-  );
+  logtail.error(`✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}`, {
+    tracing: new_resources,
+  });
 };

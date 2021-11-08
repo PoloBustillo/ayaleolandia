@@ -11,9 +11,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-import { Logtail } from "@logtail/browser";
-const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
-import { logInfo } from "utils/logger";
+import { logInfo, logError, logWarning } from "utils/logger";
 
 import {
   enableIndexedDbPersistence,
@@ -44,9 +42,15 @@ if (!firebaseapp) {
   let initDB = initializeFirestore(firebaseapp, {});
   enableIndexedDbPersistence(initDB).catch((err) => {
     if (err.code == "failed-precondition") {
-      logtail.warn("Multiple tabs open, persistence can only be enabled");
+      logWarning(
+        "Multiple tabs open, persistence can only be enabled",
+        "FirebaseClient",
+        { firebase: firebaseapp.name }
+      );
     } else if (err.code == "unimplemented") {
-      logtail.warn("The current browser does not support");
+      logWarning("The current browser does not support", "FirebaseClient", {
+        firebase: firebaseapp.name,
+      });
     }
   });
 }
@@ -85,12 +89,10 @@ export const createAccountWith = async (formState) => {
     avatar: session.user.photoURL,
   };
   await createUser(session.user.uid, data);
-  logInfo(
-    createUserWithEmailAndPassword.name,
-    data,
-    `user created ${session.user.uid}`,
-    { uid: session.user.uid }
-  );
+  logInfo("Usuario con email creado", createAccountWith.name, {
+    uid: session.user.uid,
+    data: { paymentMethods: {}, ...data },
+  });
 };
 
 export const loginWith = async (provider, email, password) => {
@@ -104,26 +106,26 @@ export const loginWith = async (provider, email, password) => {
   if (provider === "email") {
     session = await signInWithEmailAndPassword(auth, email, password);
   }
+  logInfo(`Usuario login con ${provider}`, loginWith.name, {});
 };
 
 export const createUser = async (uid, data) => {
   try {
     await setDoc(doc(usersRef, uid), data);
-    logInfo(createUser.name, data, "User created", { uid: uid });
+    logInfo(`Usuario creado ${uid}`, createUser.name, {});
   } catch (error) {
-    logtail.error(
-      `Method: createUser / User: ${uid} - ${data} / Error: ${error}`
-    );
+    logError(`Usuario no creado en DB ${uid}`, createUser.name, { error });
   }
 };
 export const updateUser = async (uid, data) => {
   try {
     await updateDoc(doc(usersRef, uid), data);
+    logInfo(`Usuario actualizado ${uid}`, createUser.updateUser, {
+      uid: session.user.uid,
+      data: { paymentMethods: {}, ...data },
+    });
   } catch (error) {
-    console.log(error);
-    logtail.error(
-      `Method: updateUser / User: ${uid} - ${data} / Error: ${error}`
-    );
+    logError(`Usuario no actualizado en DB ${uid}`, createUser.name, { error });
   }
 };
 
@@ -131,14 +133,19 @@ export const getUser = async (uid) => {
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
+    logInfo(`Usuario obtenido de DB ${uid}`, getUser.name, {
+      uid: session.user.uid,
+      data: { paymentMethods: {}, ...user?.data() },
+    });
     return user?.data();
   } catch (error) {
-    logtail.error(`Method: getUser / User: ${uid} / Error: ${error}`);
+    logError(`Usuario no obtenido de DB ${uid}`, getUser.name, { error });
   }
   return user;
 };
 
 export const signOutUser = async () => {
+  logInfo(`Usuario ${uid} salio de sesion`, getUser.name, {});
   auth.signOut();
 };
 
@@ -146,9 +153,20 @@ export const resetPasswordByEmail = async (email, successFunc, errorFunc) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       successFunc();
+      logInfo(
+        `Email para resetear enviado ${uid}`,
+        resetPasswordByEmail.name,
+        {}
+      );
     })
     .catch((error) => {
-      logtail.error(`Sent email error: ${error}`);
+      logError(
+        `Erro al enviar ${uid} email para resetear`,
+        resetPasswordByEmail.name,
+        {
+          error,
+        }
+      );
       const errorCode = error.code;
       errorFunc(errorCode);
     });
