@@ -6,6 +6,7 @@ import UseFirebaseAuth from "hooks/UseFirebaseAuth";
 const authUserContext = createContext({
   authUser: null,
   loading: true,
+  setAuthUser: () => {},
 });
 
 export function AuthUserProvider({ children }) {

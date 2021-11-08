@@ -125,7 +125,7 @@ export function getURL(path = "") {
   return url;
 }
 
-// Helper to make GET requests to Strapi
+// Helper to make GET requests to Firebase
 export async function fetchGet(path) {
   const requestUrl = getURL(path);
   const response = await axios.get(requestUrl);

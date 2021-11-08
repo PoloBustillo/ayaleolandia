@@ -25,7 +25,6 @@ if (!admin.apps.length) {
       databaseURL: `https://${projectId}.firebaseio.com`,
     });
   } catch (error) {
-    console.log(error);
     logtail.error("Firebase admin initialization error", error.stack);
   }
 }

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { auth, createUser, getUser } from "configs/client/firebase.js";
+import { Logtail } from "@logtail/browser";
+const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
 
 const formatAuthUser = (user, userDB) => {
   if (userDB) {
@@ -38,16 +40,19 @@ export default function UseFirebaseAuth() {
       return;
     }
     setLoading(true);
-
     let user = await getUser(authState.uid);
     let formattedUser = formatAuthUser(authState, user);
 
     try {
+      if (user === undefined) {
+        await createUser(authState.uid, formattedUser);
+      }
       setAuthUser(formattedUser);
       setLoading(false);
     } catch (error) {
-      console.log(error);
-      //TODO: log off sent error msg
+      logtail.error(
+        `Method: authStateChanged / Data: ${formattedUser} / Error: ${error}`
+      );
     }
   };
 

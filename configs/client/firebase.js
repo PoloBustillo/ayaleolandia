@@ -13,6 +13,7 @@ import {
 
 import { Logtail } from "@logtail/browser";
 const logtail = new Logtail("46f2YDT9azLZ21YpgxK3uCJJ");
+import { logInfo } from "utils/logger";
 
 import {
   enableIndexedDbPersistence,
@@ -43,9 +44,9 @@ if (!firebaseapp) {
   let initDB = initializeFirestore(firebaseapp, {});
   enableIndexedDbPersistence(initDB).catch((err) => {
     if (err.code == "failed-precondition") {
-      logtail.error("Multiple tabs open, persistence can only be enabled");
+      logtail.warn("Multiple tabs open, persistence can only be enabled");
     } else if (err.code == "unimplemented") {
-      logtail.error("The current browser does not support");
+      logtail.warn("The current browser does not support");
     }
   });
 }
@@ -59,7 +60,6 @@ const facebookProvider = new FacebookAuthProvider();
 
 export const createAccountWith = async (formState) => {
   let session;
-  //const { authUser, loading, setAuthUser } = useAuth();
 
   session = await createUserWithEmailAndPassword(
     auth,
@@ -84,12 +84,13 @@ export const createAccountWith = async (formState) => {
     name: formState.name,
     avatar: session.user.photoURL,
   };
-
-  //console.log(data);
-  //console.log(authUser);
-  //console.log(setAuthUser);
-  //setAuthUser(data);
   await createUser(session.user.uid, data);
+  logInfo(
+    createUserWithEmailAndPassword.name,
+    data,
+    `user created ${session.user.uid}`,
+    { uid: session.user.uid }
+  );
 };
 
 export const loginWith = async (provider, email, password) => {
@@ -108,19 +109,21 @@ export const loginWith = async (provider, email, password) => {
 export const createUser = async (uid, data) => {
   try {
     await setDoc(doc(usersRef, uid), data);
+    logInfo(createUser.name, data, "User created", { uid: uid });
   } catch (error) {
-    //TODO: log off sent error msg
-    console.log(error);
-    logtail.error(`User creation error: ${error}`);
+    logtail.error(
+      `Method: createUser / User: ${uid} - ${data} / Error: ${error}`
+    );
   }
 };
 export const updateUser = async (uid, data) => {
   try {
-    await updateDoc(doc(db, "users", uid), data);
+    await updateDoc(doc(usersRef, uid), data);
   } catch (error) {
-    //TODO: log off sent error msg
     console.log(error);
-    logtail.error(`User creation error: ${error}`);
+    logtail.error(
+      `Method: updateUser / User: ${uid} - ${data} / Error: ${error}`
+    );
   }
 };
 
@@ -130,9 +133,7 @@ export const getUser = async (uid) => {
     user = await getDoc(doc(usersRef, uid));
     return user?.data();
   } catch (error) {
-    //TODO: log off sent error msg
-    console.log(error);
-    logtail.error(`User creation error: ${error}`);
+    logtail.error(`Method: getUser / User: ${uid} / Error: ${error}`);
   }
   return user;
 };
