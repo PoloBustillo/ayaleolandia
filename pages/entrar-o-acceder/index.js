@@ -12,12 +12,7 @@ import {
   resetPasswordByEmail,
 } from "configs/client/firebase";
 import { useRouter } from "next/router";
-import {
-  validateFormData,
-  hasError,
-  errorFirebaseMap,
-  fetchGet,
-} from "utils/methods";
+import { validateFormData, hasError, errorFirebaseMap } from "utils/methods";
 import FacebookIcon from "components/icons/FacebookIcon";
 import GoogleIcon from "components/icons/GoogleIcon";
 import { ButtonLoader } from "components/ButtonLoader";

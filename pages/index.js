@@ -86,7 +86,6 @@ export async function getStaticProps(context) {
     logError("TopBar failing", getStaticProps.name, {});
   }
 
-  console.log(topBarMsgs);
   if (!topBarMsgs) {
     return {
       notFound: true,

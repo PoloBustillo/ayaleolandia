@@ -39,14 +39,17 @@ export default function UseFirebaseAuth() {
       setLoading(false);
       return;
     }
+
     setLoading(true);
     let user = await getUser(authState.uid);
+
     let formattedUser = formatAuthUser(authState, user);
 
     try {
       if (user === undefined) {
         await createUser(authState.uid, formattedUser);
       }
+
       setAuthUser(formattedUser);
       setLoading(false);
     } catch (error) {

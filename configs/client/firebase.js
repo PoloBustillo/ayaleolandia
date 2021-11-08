@@ -112,7 +112,6 @@ export const loginWith = async (provider, email, password) => {
 export const createUser = async (uid, data) => {
   try {
     await setDoc(doc(usersRef, uid), data);
-    logInfo(`Usuario creado ${uid}`, createUser.name, {});
   } catch (error) {
     logError(`Usuario no creado en DB ${uid}`, createUser.name, { error });
   }
@@ -120,12 +119,12 @@ export const createUser = async (uid, data) => {
 export const updateUser = async (uid, data) => {
   try {
     await updateDoc(doc(usersRef, uid), data);
-    logInfo(`Usuario actualizado ${uid}`, createUser.updateUser, {
+    logInfo(`Usuario actualizado ${uid}`, updateUser.name, {
       uid: session.user.uid,
       data: { paymentMethods: {}, ...data },
     });
   } catch (error) {
-    logError(`Usuario no actualizado en DB ${uid}`, createUser.name, { error });
+    logError(`Usuario no actualizado en DB ${uid}`, updateUser.name, { error });
   }
 };
 
@@ -133,8 +132,9 @@ export const getUser = async (uid) => {
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
+    console.log(user.data());
     logInfo(`Usuario obtenido de DB ${uid}`, getUser.name, {
-      uid: session.user.uid,
+      uid: uid,
       data: { paymentMethods: {}, ...user?.data() },
     });
     return user?.data();
@@ -145,7 +145,6 @@ export const getUser = async (uid) => {
 };
 
 export const signOutUser = async () => {
-  logInfo(`Usuario ${uid} salio de sesion`, getUser.name, {});
   auth.signOut();
 };
 

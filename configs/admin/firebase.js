@@ -5,7 +5,6 @@ import admin from "firebase-admin";
 const privateKey = process.env.NEXT_FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n");
 const clientEmail = process.env.NEXT_FIREBASE_EMAIL;
 const projectId = "ayaleolandia-87c19";
-console.log(process.env.NEXT_PUBLIC_LOGTAIL_KEY);
 
 if (!privateKey || !clientEmail || !projectId) {
   console.log(

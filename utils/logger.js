@@ -20,11 +20,12 @@ Object.freeze(resources);
  * @param {*} extra Data extra
  */
 export const logInfo = (msg = "NONE", method = "LOGGER", extra = {}) => {
-  if (typeof extra !== "object") {
-    extra = { data: extra };
-  }
-  let new_resources = { ...resources, ...extra };
   try {
+    if (typeof extra !== "object") {
+      extra = { data: extra };
+    }
+    let new_resources = { ...resources, ...extra };
+
     logtail.info(`🚀 INFO 🚀 -- Method: ${method} - Msg: ${msg}`, {
       tracing: new_resources,
     });
@@ -40,11 +41,12 @@ export const logInfo = (msg = "NONE", method = "LOGGER", extra = {}) => {
  * @param {*} extra Data extra
  */
 export const logError = (msg = "NONE", method = "LOGGER", extra = {}) => {
-  if (typeof extra !== "object") {
-    extra = { data: extra };
-  }
-  let new_resources = { ...resources, ...extra };
   try {
+    if (typeof extra !== "object") {
+      extra = { data: extra };
+    }
+    let new_resources = { ...resources, ...extra };
+    console.log(new_resources);
     logtail.error(`🎃 ERROR 🎃 -- Method: ${method} - Msg: ${msg}`, {
       tracing: new_resources,
     });
@@ -60,11 +62,12 @@ export const logError = (msg = "NONE", method = "LOGGER", extra = {}) => {
  * @param {*} extra Data extra
  */
 export const logWarning = (msg = "NONE", method = "LOGGER", extra = {}) => {
-  if (typeof extra !== "object") {
-    extra = { data: extra };
-  }
-  let new_resources = { ...resources, ...extra };
   try {
+    if (typeof extra !== "object") {
+      extra = { data: extra };
+    }
+    let new_resources = { ...resources, ...extra };
+
     logtail.error(`✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}`, {
       tracing: new_resources,
     });

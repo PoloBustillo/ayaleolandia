@@ -14,6 +14,7 @@ import { updateUser } from "configs/client/firebase";
 
 function UserProfile({ fallback }) {
   const { authUser, loading, setAuthUser } = useAuth();
+
   const inputFile = useRef(null);
   const [showAlert, setShowAlert] = useState(false);
   const [file, setFile] = useState({});
