@@ -1,6 +1,6 @@
 /** @format */
 import React from "react";
-
+import Image from "next/image";
 import { Row } from "react-bootstrap";
 import SearchInput, { createFilter } from "react-search-input";
 import { useState } from "react";
@@ -83,13 +83,14 @@ export const SearchBar = (props) => {
             setSearchTerm(term);
           }}
         />
-        <img
+        <Image
           onClick={() => {
             props.closeFunc();
           }}
           id="x-black"
           src={"/xBlack.png"}
-          height="25px"
+          height={25}
+          width={25}
           alt="Close Top Bar Leolandia"
         />
       </span>

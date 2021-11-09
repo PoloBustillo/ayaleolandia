@@ -11,6 +11,14 @@ const withNextEnv = nextEnv();
 
 module.exports = withNextEnv(
   withImages({
+    images: {
+      domains: [
+        "graph.facebook.com",
+        "lh3.googleusercontent.com",
+        "images.unsplash.com",
+        "storage.googleapis.com",
+      ],
+    },
     webpack: (config) => {
       config.resolve.alias["components"] = path.resolve(
         __dirname,

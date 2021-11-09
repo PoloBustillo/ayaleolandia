@@ -93,6 +93,10 @@ a {
   text-align: center;
   padding: 2.5vh;
 }
+#close-top-bar span {
+  top: 4px !important;
+  vertical-align: middle;
+}
 #top-bar:hover {
   cursor: pointer;
 }
@@ -397,6 +401,12 @@ input:focus {
   font-size: small;
   margin: 2vw;
   margin-left: 5vw;
+}
+.side-item span {
+  vertical-align: middle !important;
+}
+.nav-item span {
+  vertical-align: middle !important;
 }
 .side-item:focus {
   outline: none;
@@ -740,6 +750,9 @@ input:focus {
 .pageSwitcherItem:last-child {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
+}
+.tools-container span {
+  vertical-align: middle;
 }
 .form-floating input {
   font-size: 2vh;

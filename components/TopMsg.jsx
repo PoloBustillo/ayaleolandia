@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Image from "next/image";
 
 export const TopMsg = (props) => {
   const { text, icon, subText } = props.msg;

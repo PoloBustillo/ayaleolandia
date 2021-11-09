@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Image from "next/image";
 import { signOutUser } from "configs/client/firebase";
 import UserProfile from "./icons/UserProfileIcon";
 import Link from "next/link";
@@ -29,9 +30,13 @@ export const SideAvatar = (props) => {
               props.sideMenuFunc(false);
             }}
           >
-            <img
-              src={authUser?.avatar ? authUser.avatar : "usergirl.png"}
+            <Image
+              className={"nav-icon"}
+              id="user-icon"
+              src={authUser?.avatar ? authUser.avatar : "/usergirl.png"}
               alt="user avatar"
+              alt="Login"
+              layout="fill"
             />
           </a>
         </Link>

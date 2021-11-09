@@ -3,6 +3,7 @@
 import React from "react";
 import { Col } from "react-bootstrap";
 import Link from "next/link";
+import Image from "next/image";
 import ShipIcon from "./icons/ShipIcon";
 import PromosIcon from "./icons/PromoseIcon";
 import PayMethods from "./icons/PayMethods";
@@ -19,13 +20,13 @@ export const MenuItems = (props) => {
       </Link>
       <Link href="/colecciones">
         <Col className={props.itemClass}>
-          <img
+          <Image
+            src={"/fashion.png"}
             className="side-icon"
             id="fashion-icon"
-            src={"/fashion.png"}
-            height="20px"
-            width="20px"
             alt="Ir a colecciones de Leolandia"
+            height={20}
+            width={20}
           />{" "}
           COLECCIONES
         </Col>

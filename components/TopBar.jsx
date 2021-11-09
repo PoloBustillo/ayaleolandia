@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { TopMsg } from "./TopMsg";
 
@@ -36,13 +37,14 @@ export const TopBar = (props) => {
           setClose(true);
         }}
       >
-        <span className="visually-hidden">Cerrar Barra</span>
-        <img
+        <Image
           id="x-img"
           src={"/close.png"}
-          height="15px"
+          height={15}
+          width={15}
           alt="Close Top Bar Leolandia"
         />
+        <span className="visually-hidden">Cerrar Barra</span>
       </div>
     </div>
   ) : null;

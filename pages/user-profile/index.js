@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { useAuth } from "hooks/AuthUserProvider";
+import Image from "next/image";
 
 import { ButtonLoader } from "components/ButtonLoader";
 import { Row, Col, Form, Accordion, Alert } from "react-bootstrap";
@@ -72,15 +73,16 @@ function UserProfile({ fallback }) {
                       >
                         <Col className="container-upload">
                           <div className="avatar-form">
-                            <img
+                            <Image
                               src={
                                 avatar
                                   ? avatar
                                   : authUser.avatar
                                   ? authUser.avatar
-                                  : "usergirl.png"
+                                  : "/usergirl.png"
                               }
                               alt="user avatar"
+                              layout="fill"
                             />
                           </div>
                         </Col>
@@ -89,11 +91,12 @@ function UserProfile({ fallback }) {
                             controlId="formFile"
                             className="avatar-upload"
                           >
-                            <img
-                              width="30px"
-                              src={"upload_file.png"}
+                            <Image
+                              src={"/upload_file.png"}
                               alt="file upload"
+                              layout="fill"
                             />
+
                             <Form.Control
                               onChange={handleFileSelected}
                               ref={inputFile}

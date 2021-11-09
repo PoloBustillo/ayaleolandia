@@ -123,7 +123,7 @@ export default function Deck() {
             setPlayAgain(false);
           }}
         >
-          <img src="/playAgain.png" width="60px" />
+          <Image src="/playAgain.png" width="60px" alt="Deck" />
         </div>
       )}
     </>

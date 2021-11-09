@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useAuth } from "hooks/AuthUserProvider";
 import Head from "next/head";
@@ -23,7 +24,15 @@ function withAuth(WrappedComponent) {
               <link rel="icon" href="/logo.png" />
             </Head>
             <div className="loading-container">
-              <img src="/loading.gif" alt="loading..." />
+              <Image
+                onClick={() => {
+                  props.closeFunc();
+                }}
+                src="/loading.gif"
+                alt="loading..."
+                layout="fill"
+                priority
+              />
             </div>
           </>
         );

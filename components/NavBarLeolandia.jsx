@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import HamburguerBtn from "./HamburguerBtn";
@@ -55,11 +56,12 @@ export const NavBarLeolandia = (props) => {
           <Link href={"/"}>
             <a>
               <div>
-                <img
+                <Image
                   className="nav-icon"
                   id="logo-icon"
                   src={"/logo.png"}
-                  height="50px"
+                  height={50}
+                  width={50}
                   alt="joyeria y accesorios"
                 />
                 <span id="aya-text">
@@ -77,17 +79,19 @@ export const NavBarLeolandia = (props) => {
           {authUser == null ? (
             <Link className="icon-tool" href="/entrar-o-acceder" passHref>
               <a className="icon-tool">
-                <img
+                <Image
                   className={"nav-icon"}
                   id="user-icon"
                   src={"/usergirl.png"}
                   height="30px"
                   alt="Login"
+                  height={30}
+                  width={30}
                 />
               </a>
             </Link>
           ) : (
-            <img
+            <Image
               onClick={async () => {
                 props.sideMenuFunc(true);
               }}
@@ -98,7 +102,8 @@ export const NavBarLeolandia = (props) => {
               }
               id="user-icon"
               src={authUser?.avatar ? authUser.avatar : "/usergirl.png"}
-              height="30px"
+              height={30}
+              width={30}
               alt="Login"
             />
           )}
