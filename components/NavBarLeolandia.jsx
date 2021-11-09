@@ -73,7 +73,7 @@ export const NavBarLeolandia = (props) => {
                   id="logo-icon"
                   src={"/logo.png"}
                   placeholder="blur"
-                  blurDataURL={rgbDataURL(237, 181, 6)}
+                  blurDataURL={rgbDataURL(237, 237, 237)}
                   height={50}
                   width={50}
                   alt="joyeria y accesorios"

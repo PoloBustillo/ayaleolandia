@@ -17,6 +17,7 @@ module.exports = withNextEnv(
         "lh3.googleusercontent.com",
         "images.unsplash.com",
         "storage.googleapis.com",
+        "upload.wikimedia.org",
       ],
     },
     webpack: (config) => {

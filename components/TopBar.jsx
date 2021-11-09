@@ -21,7 +21,7 @@ export const TopBar = (props) => {
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [index]);
+  }, [index, data]);
 
   return !close && data ? (
     <div className="top-bar-container">

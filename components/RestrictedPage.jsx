@@ -13,7 +13,7 @@ export const RestrictedPage = ({ children }) => {
     if (authUser == null && !loading) {
       router.push("/entrar-o-acceder");
     }
-  }, [authUser, loading]);
+  }, [authUser, loading, router]);
 
   if (authUser) {
     return <Layout>{children}</Layout>;

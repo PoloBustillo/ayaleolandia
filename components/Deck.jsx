@@ -124,7 +124,12 @@ export default function Deck() {
             setPlayAgain(false);
           }}
         >
-          <Image src="/playAgain.png" width="60px" alt="Deck" />
+          <Image
+            placeholder="blur"
+            src="/playAgain.png"
+            width="60px"
+            alt="Deck"
+          />
         </div>
       )}
     </>
