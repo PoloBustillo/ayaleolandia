@@ -46,10 +46,14 @@ export const logError = (msg = "NONE", method = "LOGGER", extra = {}) => {
       extra = { data: extra };
     }
     let new_resources = { ...resources, ...extra };
-    console.log(new_resources);
-    logtail.error(`🎃 ERROR 🎃 -- Method: ${method} - Msg: ${msg}`, {
-      tracing: new_resources,
-    });
+    logtail.error(
+      `🎃 ERROR  NEW 2🎃 --Method: ${method} - Msg: ${msg}  - Error: ${JSON.stringify(
+        extra
+      )}`,
+      {
+        tracing: new_resources,
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -67,10 +71,14 @@ export const logWarning = (msg = "NONE", method = "LOGGER", extra = {}) => {
       extra = { data: extra };
     }
     let new_resources = { ...resources, ...extra };
-
-    logtail.error(`✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}`, {
-      tracing: new_resources,
-    });
+    logtail.error(
+      `✨ WARNING ✨ -- Method: ${method} - Msg: ${msg}  - Error ${JSON.stringify(
+        extra
+      )}`,
+      {
+        tracing: new_resources,
+      }
+    );
   } catch (error) {
     console.log(error);
   }

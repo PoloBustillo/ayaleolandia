@@ -347,9 +347,6 @@ export default function Login({ fallback }) {
               )}
               <ButtonLoader
                 clickFunc={handleSubmitEmail}
-                onMouseUpFunc={() => {
-                  setTriggerAnimation(false);
-                }}
                 block
                 size="lg"
                 type="submit"

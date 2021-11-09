@@ -132,7 +132,6 @@ export const getUser = async (uid) => {
   let user = null;
   try {
     user = await getDoc(doc(usersRef, uid));
-    console.log(user.data());
     logInfo(`Usuario obtenido de DB ${uid}`, getUser.name, {
       uid: uid,
       data: { paymentMethods: {}, ...user?.data() },
