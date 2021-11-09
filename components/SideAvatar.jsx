@@ -35,7 +35,6 @@ export const SideAvatar = (props) => {
               id="user-icon"
               src={authUser?.avatar ? authUser.avatar : "/usergirl.png"}
               alt="user avatar"
-              alt="Login"
               layout="fill"
             />
           </a>

@@ -12,6 +12,18 @@ import CartIcon from "./icons/CartIcon";
 import { useAuth } from "hooks/AuthUserProvider";
 
 import SearchIcon from "./icons/SearchIcon";
+const keyStr =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+const triplet = (e1, e2, e3) =>
+  keyStr.charAt(e1 >> 2) +
+  keyStr.charAt(((e1 & 3) << 4) | (e2 >> 4)) +
+  keyStr.charAt(((e2 & 15) << 2) | (e3 >> 6)) +
+  keyStr.charAt(e3 & 63);
+const rgbDataURL = (r, g, b) =>
+  `data:image/gif;base64,R0lGODlhAQABAPAA${
+    triplet(0, r, g) + triplet(b, 255, 255)
+  }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 
 export const NavBarLeolandia = (props) => {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -60,6 +72,8 @@ export const NavBarLeolandia = (props) => {
                   className="nav-icon"
                   id="logo-icon"
                   src={"/logo.png"}
+                  placeholder="blur"
+                  blurDataURL={rgbDataURL(237, 181, 6)}
                   height={50}
                   width={50}
                   alt="joyeria y accesorios"
@@ -83,7 +97,6 @@ export const NavBarLeolandia = (props) => {
                   className={"nav-icon"}
                   id="user-icon"
                   src={"/usergirl.png"}
-                  height="30px"
                   alt="Login"
                   height={30}
                   width={30}

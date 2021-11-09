@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { useSprings, animated, to as interpolate } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 
