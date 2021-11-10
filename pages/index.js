@@ -9,6 +9,8 @@ import { fetchGet } from "utils/methods";
 import { Layout } from "components/Layout";
 import { TopBar } from "components/TopBar";
 import { logError } from "utils/logger";
+import Title from "components/atoms/Title.tsx";
+import { height } from "dom-helpers";
 
 export default function Home(props) {
   const [products, setProducts] = useState([]);
@@ -69,6 +71,10 @@ export default function Home(props) {
               />
             </video> */}
         </div>
+        <Title
+          text="Hola"
+          image={{ src: "/usergirl.png", width: 20, height: 20 }}
+        ></Title>
         <div id="root">
           <Deck></Deck>
         </div>

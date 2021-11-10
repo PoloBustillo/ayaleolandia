@@ -3,20 +3,13 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { Form, Col, Row } from "react-bootstrap";
-import { useAuth } from "hooks/AuthUserProvider";
 
-export const UpdateProfile = () => {
-  const { authUser, loading, setAuthUser } = useAuth();
-  console.log(authUser);
+export const UpdateProfile = (props) => {
+  const { handleFieldChange, handleCheckChange, formState } = props;
 
   const inputFile = useRef(null);
   const [file, setFile] = useState({});
   const [avatar, setAvatar] = useState(null);
-  const [formState, setFormState] = useState(authUser);
-
-  const handleFieldChange = (event) => {
-    setFormState({ ...formState, [event.target.name]: event.target.value });
-  };
 
   const handleFileSelected = (e) => {
     const files = Array.from(e.target.files);
@@ -39,8 +32,8 @@ export const UpdateProfile = () => {
               src={
                 avatar
                   ? avatar
-                  : authUser.avatar
-                  ? authUser.avatar
+                  : formState.avatar
+                  ? formState.avatar
                   : "/usergirl.png"
               }
               alt="user avatar"
@@ -147,12 +140,8 @@ export const UpdateProfile = () => {
 
         <Form.Check
           checked={formState.pushNotification}
-          onChange={() => {
-            setFormState({
-              ...formState,
-              pushNotification: !formState.pushNotification,
-            });
-          }}
+          onChange={handleCheckChange}
+          name="pushNotification"
           className="form-settings"
           type="switch"
           id="terminos-switch"
@@ -160,12 +149,8 @@ export const UpdateProfile = () => {
         ></Form.Check>
         <Form.Check
           checked={formState.subscription}
-          onChange={() => {
-            setFormState({
-              ...formState,
-              subscription: !formState.subscription,
-            });
-          }}
+          name="subscription"
+          onChange={handleCheckChange}
           className="form-settings"
           type="switch"
           id="terminos-switch"

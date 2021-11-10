@@ -68,7 +68,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 .accordion-item {
   background-color: whitesmoke !important;
-  color: deeppink;
+  color: #002830;
 }
 .accordion-button {
   background-color: transparent !important;
@@ -163,8 +163,13 @@ img {
 .border-top-bar {
   border-bottom: 1px dotted black;
 }
+.settings-list-item {
+  background-color: transparent !important;
+}
 .input-settings {
-  font-size: 2vw !important;
+  -webkit-text-fill-color: violet !important;
+  color: violet !important;
+  font-size: 2.5vw !important;
   padding-right: 0 !important;
 }
 .by-title {

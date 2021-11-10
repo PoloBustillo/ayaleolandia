@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 import { useState, useRef } from "react";
-import Link from "next/link";
+
 import { useAuth } from "hooks/AuthUserProvider";
 import { UpdateProfile } from "components/UpdateProfile";
 
@@ -12,25 +12,22 @@ import { Row, Col, Form, Accordion, Alert } from "react-bootstrap";
 import { Layout } from "components/Layout";
 import withAuth from "components/HOC/withAuth";
 import { updateUser } from "configs/client/firebase";
+import { UpdateShippingAddress } from "components/UpdateShippingAddress";
 
 function UserProfile({ fallback }) {
   const { authUser, loading, setAuthUser } = useAuth();
-
-  const inputFile = useRef(null);
+  console.log(authUser);
   const [showAlert, setShowAlert] = useState(false);
-  const [file, setFile] = useState({});
-  const [avatar, setAvatar] = useState(null);
+  const [formState, setFormState] = useState(authUser);
 
   const handleFieldChange = (event) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
-
-  const handleFileSelected = (e) => {
-    const files = Array.from(e.target.files);
-    try {
-      setAvatar(URL.createObjectURL(files[0]));
-      setFile(files[0]);
-    } catch (error) {}
+  const handleCheckChange = (event) => {
+    setFormState({
+      ...formState,
+      [event.target.name]: !formState[event.target.name],
+    });
   };
 
   return (
@@ -65,13 +62,21 @@ function UserProfile({ fallback }) {
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>Información de la cuenta</Accordion.Header>
                   <Accordion.Body>
-                    <UpdateProfile></UpdateProfile>
+                    <UpdateProfile
+                      handleFieldChange={handleFieldChange}
+                      handleCheckChange={handleCheckChange}
+                      formState={formState}
+                    ></UpdateProfile>
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>Dirrecciones de envios </Accordion.Header>
                   <Accordion.Body>
-                    <div>Dirrecciones de envios +</div>
+                    <UpdateShippingAddress
+                      handleFieldChange={handleFieldChange}
+                      handleCheckChange={handleCheckChange}
+                      formState={formState}
+                    ></UpdateShippingAddress>
                   </Accordion.Body>
                 </Accordion.Item>
                 <Accordion.Item eventKey="2">
