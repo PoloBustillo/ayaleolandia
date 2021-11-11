@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Form, Col, Row } from "react-bootstrap";
 
 export const UpdateProfile = (props) => {
