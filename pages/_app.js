@@ -1,6 +1,6 @@
 /** @format */
 
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SSRProvider from "react-bootstrap/SSRProvider";
 import { AuthUserProvider } from "hooks/AuthUserProvider";

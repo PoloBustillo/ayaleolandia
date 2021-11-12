@@ -58,7 +58,7 @@ export default function Home(props) {
             })}
           </Row>
         </div>
-        <div>
+        <div className="new-products-container">
           <div className="title-new ">Nuevos Productos</div>
           {/* <video playsInline muted autoPlay loop poster="" id="bgvid">
               <source
@@ -70,13 +70,13 @@ export default function Home(props) {
                 type="video/mp4"
               />
             </video> */}
-        </div>
-        <Title
-          text="Hola"
-          image={{ src: "/usergirl.png", width: 20, height: 20 }}
-        ></Title>
-        <div id="root">
-          <Deck></Deck>
+          <Title
+            text="Hola"
+            image={{ src: "/usergirl.png", width: 20, height: 20 }}
+          ></Title>
+          <div id="new-products">
+            <Deck></Deck>
+          </div>
         </div>
       </Layout>
     </div>

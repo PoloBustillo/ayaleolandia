@@ -5,8 +5,8 @@ import styles from "styles/Home.module.css";
 
 export const Footer = () => {
   return (
-    <footer className={styles.footer}>
-      Powered by <span className={styles.logo}>Takito Corp</span>
+    <footer className={"footer"}>
+      Powered by <span className={"logo"}>Takito Corp</span>
     </footer>
   );
 };

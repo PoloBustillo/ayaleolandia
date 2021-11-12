@@ -1,0 +1,952 @@
+/** @format */
+/* Hamburguer Btn */
+/* ANIMATION */
+@import "https://fonts.googleapis.com/css2?family=Rampart+One&display=swap";
+$background-color: whitesmoke;
+$secondary-color: #d98ba0;
+
+@media (min-width: 768px) {
+  .search-container {
+    margin-left: 0vw !important;
+  }
+  .search-bar {
+    padding-left: 30vw !important;
+  }
+  .menu-btn {
+    display: none;
+  }
+  .menu-btn-container {
+    display: none;
+  }
+  .hidden-md {
+    display: none !important;
+  }
+  .by-title {
+    left: 13vw !important;
+    top: 0vh !important;
+    max-width: 40vw;
+    color: rgb(0 0 0 / 66%);
+    font-family: "Mrs Saint Delafield", cursive;
+    font-weight: 100;
+    font-size: 5vw;
+    position: relative;
+  }
+  #aya-text {
+    -webkit-text-stroke: transparent;
+    font-family: "Caudex", serif;
+  }
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  background-color: $background-color !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background-color: $background-color !important;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+//TOP BAR
+.top-bar-container {
+  background-color: $background-color;
+  #top-bar {
+    height: 100%;
+    background-color: $secondary-color;
+    width: 100vw;
+    position: sticky;
+    text-align: center;
+    padding: 2.5vh;
+    &:hover {
+      cursor: pointer;
+    }
+    #top-bar-text {
+      font-weight: bolder;
+      color: $background-color;
+      font-size: 20px;
+      font-family: "Amatic SC", cursive;
+    }
+    #top-bar-sub-text {
+      font-weight: bolder;
+      color: $background-color;
+      font-size: 14px;
+      font-family: "Amatic SC", cursive;
+    }
+  }
+  #close-top-bar {
+    span {
+      top: 4px !important;
+      vertical-align: middle;
+    }
+    top: -2vh;
+    left: 46vw;
+    position: relative;
+    border-radius: 50%;
+    padding: 0 2vh 1.5vh;
+    background: $secondary-color;
+    display: inline-block;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+//LAYOUT
+.main {
+  overflow: hidden;
+  background-color: $background-color !important;
+  .headroom-wrapper {
+    height: auto !important;
+    .navbar-container {
+      padding-bottom: 2vh;
+      width: 99vw;
+      position: sticky;
+      top: 0px;
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      .menu-btn-container {
+        position: absolute;
+        width: 15%;
+        height: 50%;
+        z-index: 1000;
+        cursor: pointer;
+        .menu-btn {
+          position: fixed;
+          left: 5vw;
+          top: 3vh;
+          cursor: pointer;
+          transition: all 0.5s ease-in-out;
+        }
+        .menu-btn__burger {
+          width: 7vw;
+          height: 2px;
+          background: rgb(80 80 80);
+          transition: all 0.5s ease-in-out;
+          &::before {
+            content: "";
+            position: absolute;
+            width: 7vw;
+            height: 2px;
+            background: rgb(80 80 80);
+            transition: all 0.5s ease-in-out;
+            transform: translateY(-6px);
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            width: 7vw;
+            height: 2px;
+            background: rgb(80 80 80);
+            transition: all 0.5s ease-in-out;
+            transform: translateY(6px);
+          }
+        }
+        .menu-btn.open {
+          .menu-btn__burger {
+            transform: translateX(70vw);
+            background: transparent;
+            box-shadow: none;
+            &::before {
+              transform: rotate(45deg) translate(35px, -35px);
+            }
+            &::after {
+              transform: rotate(-45deg) translate(35px, 35px);
+            }
+          }
+        }
+      }
+      .search-container {
+        margin-left: 8vw;
+        text-align: center;
+        padding: 5vw 0;
+        display: inline-block;
+      }
+      .menu-nav {
+        margin-bottom: 2vh;
+        .nav-item {
+          cursor: pointer;
+          text-align: center;
+          font-family: "Unica One", cursive;
+          font-size: small;
+          span {
+            vertical-align: middle !important;
+          }
+        }
+      }
+      .tools-container {
+        padding: 5vw 0;
+        text-align: center;
+        display: inline-block;
+        span {
+          vertical-align: middle;
+        }
+        .icon-tool {
+          margin: 0 1vw;
+        }
+      }
+    }
+  }
+  .by-title {
+    width: 20vw;
+    margin: 0;
+    padding: 0;
+    left: 12vw;
+    top: -1.8vh;
+    max-width: 40vw;
+    color: rgb(0 0 0 / 66%);
+    font-family: "Mrs Saint Delafield", cursive;
+    font-weight: 100;
+    font-size: 5vw;
+    position: relative;
+  }
+}
+//PRODUCTS CONTAINER
+.products-container {
+  text-align: center;
+  .product-row {
+    --bs-gutter-x: 0.5rem !important;
+  }
+}
+//NEW PRODUCTS
+.new-products-container {
+  .title-new {
+    -webkit-text-stroke: 1px black;
+    margin: auto;
+    text-align: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    font-size: 15vw;
+    font-family: "Rampart One", cursive;
+    transform: rotate(-13deg);
+    color: hotpink;
+  }
+  #new-products {
+    img {
+      width: 100vw;
+    }
+  }
+  #new-products {
+    background-color: $background-color;
+    width: 90vw;
+    margin: auto;
+    padding: 6vh 0;
+    position: relative;
+    height: 65vh;
+    overflow: hidden;
+    > div {
+      width: 100%;
+      position: absolute;
+      will-change: transform;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > div {
+        cursor: url("https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png")
+            39 39,
+          auto;
+        background-color: white;
+        background-size: auto 85%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 27vw;
+        max-width: 250px;
+        min-width: 220px;
+        height: 50vh;
+        max-height: 570px;
+        will-change: transform;
+        border-radius: 10px;
+        border: 0.5px;
+        border-style: solid;
+        border-color: #ff149366;
+        box-shadow: 7px 5px 14px -10px deeppink, 5px 10px 20px -10px deeppink;
+      }
+    }
+  }
+}
+
+//LOGIN
+.pageSwitcher {
+  align-items: center;
+  text-align: center;
+  display: block;
+  padding-top: 2vh;
+  background-color: $background-color;
+  .pageSwitcherItem.selected {
+    background-color: deeppink;
+    color: white;
+    &:hover {
+      background-color: deeppink;
+      color: white;
+    }
+  }
+  .pageSwitcherItem {
+    &:hover {
+      color: deeppink;
+    }
+    &:first-child {
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border-right: none;
+    }
+    &:last-child {
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+    }
+    background-color: transparent;
+    border: 1px solid deeppink;
+    color: deeppink;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-size: 0.9em;
+    outline: none;
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+.login-page {
+  background-color: $background-color;
+  padding: 5vh 0;
+  .loading-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+//SIDEBAR
+.bm-menu-wrap {
+  z-index: 1000 !important;
+  width: 65vw !important;
+  .bm-morph-shape {
+    fill: transparent;
+  }
+  .bm-menu {
+    overflow-x: hidden !important;
+    top: 6vh;
+    height: 70vh !important;
+    text-align: center;
+    width: 100%;
+    background-color: $background-color;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+//COMPONENTS
+.bm-overlay {
+  fill: rgba(170, 61, 61, 0.555);
+  background: rgba(255, 192, 203, 0.767) !important;
+  top: 0vh !important;
+}
+
+.nav-icon {
+  cursor: pointer;
+}
+
+.nav-item-selected {
+  cursor: pointer;
+  text-decoration-line: underline;
+  color: crimson;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+}
+
+.logo {
+  height: 1em;
+  margin-left: 0.5rem;
+}
+.settings-container {
+  margin: auto;
+  width: 75vw;
+  background-color: $background-color;
+  button::after {
+    color: deeppink;
+  }
+  .form-settings {
+    margin: 2vh 0;
+    padding-bottom: 0vh !important;
+    padding-top: 0vh !important;
+    font-family: "Abril Fatface" !important;
+    color: deeppink;
+    cursor: pointer;
+  }
+  .input-settings {
+    -webkit-text-fill-color: violet !important;
+    color: violet !important;
+    font-size: 2.5vw !important;
+    padding-right: 0 !important;
+  }
+  .settings-title {
+    font-size: 7vw;
+    color: deeppink;
+    font-family: "Abril Fatface", cursive;
+    text-align: center;
+    padding-bottom: 2vh;
+  }
+  .accordion-button {
+    background-color: transparent !important;
+    color: hotpink !important;
+    &:hover {
+      z-index: 0 !important;
+    }
+  }
+  .settings-list-item {
+    background-color: transparent !important;
+  }
+}
+
+input,
+button {
+  z-index: 0;
+  &:hover {
+    z-index: 0;
+  }
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+  &::-webkit-search-results-button {
+    -webkit-appearance: none;
+  }
+  &::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+}
+
+.notfoud-container {
+  width: 100vw;
+  background-color: $background-color;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  h1 {
+    color: #bf8969;
+    font-family: "Abril Fatface", cursive;
+  }
+  h3 {
+    color: hotpink;
+    font-family: "Abril Fatface", cursive;
+  }
+}
+.login-container {
+  margin: auto;
+  width: 75vw;
+  background-color: $background-color;
+}
+
+.accordion-container {
+  background-color: $background-color;
+  color: deeppink;
+}
+.accordion-item {
+  background-color: $background-color !important;
+  color: #002830;
+}
+
+a {
+  color: inherit;
+  text-decoration: none !important;
+}
+* {
+  box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.title {
+  text-align: center;
+  color: #bf9393;
+  font-family: "Caudex", serif;
+}
+.dot {
+  color: #bf8969b6;
+}
+#aya-text {
+  -webkit-text-stroke: 1px deeppink;
+  font-size: 7vw;
+  color: #bf8969;
+  font-family: "Abril Fatface", cursive;
+}
+.span-img {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+#x-black {
+  bottom: -12px;
+  left: -20px;
+  position: relative;
+}
+img {
+  vertical-align: middle;
+}
+#x-img {
+  position: relative;
+  top: 4px;
+}
+.border-top-bar {
+  border-bottom: 1px dotted black;
+}
+
+.invalid-feedback {
+  font-size: 0.575em !important;
+}
+.valid-feedback {
+  font-size: 0.575em !important;
+}
+
+#search-icon {
+  vertical-align: middle;
+}
+.search-bar-container {
+  text-align: center;
+  padding: 2vw 0;
+  width: 100vw;
+  background-color: $background-color;
+}
+.search-input {
+  float: left;
+  background-color: $background-color;
+  font-size: large;
+  font-family: monospace;
+  padding: 2vh;
+  padding: 10px 10px;
+  height: 52px;
+  position: relative;
+  input {
+    background-color: $background-color;
+    font-size: large;
+    font-family: monospace;
+  }
+  &::before {
+    display: block;
+    position: absolute;
+    width: 15px;
+    z-index: 3;
+    height: 15px;
+    font-size: 20px;
+    top: 11px;
+    left: 16px;
+    line-height: 32px;
+    opacity: 0.6;
+  }
+  > input {
+    width: 100%;
+    font-size: 18px;
+    border: none;
+    line-height: 22px;
+    padding: 5px 10px 5px 25px;
+    height: 32px;
+    position: relative;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+input {
+  &:focus {
+    color: $secondary-color;
+    outline: none;
+  }
+}
+.filter-search {
+  background-color: $background-color;
+  font-size: large;
+  font-family: monospace;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.bm-burger-button {
+  display: none;
+}
+
+.side-item {
+  text-align: start;
+  cursor: pointer;
+  font-family: "Unica One", cursive;
+  font-size: small;
+  margin: 2vw;
+  margin-left: 5vw;
+  span {
+    vertical-align: middle !important;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+#bgvid {
+  width: 100vw;
+}
+
+.container-avatar {
+  background-color: $background-color;
+  margin: auto;
+  text-align: -webkit-center !important;
+  width: 90%;
+  align-self: center;
+  padding: 1em 0;
+  margin-bottom: 2vh;
+  border-bottom: solid 1px #ffa9f7;
+  &:focus {
+    outline: none;
+  }
+}
+.avatar-form {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  width: 3em;
+  height: 3em;
+  border: 3px solid hotpink;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+  img {
+    width: 100%;
+    cursor: pointer;
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.container-upload {
+  cursor: pointer;
+  vertical-align: middle;
+  display: grid;
+  border: 1px dotted hotpink;
+  padding: 4px 0;
+}
+.avatar-upload {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: auto;
+}
+.avatar-label {
+  font-size: 1.5vw;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
+.avatar-file-input {
+  visibility: hidden !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5;
+  color: hotpink !important;
+  background-color: $background-color !important;
+  background-clip: padding-box;
+  border: 1px solid hotpink !important;
+}
+.avatar {
+  position: relative;
+  width: 5em;
+  height: 5em;
+  border: 5px solid hotpink;
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.status {
+  font-family: "Abril Fatface", cursive;
+  align-items: center;
+  margin-top: 3vh;
+  color: $secondary-color;
+  h2 {
+    font-weight: bold;
+    font-size: 0.75em;
+  }
+  span {
+    font-size: 10px;
+    cursor: pointer;
+  }
+}
+.container-orders-side {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+.order-avatar {
+  display: flex;
+  img {
+    max-width: 65px;
+    max-height: 40px;
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.product-name {
+  font-family: "Abril Fatface", cursive;
+  color: coral;
+}
+.order-info {
+  padding-left: 1em;
+  justify-content: space-between;
+}
+.order-date {
+  font-size: 7px;
+  font-weight: bolder;
+  color: #000;
+}
+.order-sku {
+  font-family: "Major Mono Display", monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #999;
+}
+.order-p {
+  font-weight: 400;
+  font-size: 0.6em;
+  color: #555;
+}
+.user-nav-avatar {
+  border: 1px solid #040404;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.change-photo {
+  position: fixed;
+  top: 16vh;
+  right: 16vw;
+  z-index: 1;
+}
+
+#camera-icon {
+  width: 20px;
+  height: 20px;
+  top: 11vh;
+  position: relative;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background-color: $background-color;
+}
+.bm-item {
+  &:focus {
+    outline: none;
+  }
+}
+.title-orders {
+  position: relative;
+  color: $secondary-color;
+  top: -20px;
+  font-family: "Abril Fatface", cursive;
+  font-size: 17px;
+}
+
+.form-control {
+  input {
+    border: 1px solid #fa4fb6;
+  }
+  &:focus {
+    color: $secondary-color !important;
+    border-color: $secondary-color !important;
+  }
+}
+.btn-primary {
+  fill: deeppink;
+  font-family: "Abril Fatface" !important;
+  cursor: pointer;
+  margin: 2vh 0 !important;
+  background: transparent !important;
+  color: deeppink !important;
+  border-color: deeppink !important;
+  &:hover {
+    fill: white;
+    background: deeppink !important;
+    color: white !important;
+    border-color: white !important;
+  }
+}
+.login-email {
+  width: 100%;
+}
+.login-facebook {
+  width: 80%;
+  text-align: center !important;
+}
+.login-google {
+  width: 80%;
+  text-align: center !important;
+}
+.form-switch {
+  margin: 2vh 0;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
+  font-family: "Abril Fatface" !important;
+  color: deeppink;
+  cursor: pointer;
+}
+
+.form-check-input {
+  cursor: pointer;
+  &:checked {
+    background-color: deeppink !important;
+    border-color: black !important;
+  }
+}
+.forgot-password {
+  display: block;
+  text-align: center;
+  margin: 3vh;
+  cursor: pointer;
+  color: #0d6efd;
+  font-size: 11px;
+  font-family: "Abril Fatface" !important;
+}
+.login-btn {
+  text-align: center;
+}
+.create-account-container {
+  text-align: center;
+  font-family: "Abril Fatface" !important;
+  padding-top: 1vh;
+  cursor: pointer;
+}
+
+.form-floating {
+  input {
+    font-size: 2vh;
+    padding-right: 0px;
+    -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+    -webkit-text-fill-color: deeppink !important;
+    border-radius: unset;
+    border: none;
+    border-bottom: 1px solid pink;
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+      -webkit-text-fill-color: deeppink !important;
+      &:hover {
+        -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+      }
+      &:focus {
+        -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+      }
+      &:active {
+        -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+      }
+    }
+    &:hover {
+      -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+    }
+    &:focus {
+      -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+    }
+    &:active {
+      -webkit-box-shadow: 0 0 0 30px $background-color inset !important;
+    }
+  }
+}
+.advice {
+  text-align: center;
+  font-size: 9px;
+  color: deeppink;
+}
+
+.settings {
+  width: 100%;
+  position: absolute;
+  left: 38%;
+  cursor: pointer;
+}
+.alert-heading {
+  font-family: "Abril Fatface" !important;
+  font-size: 3vw !important;
+}
+.alert {
+  p {
+    font-family: "Abril Fatface" !important;
+    font-size: 2vw;
+  }
+  margin: auto;
+  width: 60%;
+  text-align: center;
+}
+.is-valid {
+  ~ {
+    div {
+      > .valid-feedback {
+        display: block;
+      }
+    }
+  }
+}
+.is-invalid {
+  ~ {
+    div {
+      > .invalid-feedback {
+        display: block;
+      }
+    }
+  }
+}
+.loader {
+  margin: auto;
+  border: 4px solid rgb(191 191 191 / 46%);
+  border-left: 4px solid;
+  animation: load 1s infinite linear;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+.dropdown {
+  color: coral;
+  width: fit-content;
+  margin: auto;
+  a {
+    font-family: "Abril Fatface", cursive;
+    color: #bf8969;
+    &:hover {
+      font-family: "Abril Fatface", cursive;
+      color: deeppink;
+    }
+  }
+}
+.dropdown-item.active {
+  color: #fff;
+  text-decoration: none;
+  background-color: deeppink !important;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: deeppink !important;
+  }
+}
+.title-products {
+  font-family: "Abril Fatface", cursive;
+  color: #bf8969;
+}
+
+.row {
+  --bs-gutter-x: 0rem !important;
+}
